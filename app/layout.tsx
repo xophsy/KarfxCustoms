@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ConditionalFooter from "@/components/ConditionalFooter";
 import { BUSINESS_INFO } from "@/lib/business";
 
 const bodoni = Bodoni_Moda({
@@ -152,7 +152,7 @@ export default function RootLayout({
         <main id="main-content" className="min-h-screen pt-20">
           {children}
         </main>
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );
