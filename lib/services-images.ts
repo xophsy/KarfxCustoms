@@ -49,25 +49,12 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
   // ── PROTECTION ─────────────────────────────────────────────────────────────
 
   "protection/ppf": {
-    hero: GALLERY("IMG_0073.jpg"),
-    heroAlt: "Paint protection film installation on vehicle hood — Raleigh NC",
+    hero: GALLERY("maserati-ppf.jpg"),
+    heroAlt: "White Maserati inside the KAR FX Customs workshop",
     gallery: [
       {
         src: GALLERY("maserati-ppf.jpg"),
         alt: "PPF applied to Maserati — front bumper and hood coverage",
-      },
-      {
-        src: GALLERY("ppf.jpg"),
-        alt: "BMW with full front-end PPF — hood, fenders, and mirrors protected",
-      },
-      {
-        src: GALLERY("ppf.jpg"),
-        alt: "PPF on hood edge — film line and edge seal close-up",
-      },
-      {
-        src: GALLERY("ppf.jpg"),
-        alt: "Front bumper PPF on primary impact zone — edge detail close-up",
-        isDetail: true,
       },
     ],
   },
@@ -124,10 +111,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
         alt: "Ceramic coated paint surface — water beading close-up",
         isDetail: true,
       },
-      {
-        src: GALLERY("paint-correction.jpg"),
-        alt: "Paint decontamination and prep before ceramic coating application",
-      },
     ],
   },
 
@@ -145,10 +128,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
         src: GALLERY("wraps.jpg"),
         alt: "Vehicle with full color-change wrap — side profile",
       },
-      {
-        src: GALLERY("color-change.jpg"),
-        alt: "Color change wrap — full vehicle 3/4 front view",
-      },
     ],
   },
 
@@ -164,44 +143,27 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
         src: GALLERY("chrome-delete.jpg"),
         alt: "Chrome deleted window trim — clean side profile view",
       },
-      {
-        src: GALLERY("color-change.jpg"),
-        alt: "Blacked-out grille surround and badge close-up",
-        isDetail: true,
-      },
     ],
   },
 
   "wraps-styling/commercial-wraps": {
-    hero: CATALOG("commercial-v2.jpg"),
-    heroAlt: "Commercial vehicle wrap with business branding — full vehicle",
+    hero: GALLERY("IMG_6230.jpg"),
+    heroAlt: "Branded commercial van parked in the city",
     gallery: [
       {
-        src: GALLERY("tarifa-comercial.jpg"),
-        alt: "Commercial wrapped vehicle — business branding on full side panel",
-      },
-      {
-        src: GALLERY("commercial.jpg"),
-        alt: "Commercial wrapped truck — full side panel with visible branding",
-      },
-      {
-        src: GALLERY("tarifa-comercial.jpg"),
-        alt: "Commercial wrap installation process in shop",
+        src: GALLERY("IMG_6230.jpg"),
+        alt: "Branded commercial van parked in the city",
       },
     ],
   },
 
   "wraps-styling/boats-rvs": {
-    hero: GALLERY("wraps.jpg"),
-    heroAlt: "Vinyl wrap on boat or RV — professional marine and recreational vehicle styling",
+    hero: GALLERY("IMG_6070.jpg"),
+    heroAlt: "Green and white boat inside the KAR FX Customs workshop",
     gallery: [
       {
-        src: GALLERY("wraps.jpg"),
-        alt: "RV with full color-change wrap — side profile view",
-      },
-      {
-        src: GALLERY("color-change.jpg"),
-        alt: "Custom vinyl wrap on recreational vehicle — front angle",
+        src: GALLERY("IMG_6071.jpg"),
+        alt: "Green and white boat seating and trim inside the workshop",
       },
     ],
   },
@@ -213,38 +175,23 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
     heroAlt: "Custom painted wheels — professional automotive finish",
     gallery: [
       {
-        src: GALLERY("wheels.jpg"),
-        alt: "Painted wheels — custom finish on vehicle in shop",
+        src: CATALOG("wheels-v2.jpg"),
+        alt: "Custom wheel finish on a workshop display stand",
       },
       {
-        src: GALLERY("wheels.jpg"),
-        alt: "Custom painted wheel close-up — gloss or matte finish",
-        isDetail: true,
-      },
-      {
-        src: GALLERY("wheels.jpg"),
-        alt: "Before and after wheel paint — close-up comparison",
-        isBeforeAfter: true,
+        src: GALLERY("IMG_8423.jpg"),
+        alt: "Polished wheels displayed inside the workshop",
       },
     ],
   },
 
   "wheels-calipers-lighting/caliper-painting": {
-    hero: GALLERY("wheels.jpg"),
-    heroAlt: "Painted brake calipers — bold color visible through wheel spokes",
+    hero: GALLERY("reflective-calipers.avif"),
+    heroAlt: "Finished blue brake caliper beside a black wheel",
     gallery: [
-      {
-        src: GALLERY("wheels.jpg"),
-        alt: "Painted caliper color close-up with wheel background",
-        isDetail: true,
-      },
       {
         src: GALLERY("IMG_7774.jpg"),
         alt: "Painted caliper on dark wheel — parked vehicle",
-      },
-      {
-        src: GALLERY("IMG_7790.jpg"),
-        alt: "Caliper painting process in shop — prep and application",
       },
     ],
   },
@@ -266,17 +213,12 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
   },
 
   "wheels-calipers-lighting/starlight-headliner": {
-    hero: CATALOG("starlight.jpg"),
-    heroAlt: "Starlight headliner — luxury fiber optic star ceiling inside vehicle cabin",
+    hero: GALLERY("photo-mar-20-2025.jpg"),
+    heroAlt: "Illuminated starlight ceiling inside a vehicle cabin",
     gallery: [
       {
-        src: GALLERY("starlight.jpg"),
-        alt: "Starlight headliner wide interior shot — full star ceiling visible",
-      },
-      {
-        src: GALLERY("starlight.jpg"),
-        alt: "Starlight headliner close-up — individual fiber strands glowing",
-        isDetail: true,
+        src: GALLERY("photo-mar-20-2025.jpg"),
+        alt: "Illuminated starlight ceiling and purple cabin lighting",
       },
     ],
   },
@@ -325,21 +267,12 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
         isDetail: true,
       },
       {
-        src: GALLERY("paint-correction.jpg"),
-        alt: "Paint correction and polish — removing swirl marks from paint surface",
-      },
-      {
         src: GALLERY("bmw-ceramic.jpg"),
         alt: "BMW after full detail and ceramic treatment — exterior finish",
       },
       {
         src: GALLERY("detail-shot-1.jpg"),
         alt: "Interior deep clean — seats, dashboard, and floors restored",
-      },
-      {
-        src: GALLERY("paint-correction.jpg"),
-        alt: "Before and after full detail — exterior transformation",
-        isBeforeAfter: true,
       },
     ],
   },
@@ -351,11 +284,11 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
 
 export const CATEGORY_IMAGES: Record<string, { src: string; alt: string }> = {
   protection: {
-    src: CATALOG("protection.jpg"),
+    src: GALLERY("maserati-ppf.jpg"),
     alt: "Paint protection film — KAR FX protection services",
   },
   "wraps-styling": {
-    src: CATALOG("wraps-styling-v3.jpg"),
+    src: GALLERY("wraps.jpg"),
     alt: "Color change wrap — KAR FX wraps and styling services",
   },
   "wheels-calipers-lighting": {
@@ -373,8 +306,8 @@ export const CATEGORY_IMAGES: Record<string, { src: string; alt: string }> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const RESTORFX_IMAGE = {
-  src: CATALOG("restorfx.jpg"),
-  alt: "RestorFX — trusted partner for paint clearcoat restoration",
+  src: GALLERY("tarifa-comercial.jpg"),
+  alt: "RestorFX Raleigh award badges",
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

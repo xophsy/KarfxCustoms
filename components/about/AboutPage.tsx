@@ -90,8 +90,8 @@ export default function AboutPage() {
             <ScrollReveal delay={0.15}>
               <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/5 bg-surface-800">
                 <Image
-                  src="/images/about/IMG_6140.jpg"
-                  alt="KAR FX Customs — Raleigh vehicle protection and styling shop"
+                  src="/images/about/8a8aaa_6f012fad3b3f44b99697004c5779a706~mv2.avif"
+                  alt="Custom red and black Toyota Supra inside the KAR FX Customs workshop"
                   fill
                   priority
                   className="object-cover object-center"
@@ -114,8 +114,8 @@ export default function AboutPage() {
             <ScrollReveal delay={0.05}>
               <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/5 bg-surface-800">
                 <Image
-                  src="/images/about/IMG_1296.jpg"
-                  alt="Carlos and Mauricio — KAR FX Customs, Raleigh"
+                  src="/images/gallery/all/IMG_9575.jpg"
+                  alt="Black SUV inside the KAR FX Customs workshop"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -210,8 +210,8 @@ export default function AboutPage() {
             <ScrollReveal delay={0.05}>
               <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/5 bg-surface-800">
                 <Image
-                  src="/images/about/IMG_9563.jpg"
-                  alt="KAR FX Customs team at work — Raleigh shop"
+                  src="/images/gallery/all/IMG_9397.jpg"
+                  alt="Vehicles inside the KAR FX Customs workshop in Raleigh"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"

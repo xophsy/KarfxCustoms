@@ -7,18 +7,10 @@ import { ArrowRight } from "lucide-react";
 
 // ── Curated image sets — split into two rows ───────────────────────────────
 const ROW_1 = [
-  "/images/gallery/all/IMG_0058.jpg",
   "/images/gallery/all/IMG_0175.jpg",
   "/images/gallery/all/IMG_0457.jpg",
-  "/images/gallery/all/IMG_0508.jpg",
   "/images/gallery/all/IMG_0929.jpg",
-  "/images/gallery/all/IMG_1153.jpg",
-  "/images/gallery/all/IMG_1171.jpg",
-  "/images/gallery/all/IMG_1192.jpg",
-  "/images/gallery/all/IMG_1227.jpg",
-  "/images/gallery/all/IMG_1296.jpg",
   "/images/gallery/all/IMG_1319.jpg",
-  "/images/gallery/all/IMG_1352.jpg",
   "/images/gallery/all/IMG_1439.jpg",
   "/images/gallery/all/IMG_1443.jpg",
   "/images/gallery/all/IMG_1529.jpg",
@@ -29,22 +21,12 @@ const ROW_1 = [
 
 const ROW_2 = [
   "/images/gallery/all/IMG_2321.jpg",
-  "/images/gallery/all/IMG_2566.jpg",
-  "/images/gallery/all/IMG_2576.jpg",
-  "/images/gallery/all/IMG_2612.jpg",
   "/images/gallery/all/IMG_2634.jpg",
-  "/images/gallery/all/IMG_2779.jpg",
   "/images/gallery/all/IMG_2797.jpg",
-  "/images/gallery/all/IMG_3135.jpg",
   "/images/gallery/all/IMG_3152.jpg",
   "/images/gallery/all/IMG_3163.jpg",
-  "/images/gallery/all/IMG_3272.jpg",
   "/images/gallery/all/IMG_3596.jpg",
-  "/images/gallery/all/IMG_3616.jpg",
   "/images/gallery/all/IMG_3767.jpg",
-  "/images/gallery/all/IMG_3897.jpg",
-  "/images/gallery/all/IMG_3925.jpg",
-  "/images/gallery/all/IMG_3936.jpg",
   "/images/gallery/all/IMG_4850.jpg",
 ];
 
