@@ -5,13 +5,15 @@ import { AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { ContactInfo, SelectedService } from "../QuoteFlow";
 import QuoteChip from "../QuoteChip";
+import { BUSINESS_INFO } from "@/lib/business";
 
 type Props = {
   selectedServices: SelectedService[];
   onRemoveService: (slug: string) => void;
   onAddAnother: () => void;
-  onSubmit: (contact: ContactInfo) => void;
+  onSubmit: (contact: ContactInfo, website: string) => void;
   isSubmitting: boolean;
+  submitError: boolean;
 };
 
 export default function StepContact({
@@ -20,19 +22,21 @@ export default function StepContact({
   onAddAnother,
   onSubmit,
   isSubmitting,
+  submitError,
 }: Props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — real people never see it
   const [errors, setErrors] = useState<Partial<ContactInfo>>({});
 
   function validate(): boolean {
     const e: Partial<ContactInfo> = {};
-    if (!name.trim()) e.name = "Please enter your name.";
-    if (!phone.trim()) e.phone = "Please enter your phone number.";
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email))
-      e.email = "Please enter a valid email address.";
+    if (name.trim().length < 2) e.name = "Please enter your name.";
+    if (phone.replace(/\D/g, "").length < 7) e.phone = "Please enter your phone number.";
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+      e.email = "Please check your email address, or leave it blank.";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -40,7 +44,10 @@ export default function StepContact({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    onSubmit({ name: name.trim(), phone: phone.trim(), email: email.trim(), message: message.trim() || undefined });
+    onSubmit(
+      { name: name.trim(), phone: phone.trim(), email: email.trim(), message: message.trim() || undefined },
+      website
+    );
   }
 
   return (
@@ -127,7 +134,7 @@ export default function StepContact({
               htmlFor="quote-email"
               className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.12em] text-white/60"
             >
-              Email Address
+              Email Address <span className="normal-case tracking-normal text-white/25">(optional)</span>
             </label>
             <input
               id="quote-email"
@@ -167,6 +174,18 @@ export default function StepContact({
             />
           </div>
 
+          {/* Honeypot — hidden from people and screen readers, catches form bots */}
+          <input
+            type="text"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+
           {/* Privacy reassurance */}
           <p className="pt-1 text-xs leading-relaxed text-white/30">
             Your information is safe with us and will only be used to contact
@@ -191,6 +210,16 @@ export default function StepContact({
               </>
             )}
           </button>
+
+          {submitError && (
+            <p role="alert" className="text-center text-sm leading-relaxed text-red-400/90">
+              We couldn&apos;t send your request. Please try again, or call us at{" "}
+              <a href={BUSINESS_INFO.phoneHref} className="font-semibold text-gold-500 underline">
+                {BUSINESS_INFO.phoneDisplay}
+              </a>
+              .
+            </p>
+          )}
         </form>
 
         {/* ── Right: Selected services summary ──────────────────────── */}

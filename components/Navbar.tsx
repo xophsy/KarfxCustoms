@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BUSINESS_INFO } from "@/lib/business";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -16,6 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     function handleScroll() {
@@ -147,6 +150,22 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
+
+      {/* Phones hide the header buttons, so keep Call / Quote one tap away */}
+      {pathname !== "/quote" && !menuOpen && (
+        <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-gold-500/20 bg-black/85 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl md:hidden">
+          <a
+            href={BUSINESS_INFO.phoneHref}
+            className="btn-ghost inline-flex items-center justify-center gap-2"
+          >
+            <Phone size={13} strokeWidth={2} />
+            Call Us
+          </a>
+          <Link href="/quote" className="btn-gold text-center">
+            Get a Quote
+          </Link>
+        </div>
+      )}
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function QuotePage({ searchParams }: Props) {
       <QuoteFlow
         preselectedCategory={searchParams.category}
         preselectedService={searchParams.service}
-        ref={searchParams.ref}
+        source={searchParams.ref}
       />
     </>
   );

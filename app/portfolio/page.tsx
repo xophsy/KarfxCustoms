@@ -25,7 +25,7 @@ export default function PortfolioPage() {
     filter === "all" ? ALL_PORTFOLIO_IMAGES : PORTFOLIO_BY_CATEGORY[filter];
 
   return (
-    <section className="flex h-[calc(100dvh-5rem)] flex-col bg-surface-900">
+    <section className="flex h-[calc(100dvh-10rem)] flex-col bg-surface-900 md:h-[calc(100dvh-5rem)]">
       {/* top padding clears the navbar logo, which hangs below the bar */}
       <div className="shrink-0 px-6 pb-4 pt-16 md:px-8 md:pt-24 lg:px-16">
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500/70">

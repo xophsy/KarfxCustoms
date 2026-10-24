@@ -149,7 +149,8 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navbar />
-        <main id="main-content" className="min-h-screen pt-20">
+        {/* pb-20 keeps page bottoms clear of the mobile Call / Quote bar */}
+        <main id="main-content" className="min-h-screen pb-20 pt-20 md:pb-0">
           {children}
         </main>
         <ConditionalFooter />

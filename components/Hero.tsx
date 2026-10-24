@@ -119,19 +119,16 @@ export default function Hero() {
             seriously enough that the results speak for themselves.
           </p>
 
-          <div className="hero-item hero-item-4 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <a
-              href="/#services"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-gold-500 transition-colors duration-200 hover:text-gold-400"
-            >
-              Our Services
+          <div className="hero-item hero-item-4 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+            <Link href="/quote" className="btn-gold inline-flex items-center gap-2">
+              Get a Quote
               <ArrowRight size={13} />
-            </a>
+            </Link>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-white/40 transition-colors duration-200 hover:text-white/70"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-white/60 transition-colors duration-200 hover:text-white/90"
             >
-              View Portfolio
+              View Our Work
               <ArrowRight size={13} />
             </Link>
           </div>

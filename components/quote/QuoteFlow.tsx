@@ -56,7 +56,7 @@ const stepVariants = {
 type Props = {
   preselectedCategory?: string; // from ?category= query param
   preselectedService?: string;  // from ?service= query param
-  ref?: string;                 // from ?ref= (e.g. restorfx)
+  source?: string;              // from ?ref= (e.g. restorfx)
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,6 +66,7 @@ type Props = {
 export default function QuoteFlow({
   preselectedCategory,
   preselectedService,
+  source,
 }: Props) {
   // ── Step state ─────────────────────────────────────────────────────────────
   const [step, setStep] = useState<QuoteStep>(() => {
@@ -92,6 +93,9 @@ export default function QuoteFlow({
 
   // ── Contact state ──────────────────────────────────────────────────────────
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  // One id per request, reused on retry so the shop never gets duplicate emails.
+  const submissionId = useRef<string>();
 
   // ── Navigation helpers ────────────────────────────────────────────────────
 
@@ -131,22 +135,29 @@ export default function QuoteFlow({
     goTo("services", -1);
   }
 
-  async function handleSubmit(contact: ContactInfo) {
+  async function handleSubmit(contact: ContactInfo, website: string) {
     setIsSubmitting(true);
+    setSubmitError(false);
+    submissionId.current ??= crypto.randomUUID();
     try {
-      await fetch("/api/quote", {
+      const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           services: selectedServices,
           contact,
+          source,
+          website,
+          submissionId: submissionId.current,
         }),
       });
+      if (!res.ok) throw new Error(`Quote request failed: ${res.status}`);
+      goTo("success", 1);
     } catch {
-      // Fail silently — show success regardless so we don't lose leads
+      // Keep their details on screen and point them to the phone, never a fake success.
+      setSubmitError(true);
     } finally {
       setIsSubmitting(false);
-      goTo("success", 1);
     }
   }
 
@@ -218,6 +229,7 @@ export default function QuoteFlow({
                 onAddAnother={handleAddAnother}
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
+                submitError={submitError}
               />
             </motion.div>
           )}

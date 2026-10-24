@@ -1,93 +1,205 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 import { BUSINESS_INFO } from "@/lib/business";
+import { SERVICE_CATEGORIES } from "@/lib/services-data";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/quote
 //
-// Receives the quote form submission and:
-// 1. Validates the payload
-// 2. Logs it to console (dev/staging)
-// 3. Returns success
+// Emails each quote request to the shop (and a confirmation to the customer
+// when they gave an email) via Resend.
 //
-// TO ADD EMAIL SENDING:
-// Install: npm install resend   (or nodemailer, sendgrid, etc.)
-// Uncomment and configure the email block below.
+// Vercel env vars:
+//   RESEND_API_KEY           required — without it the form shows a "call us" error
+//   LEAD_NOTIFICATION_EMAIL  optional — defaults to BUSINESS_INFO.email
+//   LEAD_FROM_EMAIL          optional — defaults to quotes@karfxcustoms.com
+//                            (the domain must be verified in Resend)
 // ─────────────────────────────────────────────────────────────────────────────
 
-type SelectedService = {
-  categorySlug: string;
-  categoryName: string;
-  serviceSlug: string;
-  serviceName: string;
+export const runtime = "nodejs";
+
+type Lead = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+  source: string;
+  services: string[];
+  submissionId: string;
 };
 
-type QuotePayload = {
-  services: SelectedService[];
-  contact: {
-    name: string;
-    phone: string;
-    email: string;
+function stringField(value: unknown, maxLength: number) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&#39;",
+    '"': "&quot;",
+  })[character] ?? character);
+}
+
+// Service names come from our own data, never from the request body.
+function serviceLabel(categorySlug: unknown, serviceSlug: unknown) {
+  const category = SERVICE_CATEGORIES.find((c) => c.slug === categorySlug);
+  const service = category?.services.find((s) => s.slug === serviceSlug);
+  return category && service ? `${service.name} (${category.name})` : null;
+}
+
+function parseLead(body: Record<string, unknown>): Lead | null {
+  const contact = (body.contact ?? {}) as Record<string, unknown>;
+  const rawServices = Array.isArray(body.services) ? body.services.slice(0, 20) : [];
+  const services = rawServices
+    .map((s) => serviceLabel(s?.categorySlug, s?.serviceSlug))
+    .filter((s): s is string => s !== null);
+
+  const lead: Lead = {
+    name: stringField(contact.name, 100),
+    phone: stringField(contact.phone, 40),
+    email: stringField(contact.email, 254).toLowerCase(),
+    message: stringField(contact.message, 2000),
+    source: stringField(body.source, 40),
+    services,
+    submissionId: stringField(body.submissionId, 64),
   };
-};
+
+  const emailIsValid = lead.email === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email);
+  const phoneIsValid = lead.phone.replace(/\D/g, "").length >= 7;
+  const idIsValid = /^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(lead.submissionId);
+
+  if (lead.name.length < 2 || !phoneIsValid || !emailIsValid || !idIsValid || services.length === 0) {
+    return null;
+  }
+
+  return lead;
+}
+
+function emailFrame(content: string) {
+  return `<!doctype html>
+  <html><body style="margin:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#f5f5f5">
+    <div style="max-width:640px;margin:0 auto;padding:32px 20px">
+      <div style="border:1px solid #3d3520;background:#111111;padding:32px">
+        <p style="margin:0 0 20px;color:#D4AF37;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">KAR FX Customs</p>
+        ${content}
+      </div>
+    </div>
+  </body></html>`;
+}
+
+function leadRows(lead: Lead): [string, string][] {
+  return [
+    ["Name", lead.name],
+    ["Phone", lead.phone],
+    ["Email", lead.email || "Not provided"],
+    ["Services", lead.services.join("\n")],
+    ["Car & notes", lead.message || "None"],
+    ["Came from", lead.source || "Website"],
+  ];
+}
+
+function notificationHtml(lead: Lead) {
+  const phoneHref = `tel:${lead.phone.replace(/[^\d+]/g, "")}`;
+  return emailFrame(`
+    <h1 style="margin:0 0 8px;font-size:28px;line-height:1.2">New quote request</h1>
+    <p style="margin:0 0 28px;color:#aaa">Call <a href="${escapeHtml(phoneHref)}" style="color:#D4AF37">${escapeHtml(lead.phone)}</a>${lead.email ? " or reply to this email" : ""} to reach ${escapeHtml(lead.name)}.</p>
+    <table role="presentation" style="width:100%;border-collapse:collapse">
+      ${leadRows(lead).map(([label, value]) => `<tr>
+        <td style="width:120px;padding:12px 12px 12px 0;border-top:1px solid #2b2b2b;color:#999;font-size:13px;vertical-align:top">${escapeHtml(label)}</td>
+        <td style="padding:12px 0;border-top:1px solid #2b2b2b;color:#fff;font-size:15px;white-space:pre-wrap">${escapeHtml(value)}</td>
+      </tr>`).join("")}
+    </table>`);
+}
+
+function confirmationHtml(lead: Lead) {
+  return emailFrame(`
+    <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2">We got your request, ${escapeHtml(lead.name)}.</h1>
+    <p style="margin:0 0 18px;color:#c8c8c8;font-size:16px;line-height:1.6">Thanks for reaching out about ${escapeHtml(lead.services.join(", "))}. We'll get back to you within 24 hours on weekdays.</p>
+    <p style="margin:0;color:#999;font-size:14px;line-height:1.6">Need us sooner? Call <a href="${BUSINESS_INFO.phoneHref}" style="color:#D4AF37">${BUSINESS_INFO.phoneDisplay}</a>.</p>`);
+}
 
 export async function POST(request: NextRequest) {
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("host");
+  if (!origin || !host || new URL(origin).host !== host) {
+    return NextResponse.json({ success: false, error: "Invalid request origin." }, { status: 403 });
+  }
+
+  if (Number(request.headers.get("content-length") ?? 0) > 32_000) {
+    return NextResponse.json({ success: false, error: "Request is too large." }, { status: 413 });
+  }
+
+  let body: Record<string, unknown>;
   try {
-    const body = (await request.json()) as QuotePayload;
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ success: false, error: "Invalid request." }, { status: 400 });
+  }
 
-    // ── Basic validation ────────────────────────────────────────────────────
-    if (!body.contact?.name || !body.contact?.phone || !body.contact?.email) {
-      return NextResponse.json(
-        { success: false, error: "Missing required contact fields." },
-        { status: 400 }
-      );
-    }
-
-    if (!body.services || body.services.length === 0) {
-      return NextResponse.json(
-        { success: false, error: "No services selected." },
-        { status: 400 }
-      );
-    }
-
-    // ── Log to console (always — useful for dev & server logs) ─────────────
-    console.log("[KAR FX Quote Request]", {
-      timestamp: new Date().toISOString(),
-      contact: body.contact,
-      services: body.services.map((s) => `${s.categoryName} → ${s.serviceName}`),
-    });
-
-    // ── Email notification (configure when ready) ───────────────────────────
-    // To activate: install a mailer and fill in your credentials.
-    //
-    // Example with Resend (https://resend.com):
-    //
-    // import { Resend } from "resend";
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    //
-    // const serviceList = body.services
-    //   .map((s) => `  - ${s.serviceName} (${s.categoryName})`)
-    //   .join("\n");
-    //
-    // await resend.emails.send({
-    //   from: "quotes@karfxcustoms.com",
-    //   to: BUSINESS_INFO.email,
-    //   subject: `New Quote Request — ${body.contact.name}`,
-    //   text: [
-    //     `New quote request from ${body.contact.name}`,
-    //     `Phone: ${body.contact.phone}`,
-    //     `Email: ${body.contact.email}`,
-    //     "",
-    //     "Services requested:",
-    //     serviceList,
-    //   ].join("\n"),
-    // });
-
+  // Honeypot: invisible to people, commonly filled in by form bots.
+  if (stringField(body.website, 200)) {
     return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("[KAR FX Quote Error]", err);
+  }
+
+  const lead = parseLead(body);
+  if (!lead) {
     return NextResponse.json(
-      { success: false, error: "Something went wrong." },
-      { status: 500 }
+      { success: false, error: "Please check your name, phone, and selected services." },
+      { status: 400 }
     );
   }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    // Log the lead so it can still be recovered from the server logs.
+    console.error("[KAR FX Quote] RESEND_API_KEY is not set — lead not emailed", lead);
+    return NextResponse.json({ success: false, error: "Email service unavailable." }, { status: 503 });
+  }
+
+  const resend = new Resend(apiKey);
+  const notificationEmail = process.env.LEAD_NOTIFICATION_EMAIL ?? BUSINESS_INFO.email;
+  const fromEmail = process.env.LEAD_FROM_EMAIL ?? "KAR FX Customs Website <quotes@karfxcustoms.com>";
+  const safeName = lead.name.replace(/[\r\n]+/g, " ");
+  const firstService = lead.services[0].replace(/ \(.*\)$/, "");
+
+  const { error: notificationError } = await resend.emails.send(
+    {
+      from: fromEmail,
+      to: notificationEmail,
+      replyTo: lead.email || undefined,
+      subject: `New quote request — ${firstService} — ${safeName}`,
+      html: notificationHtml(lead),
+      text: [
+        "NEW KAR FX CUSTOMS QUOTE REQUEST",
+        "",
+        ...leadRows(lead).map(([label, value]) => `${label}: ${value}`),
+      ].join("\n"),
+    },
+    { idempotencyKey: `quote-notification-${lead.submissionId}` }
+  );
+
+  if (notificationError) {
+    console.error("[KAR FX Quote] notification failed", notificationError, lead);
+    return NextResponse.json({ success: false, error: "Email delivery failed." }, { status: 502 });
+  }
+
+  if (lead.email) {
+    const { error: confirmationError } = await resend.emails.send(
+      {
+        from: fromEmail,
+        to: lead.email,
+        replyTo: notificationEmail,
+        subject: "We got your KAR FX Customs quote request",
+        html: confirmationHtml(lead),
+        text: `We got your request, ${lead.name}.\n\nThanks for reaching out about ${lead.services.join(", ")}. We'll get back to you within 24 hours on weekdays.\n\nNeed us sooner? Call ${BUSINESS_INFO.phoneDisplay}.`,
+      },
+      { idempotencyKey: `quote-confirmation-${lead.submissionId}` }
+    );
+    // The shop already has the lead, so a courtesy-email failure should not fail the form.
+    if (confirmationError) console.error("[KAR FX Quote] confirmation failed", confirmationError);
+  }
+
+  return NextResponse.json({ success: true });
 }
