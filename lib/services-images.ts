@@ -134,16 +134,7 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
   "wraps-styling/chrome-delete": {
     hero: CATALOG("chrome-delete-v2.jpg"),
     heroAlt: "Chrome delete — blacked-out trim and exterior accents",
-    gallery: [
-      {
-        src: GALLERY("chrome-delete.jpg"),
-        alt: "Chrome deleted trim — close-up of blacked-out exterior accents",
-      },
-      {
-        src: GALLERY("chrome-delete.jpg"),
-        alt: "Chrome deleted window trim — clean side profile view",
-      },
-    ],
+    gallery: [],
   },
 
   "wraps-styling/commercial-wraps": {

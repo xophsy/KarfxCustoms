@@ -5,29 +5,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// ── Curated image sets — split into two rows ───────────────────────────────
+// ── Curated image sets — one standout shot per project, mixed across services ─
 const ROW_1 = [
-  "/images/gallery/all/IMG_0175.jpg",
-  "/images/gallery/all/IMG_0457.jpg",
-  "/images/gallery/all/IMG_0929.jpg",
-  "/images/gallery/all/IMG_1319.jpg",
-  "/images/gallery/all/IMG_1439.jpg",
-  "/images/gallery/all/IMG_1443.jpg",
-  "/images/gallery/all/IMG_1529.jpg",
+  "/images/gallery/all/2583cccd.jpg",
+  "/images/gallery/all/IMG_6719.jpg",
+  "/images/gallery/all/IMG_6065.jpg",
+  "/images/gallery/all/0898a7e4-0d03-4d39-a746-8d58b7f6fa84.jpg",
+  "/images/gallery/all/photo-mar-20-2025.jpg",
   "/images/gallery/all/IMG_1531.jpg",
-  "/images/gallery/all/IMG_2162.jpg",
+  "/images/gallery/all/IMG_9471.jpg",
   "/images/gallery/all/IMG_2252.jpg",
+  "/images/gallery/all/IMG_5960.jpg",
+  "/images/gallery/all/IMG_9397.jpg",
 ];
 
 const ROW_2 = [
+  "/images/gallery/all/IMG_1443.jpg",
+  "/images/gallery/all/IMG_5019.jpg",
+  "/images/gallery/all/ambient-lighting.jpg",
+  "/images/gallery/all/IMG_9575.jpg",
   "/images/gallery/all/IMG_2321.jpg",
-  "/images/gallery/all/IMG_2634.jpg",
-  "/images/gallery/all/IMG_2797.jpg",
-  "/images/gallery/all/IMG_3152.jpg",
-  "/images/gallery/all/IMG_3163.jpg",
-  "/images/gallery/all/IMG_3596.jpg",
-  "/images/gallery/all/IMG_3767.jpg",
-  "/images/gallery/all/IMG_4850.jpg",
+  "/images/gallery/all/IMG_6124.jpg",
+  "/images/gallery/all/IMG_20190212_155553210.jpg",
+  "/images/gallery/all/IMG_7774.jpg",
+  "/images/gallery/all/IMG_9881.jpg",
+  "/images/gallery/all/IMG_6738.jpg",
 ];
 
 // Target duration for one full loop — frame-rate independent
@@ -134,7 +136,7 @@ export default function WorkShowcase() {
             Fashioned in Raleigh. Finished Right.
           </h2>
           <div className="gold-divider mt-4" />
-          <p className="mt-3 text-sm text-white/60">Every job in the portfolio is a real work, real vehicles.</p>
+          <p className="mt-3 text-sm text-white/60">Every photo is a real job on a real vehicle.</p>
         </div>
         <Link
           href="/portfolio"

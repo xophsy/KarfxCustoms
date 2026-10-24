@@ -65,7 +65,7 @@ export default function CoverflowGallery({
   // Size cards from the available HEIGHT (so the whole gallery fits one screen),
   // capped by width. Keeps the 3:4 portrait ratio. Explicit px so framer owns
   // the transform; margins center it.
-  const cardH = Math.min(stageH * 0.82, stageW * 0.42 * (4 / 3));
+  const cardH = Math.min(stageH * 0.82, stageW * (isMobile ? 0.62 : 0.42) * (4 / 3));
   const cardW = cardH * 0.75;
 
   // Spacing + anchor scale with card/stage size (responsive across widths).
@@ -219,8 +219,16 @@ export default function CoverflowGallery({
         </motion.div>
       </div>
 
+      {/* Caption for the focused photo */}
+      <p
+        className="mt-4 shrink-0 truncate px-6 text-center text-sm text-white/70"
+        aria-live="polite"
+      >
+        {images[activeIndex]?.alt}
+      </p>
+
       {/* Controls + counter */}
-      <div className="mt-4 flex shrink-0 items-center justify-center gap-6 pb-2">
+      <div className="mt-2 flex shrink-0 items-center justify-center gap-6 pb-2">
         <button
           type="button"
           onClick={() => step(-1)}
