@@ -2,15 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { BUSINESS_INFO } from "@/lib/business";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
+import { saveWebsiteLead } from "@/lib/admin/leads";
+import { normalizePhone } from "@/lib/admin/phone";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/quote
 //
-// Emails each quote request to the shop (and a confirmation to the customer
-// when they gave an email) via Resend.
+// Saves each quote request as a lead in the shop admin, then emails it to the
+// shop (and a confirmation to the customer when they gave an email) via Resend.
+// The customer sees success if either the save or the shop email worked.
 //
 // Vercel env vars:
-//   RESEND_API_KEY           required — without it the form shows a "call us" error
+//   DATABASE_URL             the shop admin database (see lib/admin/db.ts)
+//   RESEND_API_KEY           needed for emails; without it leads are only saved
 //   LEAD_NOTIFICATION_EMAIL  optional — defaults to BUSINESS_INFO.email
 //   LEAD_FROM_EMAIL          optional — defaults to quotes@karfxcustoms.com
 //                            (the domain must be verified in Resend)
@@ -24,7 +28,8 @@ type Lead = {
   email: string;
   message: string;
   source: string;
-  services: string[];
+  services: string[];       // "Paint Protection Film (Protection)", for emails
+  serviceKeys: string[];    // "protection/ppf", for the shop admin
   submissionId: string;
 };
 
@@ -52,9 +57,10 @@ function serviceLabel(categorySlug: unknown, serviceSlug: unknown) {
 function parseLead(body: Record<string, unknown>): Lead | null {
   const contact = (body.contact ?? {}) as Record<string, unknown>;
   const rawServices = Array.isArray(body.services) ? body.services.slice(0, 20) : [];
-  const services = rawServices
-    .map((s) => serviceLabel(s?.categorySlug, s?.serviceSlug))
-    .filter((s): s is string => s !== null);
+  const known = rawServices
+    .map((s) => ({ label: serviceLabel(s?.categorySlug, s?.serviceSlug), key: `${s?.categorySlug}/${s?.serviceSlug}` }))
+    .filter((s): s is { label: string; key: string } => s.label !== null);
+  const services = known.map((s) => s.label);
 
   const lead: Lead = {
     name: stringField(contact.name, 100),
@@ -63,11 +69,12 @@ function parseLead(body: Record<string, unknown>): Lead | null {
     message: stringField(contact.message, 2000),
     source: stringField(body.source, 40),
     services,
+    serviceKeys: known.map((s) => s.key),
     submissionId: stringField(body.submissionId, 64),
   };
 
   const emailIsValid = lead.email === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email);
-  const phoneIsValid = lead.phone.replace(/\D/g, "").length >= 7;
+  const phoneIsValid = normalizePhone(lead.phone) !== null;
   const idIsValid = /^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(lead.submissionId);
 
   if (lead.name.length < 2 || !phoneIsValid || !emailIsValid || !idIsValid || services.length === 0) {
@@ -151,8 +158,18 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Save first: a lead in the database survives any email problem.
+  let saved = false;
+  try {
+    await saveWebsiteLead({ ...lead, services: lead.serviceKeys });
+    saved = true;
+  } catch (err) {
+    console.error("[KAR FX Quote] lead not saved to the database", err, lead);
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
+    if (saved) return NextResponse.json({ success: true });
     // Log the lead so it can still be recovered from the server logs.
     console.error("[KAR FX Quote] RESEND_API_KEY is not set — lead not emailed", lead);
     return NextResponse.json({ success: false, error: "Email service unavailable." }, { status: 503 });
@@ -182,7 +199,8 @@ export async function POST(request: NextRequest) {
 
   if (notificationError) {
     console.error("[KAR FX Quote] notification failed", notificationError, lead);
-    return NextResponse.json({ success: false, error: "Email delivery failed." }, { status: 502 });
+    if (saved) return NextResponse.json({ success: true });
+    return NextResponse.json({ success: false, error: "Email delivery failed." }, { status: 503 });
   }
 
   if (lead.email) {

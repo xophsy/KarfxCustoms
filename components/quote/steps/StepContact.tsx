@@ -6,6 +6,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { ContactInfo, SelectedService } from "../QuoteFlow";
 import QuoteChip from "../QuoteChip";
 import { BUSINESS_INFO } from "@/lib/business";
+import { normalizePhone } from "@/lib/admin/phone";
 
 type Props = {
   selectedServices: SelectedService[];
@@ -34,7 +35,7 @@ export default function StepContact({
   function validate(): boolean {
     const e: Partial<ContactInfo> = {};
     if (name.trim().length < 2) e.name = "Please enter your name.";
-    if (phone.replace(/\D/g, "").length < 7) e.phone = "Please enter your phone number.";
+    if (!normalizePhone(phone)) e.phone = "Please enter a 10-digit phone number.";
     if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
       e.email = "Please check your email address, or leave it blank.";
     setErrors(e);
