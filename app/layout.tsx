@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import ConditionalFooter from "@/components/ConditionalFooter";
+import SiteChrome from "@/components/SiteChrome";
 import { BUSINESS_INFO } from "@/lib/business";
 
 const bodoni = Bodoni_Moda({
@@ -148,12 +147,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Navbar />
-        {/* pb-20 keeps page bottoms clear of the mobile Call / Quote bar */}
-        <main id="main-content" className="min-h-screen pb-20 pt-20 md:pb-0">
-          {children}
-        </main>
-        <ConditionalFooter />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

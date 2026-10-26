@@ -1,6 +1,11 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // PGlite (local dev database, see lib/admin/db.ts) ships WASM files webpack can't bundle.
+  experimental: {
+    serverComponentsExternalPackages: ["@electric-sql/pglite"],
+  },
+
   images: {
     // Serve AVIF first (30–40% smaller than WebP), WebP as fallback
     formats: ["image/avif", "image/webp"],
