@@ -1,21 +1,8 @@
 import Image from "next/image";
 import { BUSINESS_INFO } from "@/lib/business";
-import { EndDiagram, SideDiagram, TopDiagram } from "./CarDiagrams";
+import { EndDiagram, SideDiagram, TopDiagram, VEHICLE_TYPES, type VehicleType } from "./CarDiagrams";
 
-const CHECKLIST = [
-  "Windshield and glass",
-  "Headlights and taillights",
-  "Wheels and rims (curb rash)",
-  "Tires",
-  "Mirrors",
-  "Paint and clear coat",
-  "Existing PPF, wrap, tint or coating",
-  "Trim, badges and emblems",
-  "Interior: seats, carpet, headliner",
-  "Dash warning lights on",
-  "Aftermarket parts or mods",
-  "Signs of previous body work",
-];
+const QUICK_CHECK = ["Glass", "Lights", "Wheels and tires", "Paint and clear coat", "Film, wrap or coating", "Interior"];
 
 const DAMAGE_KEY = [
   ["S", "Scratch"],
@@ -27,192 +14,139 @@ const DAMAGE_KEY = [
   ["F", "Existing film or wrap"],
 ];
 
-function Line({ label, className = "" }: { label: string; className?: string }) {
+const label = "shrink-0 text-[7.5pt] font-semibold uppercase tracking-[0.08em] text-neutral-600";
+const caption = "text-center text-[6.5pt] uppercase tracking-[0.16em] text-neutral-500";
+
+function Line({ name, className = "" }: { name: string; className?: string }) {
   return (
-    <div className={`flex items-end gap-1.5 ${className}`}>
-      <span className="shrink-0 text-[7pt] font-semibold uppercase tracking-[0.08em] text-neutral-600">{label}</span>
-      <span className="h-[14pt] flex-1 border-b border-neutral-400" />
+    <div className={`flex items-end gap-2 ${className}`}>
+      <span className={label}>{name}</span>
+      <span className="h-[18pt] flex-1 border-b border-neutral-400" />
     </div>
   );
 }
 
 function Box() {
-  return <span className="inline-block h-[8pt] w-[8pt] shrink-0 border border-neutral-700" />;
+  return <span className="inline-block h-[9pt] w-[9pt] shrink-0 border border-neutral-700" />;
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-[5pt] flex items-center gap-2 text-[7.5pt] font-semibold uppercase tracking-[0.18em] text-black">
-      <span className="h-[7pt] w-[3pt] bg-[#D4AF37] print:bg-[#D4AF37]" style={{ printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }} />
+    <h2 className="mb-[6pt] flex items-center gap-2 text-[8pt] font-semibold uppercase tracking-[0.18em] text-black">
+      <span className="h-[8pt] w-[3pt] bg-[#D4AF37]" style={{ printColorAdjust: "exact", WebkitPrintColorAdjust: "exact" }} />
       {children}
     </h2>
   );
 }
 
-export default function InspectionSheet() {
+export default function InspectionSheet({ type }: { type: VehicleType }) {
+  const typeLabel = VEHICLE_TYPES.find((t) => t.id === type)?.label ?? "";
+
   return (
     <article
-      className="sheet mx-auto flex flex-col bg-white font-body text-[8.5pt] leading-snug text-black shadow-2xl print:shadow-none"
-      style={{ width: "8.5in", minHeight: "11in", padding: "0.32in 0.42in" }}
+      className="sheet mx-auto flex flex-col bg-white font-body text-[9pt] leading-snug text-black shadow-2xl print:shadow-none"
+      style={{ width: "8.5in", minHeight: "11in", padding: "0.35in 0.45in" }}
     >
-      {/* Header */}
-      <header className="flex items-center justify-between gap-6 border-b-[1.5pt] border-[#D4AF37] pb-[8pt]">
-        <Image src="/images/branding/logo-badge.png" alt="KAR FX Customs" width={86} height={87} priority className="h-[0.8in] w-auto" />
+      {/* Header: both logos large */}
+      <header className="grid grid-cols-[1.35in_1fr_2.1in] items-center gap-4 border-b-[1.5pt] border-[#D4AF37] pb-[8pt]">
+        <Image src="/images/branding/logo-badge.png" alt="KAR FX Customs" width={130} height={131} priority className="h-[1.3in] w-auto" />
         <div className="text-center">
-          <p className="text-[7pt] font-semibold uppercase tracking-[0.3em] text-neutral-500">Drop-off condition report</p>
-          <h1 className="font-display text-[22pt] font-semibold leading-tight">Vehicle Inspection</h1>
-          <p className="text-[7.5pt] text-neutral-600">
-            {BUSINESS_INFO.brandName} · {BUSINESS_INFO.fullAddress} · {BUSINESS_INFO.phoneDisplay}
-          </p>
+          <h1 className="font-display text-[24pt] font-semibold leading-tight">Vehicle Inspection</h1>
+          <p className="mt-[2pt] text-[8pt] font-semibold uppercase tracking-[0.28em] text-neutral-500">{typeLabel}</p>
         </div>
-        <div className="flex w-[1.5in] flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center text-center">
           {/* RestorFX's official wordmark (vector, from restorfx.com); plain img keeps the SVG sharp in print */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/branding/restorfx-logo.svg" alt="RestorFX" width={140} height={13} className="h-auto w-full" />
-          <p className="mt-[4pt] text-[6.5pt] uppercase tracking-[0.22em] text-neutral-500">Raleigh</p>
+          <p className="mt-[6pt] text-[7.5pt] uppercase tracking-[0.3em] text-neutral-500">Raleigh</p>
         </div>
       </header>
 
-      <div className="mt-[8pt] grid grid-cols-4 gap-x-4">
-        <Line label="Date" />
-        <Line label="Time in" />
-        <Line label="Job #" />
-        <Line label="Inspected by" />
-      </div>
-
-      {/* Customer and vehicle */}
-      <section className="mt-[8pt]">
-        <SectionTitle>Customer and vehicle</SectionTitle>
-        <div className="grid grid-cols-6 gap-x-4 gap-y-[3pt]">
-          <Line label="Customer" className="col-span-4" />
-          <Line label="Phone" className="col-span-2" />
-          <Line label="Email" className="col-span-3" />
-          <Line label="Year / make / model" className="col-span-3" />
-          <Line label="Color" className="col-span-2" />
-          <Line label="Plate / state" className="col-span-2" />
-          <Line label="Mileage" className="col-span-2" />
-          <div className="col-span-4 flex items-end gap-1.5">
-            <span className="text-[7pt] font-semibold uppercase tracking-[0.08em] text-neutral-600">VIN</span>
-            <span className="flex flex-1">
-              {Array.from({ length: 17 }, (_, i) => (
-                <span key={i} className="h-[15pt] flex-1 border border-r-0 border-neutral-400 last:border-r" />
-              ))}
-            </span>
-          </div>
-          <div className="col-span-2 flex items-end gap-2">
-            <span className="text-[7pt] font-semibold uppercase tracking-[0.08em] text-neutral-600">Fuel</span>
-            {["E", "¼", "½", "¾", "F"].map((mark) => (
-              <span key={mark} className="flex items-center gap-[2pt] text-[7.5pt]">
-                <Box /> {mark}
-              </span>
-            ))}
-          </div>
-          <Line label="Keys received" className="col-span-2" />
-          <div className="col-span-4 flex items-end gap-3 text-[7.5pt]">
-            <span className="text-[7pt] font-semibold uppercase tracking-[0.08em] text-neutral-600">Valuables removed by owner</span>
-            <span className="flex items-center gap-1"><Box /> Yes</span>
-            <span className="flex items-center gap-1"><Box /> No</span>
-          </div>
-        </div>
+      {/* Who and what */}
+      <section className="mt-[8pt] grid grid-cols-12 gap-x-4 gap-y-[2pt]">
+        <Line name="Date" className="col-span-4" />
+        <Line name="Job #" className="col-span-4" />
+        <Line name="Inspected by" className="col-span-4" />
+        <Line name="Customer" className="col-span-7" />
+        <Line name="Phone" className="col-span-5" />
+        <Line name="Year / make / model" className="col-span-7" />
+        <Line name="Color" className="col-span-2" />
+        <Line name="Miles" className="col-span-3" />
+        <Line name="VIN" className="col-span-8" />
+        <Line name="Plate" className="col-span-4" />
       </section>
 
-      {/* Exterior diagrams */}
-      <section className="mt-[8pt]">
-        <SectionTitle>Exterior condition</SectionTitle>
-        <p className="mb-[5pt] flex flex-wrap gap-x-3 gap-y-[2pt] text-[7.5pt] text-neutral-700">
-          <span className="font-semibold text-black">Mark each spot with a letter:</span>
+      {/* Damage diagram */}
+      <section className="mt-[12pt]">
+        <SectionTitle>Mark any damage</SectionTitle>
+        <div className="grid grid-cols-[1fr_0.36fr_0.22fr] items-center gap-x-5 rounded-[4pt] border border-neutral-300 px-[10pt] py-[6pt]">
+          <div className="space-y-[2pt]">
+            <SideDiagram type={type} facing="left" />
+            <p className={caption}>Driver side</p>
+            <SideDiagram type={type} facing="right" />
+            <p className={caption}>Passenger side</p>
+          </div>
+          <div className="space-y-[2pt]">
+            <EndDiagram type={type} end="front" />
+            <p className={caption}>Front</p>
+            <EndDiagram type={type} end="rear" />
+            <p className={caption}>Rear</p>
+          </div>
+          <div className="flex h-[3.3in] flex-col items-center">
+            <TopDiagram type={type} />
+            <p className={caption}>Top</p>
+          </div>
+        </div>
+        <p className="mt-[5pt] flex flex-wrap justify-center gap-x-4 gap-y-[2pt] text-[8pt] text-neutral-700">
           {DAMAGE_KEY.map(([code, name]) => (
             <span key={code}>
               <b className="text-black">{code}</b> {name}
             </span>
           ))}
         </p>
-        <div className="grid grid-cols-[1fr_0.55fr_0.42fr] gap-x-4 rounded-[4pt] border border-neutral-300 px-[8pt] py-[4pt]">
-          <div className="mx-auto w-[2.85in]">
-            <SideDiagram facing="left" />
-            <p className="text-center text-[6.5pt] uppercase tracking-[0.15em] text-neutral-500">Driver side</p>
-            <SideDiagram facing="right" />
-            <p className="text-center text-[6.5pt] uppercase tracking-[0.15em] text-neutral-500">Passenger side</p>
-          </div>
-          <div className="mx-auto flex w-[1.45in] flex-col justify-around gap-[4pt]">
-            <div>
-              <EndDiagram end="front" />
-              <p className="text-center text-[6.5pt] uppercase tracking-[0.15em] text-neutral-500">Front</p>
-            </div>
-            <div>
-              <EndDiagram end="rear" />
-              <p className="text-center text-[6.5pt] uppercase tracking-[0.15em] text-neutral-500">Rear</p>
-            </div>
-          </div>
-          <div className="flex h-[2.2in] flex-col items-center">
-            <TopDiagram />
-            <p className="text-center text-[6.5pt] uppercase tracking-[0.15em] text-neutral-500">Top</p>
-          </div>
-        </div>
       </section>
 
-      {/* Checklist */}
-      <section className="mt-[8pt]">
-        <SectionTitle>Condition check</SectionTitle>
-        <div className="grid grid-cols-2 gap-x-6">
-          {[CHECKLIST.slice(0, 6), CHECKLIST.slice(6)].map((column, c) => (
-            <div key={c}>
-              <div className="flex items-end gap-2 border-b border-neutral-300 pb-[2pt] text-[6.5pt] font-semibold uppercase tracking-[0.1em] text-neutral-500">
-                <span className="flex-1">Item</span>
-                <span className="w-[0.3in] text-center">OK</span>
-                <span className="w-[0.38in] text-center">Issue</span>
-                <span className="w-[1.05in]">Note</span>
-              </div>
-              {column.map((item) => (
-                <div key={item} className="flex items-end gap-2 border-b border-neutral-200 py-[2pt]">
-                  <span className="flex-1">{item}</span>
-                  <span className="flex w-[0.3in] justify-center"><Box /></span>
-                  <span className="flex w-[0.38in] justify-center"><Box /></span>
-                  <span className="h-[10pt] w-[1.05in] border-b border-neutral-400" />
-                </div>
-              ))}
+      {/* Quick check */}
+      <section className="mt-[12pt]">
+        <SectionTitle>Quick check</SectionTitle>
+        <div className="grid grid-cols-3 gap-x-6 gap-y-[6pt]">
+          {QUICK_CHECK.map((item) => (
+            <div key={item} className="flex items-center gap-2">
+              <span className="flex items-center gap-1 text-[7.5pt] text-neutral-600"><Box /> OK</span>
+              <span className="flex items-center gap-1 text-[7.5pt] text-neutral-600"><Box /> Issue</span>
+              <span className="ml-1">{item}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Work and notes */}
-      <section className="mt-[8pt] grid grid-cols-2 gap-x-6">
-        <div>
-          <SectionTitle>Work requested</SectionTitle>
-          {[0, 1, 2].map((i) => (
-            <span key={i} className="block h-[14pt] border-b border-neutral-400" />
-          ))}
-        </div>
-        <div>
-          <SectionTitle>Notes</SectionTitle>
-          {[0, 1, 2].map((i) => (
-            <span key={i} className="block h-[14pt] border-b border-neutral-400" />
-          ))}
-        </div>
+      {/* Notes */}
+      <section className="mt-[12pt]">
+        <SectionTitle>Work requested and notes</SectionTitle>
+        {[0, 1, 2].map((i) => (
+          <span key={i} className="block h-[18pt] border-b border-neutral-400" />
+        ))}
       </section>
 
       {/* Signatures */}
-      <section className="mt-auto pt-[8pt]">
-        <p className="rounded-[4pt] border border-neutral-300 bg-neutral-50 px-[8pt] py-[6pt] text-[7.5pt] leading-relaxed text-neutral-800">
-          I&apos;ve reviewed this sheet and agree it shows my vehicle&apos;s condition at drop-off. {BUSINESS_INFO.brandName} isn&apos;t
-          responsible for damage already marked above or for items left in the vehicle.
+      <section className="mt-auto pt-[12pt]">
+        <p className="text-[8pt] leading-relaxed text-neutral-700">
+          I agree this sheet shows my vehicle&apos;s condition at drop-off. {BUSINESS_INFO.brandName} isn&apos;t responsible for damage
+          marked above or for items left in the vehicle.
         </p>
-        <div className="mt-[6pt] grid grid-cols-[1.6fr_0.8fr_1.2fr] gap-x-4 gap-y-[6pt]">
-          <Line label="Client signature (drop-off)" />
-          <Line label="Date" />
-          <Line label="Shop" />
-          <Line label="Client signature (pick-up)" />
-          <Line label="Date" />
-          <div className="flex items-end gap-1.5 text-[7.5pt]">
-            <Box /> <span>Picked up in good condition</span>
-          </div>
+        <div className="mt-[8pt] grid grid-cols-[2fr_1fr] gap-x-6 gap-y-[6pt]">
+          <Line name="Client signature, drop-off" />
+          <Line name="Date" />
+          <Line name="Client signature, pick-up" />
+          <Line name="Date" />
         </div>
       </section>
 
-      <footer className="mt-[6pt] flex justify-between border-t border-neutral-300 pt-[4pt] text-[6.5pt] text-neutral-500">
-        <span>{BUSINESS_INFO.brandName} · karfxcustoms.com</span>
-        <span>Customer copy available on request</span>
+      <footer className="mt-[10pt] flex justify-between border-t border-neutral-300 pt-[4pt] text-[7pt] text-neutral-500">
+        <span>
+          {BUSINESS_INFO.brandName} · {BUSINESS_INFO.fullAddress}
+        </span>
+        <span>{BUSINESS_INFO.phoneDisplay} · karfxcustoms.com</span>
       </footer>
     </article>
   );
