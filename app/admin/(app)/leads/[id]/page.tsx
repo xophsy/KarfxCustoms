@@ -34,6 +34,9 @@ export default async function LeadPage({ params }: { params: { id: string } }) {
           </span>
         </p>
         <h1 className="mt-2 font-display text-3xl font-semibold md:text-4xl">{lead.customer.name}</h1>
+        <Link href={`/admin/customers/${lead.customer.id}`} className="mt-1 inline-block text-sm text-white/50 hover:text-gold-500">
+          Customer record →
+        </Link>
       </div>
 
       <dl className="grid grid-cols-[96px_minmax(0,1fr)] gap-x-4 gap-y-3 text-sm sm:grid-cols-[120px_minmax(0,1fr)]">
