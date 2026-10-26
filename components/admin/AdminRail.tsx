@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/admin/leads", label: "Leads" },
   { href: "/admin/customers", label: "Customers" },
+  { href: "/admin/sheets", label: "Sheets" },
 ];
 
 function LogOutButton({ name }: { name: string }) {
@@ -26,7 +27,7 @@ export default function AdminRail({ name, isOwner }: { name: string; isOwner: bo
   const links = isOwner ? [...LINKS, { href: "/admin/team", label: "Team" }] : LINKS;
 
   return (
-    <aside className="sticky top-0 z-20 flex flex-col gap-3 border-b border-white/10 bg-black px-4 pt-4 md:h-screen md:gap-8 md:border-b-0 md:border-r md:px-5 md:pb-6 md:pt-8">
+    <aside className="sticky top-0 z-20 flex flex-col print:hidden gap-3 border-b border-white/10 bg-black px-4 pt-4 md:h-screen md:gap-8 md:border-b-0 md:border-r md:px-5 md:pb-6 md:pt-8">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-baseline gap-3 md:block">
           <p className="font-display text-2xl font-semibold leading-none text-gold-500 md:text-[28px]">KAR FX</p>
