@@ -1,7 +1,7 @@
 import { createHash, randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { sql } from "@/lib/admin/db";
+import { DEMO, sql } from "@/lib/admin/db";
 import { hashPassword, verifyPassword } from "@/lib/admin/password";
 
 export type AdminUser = { id: string; email: string; name: string; role: "owner" | "tech" };
@@ -11,6 +11,9 @@ type LoginResult =
   | { ok: false; error: "Email or password is wrong." | "Too many attempts. Try again in 15 minutes." };
 
 export const SESSION_COOKIE = "kfx_session";
+// Demo mode has no passwords: this cookie value signs in the sample owner (see db/seed-demo.sql).
+export const DEMO_TOKEN = "demo";
+const DEMO_EMAIL = "sales@restorfxraleigh.com";
 const SESSION_DAYS = 30;
 const MAX_FAILURES = 10;
 
@@ -50,6 +53,11 @@ export async function attemptLogin(rawEmail: string, password: string): Promise<
 
 export async function userForToken(token: string | undefined): Promise<AdminUser | null> {
   if (!token) return null;
+  if (DEMO) {
+    if (token !== DEMO_TOKEN) return null;
+    const [owner] = await sql`select id, email, name, role from users where email = ${DEMO_EMAIL}`;
+    return (owner as AdminUser | undefined) ?? null;
+  }
   const [user] = await sql`select u.id, u.email, u.name, u.role
     from sessions s join users u on u.id = s.user_id
     where s.token_hash = ${hashToken(token)} and s.expires_at > now() and u.active`;
@@ -75,6 +83,6 @@ export async function requireUser(role?: "owner"): Promise<AdminUser> {
 
 export async function logout(): Promise<void> {
   const token = cookies().get(SESSION_COOKIE)?.value;
-  if (token) await sql`delete from sessions where token_hash = ${hashToken(token)}`;
+  if (token && !DEMO) await sql`delete from sessions where token_hash = ${hashToken(token)}`;
   cookies().delete({ name: SESSION_COOKIE, path: "/admin" });
 }

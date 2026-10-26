@@ -1,4 +1,4 @@
-import { sql, type Row } from "@/lib/admin/db";
+import { DEMO, sql, type Row } from "@/lib/admin/db";
 import { normalizePhone } from "@/lib/admin/phone";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
 
@@ -82,6 +82,8 @@ export async function saveWebsiteLead(input: {
   source: string;
   submissionId: string;
 }): Promise<{ leadId: string; number: number; created: boolean }> {
+  // A real customer's request must never land in throwaway demo data; the route then emails it instead.
+  if (DEMO) throw new Error("Demo mode: no database connected, quote not stored");
   const customerId = await upsertCustomer(input);
   const source = input.source === "restorfx" ? "referral" : "website";
   const [inserted] = await sql`insert into leads (customer_id, services, message, source, submission_id)

@@ -1,9 +1,13 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // PGlite (local dev database, see lib/admin/db.ts) ships WASM files webpack can't bundle.
+  // PGlite (local and demo database, see lib/admin/db.ts) ships WASM files webpack can't bundle,
+  // and demo mode reads PGlite's files and db/*.sql at runtime, so they go out with the server code.
   experimental: {
     serverComponentsExternalPackages: ["@electric-sql/pglite"],
+    outputFileTracingIncludes: {
+      "/**/*": ["./node_modules/@electric-sql/pglite/dist/**/*", "./db/**/*"],
+    },
   },
 
   images: {
