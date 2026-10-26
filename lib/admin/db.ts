@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import type { PGlite } from "@electric-sql/pglite";
 
 export type Row = Record<string, any>;
 type Sql = (strings: TemplateStringsArray, ...values: unknown[]) => Promise<Row[]>;
@@ -15,16 +16,20 @@ function connect(): Sql {
   return localSql();
 }
 
+// Next dev loads this module more than once (pages and server actions are bundled separately),
+// so the local database lives on globalThis: one instance, never two opening .pglite at once.
+const shared = globalThis as typeof globalThis & { __karfxLocalDb?: Promise<PGlite> };
+
 // Dev and tests without DATABASE_URL: Postgres in-process (PGlite), migrated on first use.
 // Tests get a fresh in-memory database per worker; dev keeps its data in .pglite/.
 function localSql(): Sql {
-  const ready = (async () => {
+  const ready = (shared.__karfxLocalDb ??= (async () => {
     const { PGlite } = await import("@electric-sql/pglite");
     const { applyMigrations } = await import("../../scripts/migrate.mjs");
     const db = new PGlite(process.env.VITEST ? undefined : ".pglite");
     await applyMigrations(db);
     return db;
-  })();
+  })());
   return async (strings, ...values) => {
     const db = await ready;
     const text = strings.reduce((acc, part, i) => `${acc}$${i}${part}`);
