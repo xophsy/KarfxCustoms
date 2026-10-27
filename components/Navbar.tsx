@@ -49,13 +49,13 @@ export default function Navbar() {
             <Image
               src="/images/branding/Logo.png"
               alt=""
-              width={96}
-              height={96}
+              width={144}
+              height={144}
               priority
-              className="h-12 w-12 object-contain transition-transform duration-300 group-hover:rotate-[-8deg]"
+              className="h-14 w-14 object-contain transition-transform duration-300 group-hover:rotate-[-8deg] md:h-[4.5rem] md:w-[4.5rem]"
             />
             <span className="leading-none">
-              <span className="block font-brand text-lg font-extrabold tracking-tight text-white">KAR FX</span>
+              <span className="block font-brand text-xl font-extrabold tracking-tight text-white md:text-2xl">KAR FX</span>
               <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
             </span>
           </Link>

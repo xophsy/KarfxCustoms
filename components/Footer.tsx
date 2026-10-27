@@ -27,9 +27,9 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <Link href="/" className="inline-flex items-center gap-3" aria-label="KAR FX Customs home">
-              <Image src="/images/branding/Logo.png" alt="" width={112} height={112} className="h-14 w-14 object-contain" />
+              <Image src="/images/branding/Logo.png" alt="" width={160} height={160} className="h-20 w-20 object-contain" />
               <span className="leading-none">
-                <span className="block font-brand text-xl font-extrabold tracking-tight text-white">KAR FX</span>
+                <span className="block font-brand text-2xl font-extrabold tracking-tight text-white">KAR FX</span>
                 <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
               </span>
             </Link>
