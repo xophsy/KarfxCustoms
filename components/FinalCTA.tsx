@@ -1,13 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { BUSINESS_INFO } from "@/lib/business";
-
-const CONTACTS = [
-  { Icon: MapPin, label: "Visit by appointment", value: BUSINESS_INFO.fullAddress, href: BUSINESS_INFO.mapHref, external: true },
-  { Icon: Phone, label: "Call or text", value: BUSINESS_INFO.phoneDisplay, href: BUSINESS_INFO.phoneHref },
-  { Icon: Mail, label: "Email", value: BUSINESS_INFO.email, href: BUSINESS_INFO.emailHref },
-];
 
 export default function FinalCTA() {
   return (
@@ -29,8 +23,7 @@ export default function FinalCTA() {
             We look forward to <span className="text-gold-gradient italic">hearing from you.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-            Tell us a little about your vehicle and what you are looking for. We will reply within 24 hours on weekdays to
-            coordinate a visit and evaluate the best options for you.
+            Tell us a little about your vehicle and what you are looking for.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/quote" className="btn-gold">
@@ -44,25 +37,6 @@ export default function FinalCTA() {
           </div>
         </div>
 
-        <ul className="mx-auto mt-16 grid max-w-5xl gap-3 md:grid-cols-3">
-          {CONTACTS.map(({ Icon, label, value, href, external }) => (
-            <li key={label}>
-              <a
-                href={href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="glass-card flex h-full items-start gap-4 p-5 backdrop-blur-md"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-500">
-                  <Icon size={18} aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">{label}</span>
-                  <span className="mt-1 block text-[15px] font-medium text-white">{value}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

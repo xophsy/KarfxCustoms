@@ -76,7 +76,7 @@ export default function ServiceDetailPage({
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-28 lg:px-8">
           <ServiceBreadcrumb
             crumbs={[
-              { label: "Services", href: "/services" },
+              { label: "Services", href: "/#services" },
               { label: cat.name, href: `/services/${cat.slug}` },
               { label: service.name },
             ]}
@@ -262,11 +262,11 @@ export default function ServiceDetailPage({
               </div>
               <div className="mt-8">
                 <a
-                  href="/services"
+                  href="/#services"
                   className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-white/25 transition-colors duration-200 hover:text-gold-500"
                 >
                   <span className="rotate-180 inline-block">→</span>
-                  All Services
+                  All services
                 </a>
               </div>
             </section>

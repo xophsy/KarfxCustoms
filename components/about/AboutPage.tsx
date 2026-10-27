@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/services/ScrollReveal";
-import { BUSINESS_INFO } from "@/lib/business";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // VALUE POINTS DATA
@@ -290,19 +289,6 @@ export default function AboutPage() {
             </div>
           </ScrollReveal>
 
-          {/* Location footnote */}
-          <ScrollReveal delay={0.12}>
-            <p className="mt-10 border-t border-white/5 pt-6 text-xs text-white/25">
-              {BUSINESS_INFO.fullAddress} &nbsp;·&nbsp;{" "}
-              {BUSINESS_INFO.appointmentOnlyLabel} &nbsp;·&nbsp;{" "}
-              <a
-                href={BUSINESS_INFO.phoneHref}
-                className="transition-colors duration-200 hover:text-gold-500/60"
-              >
-                {BUSINESS_INFO.phoneDisplay}
-              </a>
-            </p>
-          </ScrollReveal>
         </div>
       </section>
 

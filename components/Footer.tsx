@@ -106,9 +106,6 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {BUSINESS_INFO.brandName}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <span>
-              ★ {BUSINESS_INFO.reviewSummary}
-            </span>
             {/* Quiet staff entrance to the shop admin */}
             <Link
               href="/admin"

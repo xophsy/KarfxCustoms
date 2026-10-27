@@ -166,7 +166,7 @@ export default function QuoteFlow({
     step === "categories" || step === "services" ? 1 : step === "contact" ? 2 : 3;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 pb-20 md:px-8 lg:px-10">
+    <div className="mx-auto w-full max-w-5xl px-5 pb-20 pt-16 md:px-8 md:pt-20 lg:px-10">
 
       {/* Progress indicator — hidden on success */}
       {step !== "success" && (

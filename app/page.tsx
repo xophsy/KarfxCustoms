@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import FinalCTA from "@/components/FinalCTA";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
@@ -43,10 +41,6 @@ export default function Home() {
               <p className="text-base leading-relaxed text-white/60">
                 For us it is important to understand your needs first. If you are not sure which service is right for your vehicle, we will gladly help you decide.
               </p>
-              <Link href="/quote" className="mt-3 inline-flex items-center gap-2 font-semibold text-gold-500 hover:text-gold-400">
-                Tell us about your vehicle
-                <ArrowRight size={16} aria-hidden="true" />
-              </Link>
             </div>
           </ScrollReveal>
 

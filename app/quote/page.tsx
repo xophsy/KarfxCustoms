@@ -18,16 +18,6 @@ type Props = {
 export default function QuotePage({ searchParams }: Props) {
   return (
     <>
-      {/* Slim page header — keeps the page focused on the flow */}
-      <div className="border-b border-white/5 bg-surface-900/80 px-5 py-5 text-center md:px-8">
-        <a
-          href="/"
-          className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/30 transition-colors duration-200 hover:text-gold-500"
-        >
-          ← KAR FX Customs
-        </a>
-      </div>
-
       {/* Quote flow — receives pre-selection params from any CTA */}
       <QuoteFlow
         preselectedCategory={searchParams.category}
