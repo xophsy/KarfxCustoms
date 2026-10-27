@@ -36,15 +36,15 @@ export default function Home() {
             <div>
               <p className="eyebrow">Services</p>
               <h2 id="services-heading" className="mt-5 max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-                Everything your car needs, <span className="text-gold-gradient italic">under one roof.</span>
+                Everything your vehicle needs, <span className="text-gold-gradient italic">under one roof.</span>
               </h2>
             </div>
             <div className="max-w-sm">
               <p className="text-base leading-relaxed text-white/60">
-                Protect the paint, change the look, or bring it back to showroom clean. Not sure what you need?
+                For us it is important to understand your needs first. If you are not sure which service is right for your vehicle, we will gladly help you decide.
               </p>
               <Link href="/quote" className="mt-3 inline-flex items-center gap-2 font-semibold text-gold-500 hover:text-gold-400">
-                Tell us about your car
+                Tell us about your vehicle
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>

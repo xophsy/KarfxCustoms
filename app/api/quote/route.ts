@@ -122,9 +122,9 @@ function notificationHtml(lead: Lead) {
 
 function confirmationHtml(lead: Lead) {
   return emailFrame(`
-    <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2">We got your request, ${escapeHtml(lead.name)}.</h1>
-    <p style="margin:0 0 18px;color:#c8c8c8;font-size:16px;line-height:1.6">Thanks for reaching out about ${escapeHtml(lead.services.join(", "))}. We'll get back to you within 24 hours on weekdays.</p>
-    <p style="margin:0;color:#999;font-size:14px;line-height:1.6">Need us sooner? Call <a href="${BUSINESS_INFO.phoneHref}" style="color:#D4AF37">${BUSINESS_INFO.phoneDisplay}</a>.</p>`);
+    <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2">Thank you very much, ${escapeHtml(lead.name)}.</h1>
+    <p style="margin:0 0 18px;color:#c8c8c8;font-size:16px;line-height:1.6">We received your request about ${escapeHtml(lead.services.join(", "))}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.</p>
+    <p style="margin:0;color:#999;font-size:14px;line-height:1.6">If you need us sooner, please call or text <a href="${BUSINESS_INFO.phoneHref}" style="color:#D4AF37">${BUSINESS_INFO.phoneDisplay}</a>. We look forward to speaking with you.</p>`);
 }
 
 export async function POST(request: NextRequest) {
@@ -209,9 +209,9 @@ export async function POST(request: NextRequest) {
         from: fromEmail,
         to: lead.email,
         replyTo: notificationEmail,
-        subject: "We got your KAR FX Customs quote request",
+        subject: "We received your KAR FX Customs request",
         html: confirmationHtml(lead),
-        text: `We got your request, ${lead.name}.\n\nThanks for reaching out about ${lead.services.join(", ")}. We'll get back to you within 24 hours on weekdays.\n\nNeed us sooner? Call ${BUSINESS_INFO.phoneDisplay}.`,
+        text: `Thank you very much, ${lead.name}.\n\nWe received your request about ${lead.services.join(", ")}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.\n\nIf you need us sooner, please call or text ${BUSINESS_INFO.phoneDisplay}. We look forward to speaking with you.`,
       },
       { idempotencyKey: `quote-confirmation-${lead.submissionId}` }
     );

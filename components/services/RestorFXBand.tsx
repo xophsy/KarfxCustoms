@@ -23,12 +23,12 @@ export default function RestorFXBand() {
             </div>
 
             <h2 id="restorfx-heading" className="mt-8 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-              Faded or scratched paint? <span className="text-gold-gradient italic">We bring it back.</span>
+              Faded or scratched paint? <span className="text-gold-gradient italic">We can help.</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">
-              For paint restoration we work alongside RestorFX, our partner for specialized clear-coat repair. Whether
-              your paint needs correcting before a wrap or PPF, or it&apos;s faded and oxidized, RestorFX restores it to a
-              like-new finish without a repaint.
+              For paint restoration, we work together with RestorFX, our partner for specialized clear-coat repair. Whether
+              your paint is faded and oxidized or needs correction before a wrap or PPF, we can restore it to a like-new
+              finish without repainting.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">

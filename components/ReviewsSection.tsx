@@ -82,7 +82,7 @@ export default function ReviewsSection() {
           <div className="lg:sticky lg:top-28">
             <p className="eyebrow">Reviews</p>
             <h2 id="reviews-heading" className="mt-5 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-              Don&apos;t take our word for it.
+              What our clients <span className="text-gold-gradient italic">say about us.</span>
             </h2>
             <div className="mt-10 flex items-end gap-4">
               <span className="font-display text-8xl font-bold leading-none tracking-[-0.03em] text-white">

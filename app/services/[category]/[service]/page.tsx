@@ -225,10 +225,10 @@ export default function ServiceDetailPage({
           <section className="py-12 md:py-16">
             <div className="rounded-3xl border border-white/5 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
               <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white md:text-4xl">
-                Ready to get started?
+                We would love to help with your vehicle
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
-                Tell us about your vehicle and we&apos;ll get back to you within 24 hours.
+                Tell us a little about what you are looking for. We will reply within 24 hours on weekdays.
               </p>
               <div className="mt-7 flex justify-center">
                 <a

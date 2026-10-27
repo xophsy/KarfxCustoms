@@ -28,7 +28,7 @@ export default function StepCategories({
           What are you looking for?
         </h1>
         <p className="mt-3 text-sm text-white/45">
-          Choose a category to see the services inside it.
+          Choose a category so we can understand what you need.
         </p>
       </div>
 

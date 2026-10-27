@@ -3,16 +3,16 @@ import { ArrowRight } from "lucide-react";
 
 const STEPS = [
   {
-    title: "Tell us about your car",
-    body: "Send a quote request or give us a call. You'll hear back within 24 hours on weekdays.",
+    title: "Tell us what you need",
+    body: "Send us a quote request, a text or a call. We will reply within 24 hours on weekdays to learn more about your vehicle and what you are looking for.",
   },
   {
-    title: "Drop it off by appointment",
-    body: "We walk around the car with you and note its condition on an inspection sheet you sign.",
+    title: "We coordinate a visit",
+    body: "We find a time that works for you. At drop-off, we walk around the vehicle with you and note its condition on an inspection sheet you sign.",
   },
   {
-    title: "Drive away with the finish",
-    body: "Before you leave, we go over the work together so you know it's right.",
+    title: "We review the work together",
+    body: "Before you leave, we go over everything with you to make sure it is exactly what you wanted.",
   },
 ];
 
@@ -23,10 +23,10 @@ export default function HowItWorks() {
         <div className="lg:col-span-4">
           <p className="eyebrow">How it works</p>
           <h2 id="process-heading" className="mt-5 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-            Three steps. <span className="whitespace-nowrap text-gold-gradient italic">No guesswork.</span>
+            How we <span className="whitespace-nowrap text-gold-gradient italic">work with you.</span>
           </h2>
           <Link href="/quote" className="btn-gold mt-8">
-            Start step one
+            Tell us about your vehicle
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

@@ -42,8 +42,8 @@ export default function Hero() {
           <span className="text-gold-gradient italic">the Difference.</span>
         </h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
-          Paint protection film, wraps, tint, ceramic coating and detailing for vehicles that deserve more than ordinary
-          care.
+          Paint protection film, wraps, tint, ceramic coating and detailing in Raleigh. Tell us about your vehicle, and we
+          will help you find the best option for it.
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">

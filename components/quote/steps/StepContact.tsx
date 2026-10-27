@@ -59,11 +59,11 @@ export default function StepContact({
           Almost there
         </p>
         <h2 className="font-editorial text-4xl font-semibold text-white sm:text-5xl">
-          Your request looks good.
+          Thank you for your interest.
         </h2>
         <p className="mt-3 text-sm text-white/45">
-          Just leave your contact info and we&apos;ll be in touch within 24
-          hours.
+          Please leave your contact information so we can learn a little more about your vehicle and coordinate a
+          visit. We will reply within 24 hours on weekdays.
         </p>
       </div>
 
@@ -170,7 +170,7 @@ export default function StepContact({
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Year, make, model — or anything else you'd like us to know"
+              placeholder="Year, make and model, and anything else you would like us to know"
               className="input-gold w-full resize-none border border-white/10 bg-surface-800 px-4 py-3 text-sm text-white placeholder-white/20 transition-colors duration-200 focus:border-gold-500 focus:outline-none focus:ring-0"
             />
           </div>
@@ -206,7 +206,7 @@ export default function StepContact({
               </>
             ) : (
               <>
-                Get My Quote
+                Send my request
                 <ArrowRight size={15} />
               </>
             )}
@@ -256,9 +256,9 @@ export default function StepContact({
           {/* Contact reassurance on desktop */}
           <div className="mt-4 hidden space-y-2.5 lg:block">
             {[
-              "We'll reply within 24 hours on weekdays",
-              "No commitment required — just a quote",
-              "Raleigh-based shop, serving local clients",
+              "We will reply within 24 hours on weekdays",
+              "No commitment, just a conversation about your vehicle",
+              "Raleigh shop serving local clients by appointment",
             ].map((line) => (
               <div key={line} className="flex items-start gap-2.5">
                 <span className="mt-0.5 shrink-0 text-gold-500/60 text-sm">✓</span>

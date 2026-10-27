@@ -34,14 +34,14 @@ export default function StepSuccess({ selectedServices }: Props) {
 
       {/* Heading */}
       <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500/60">
-        Request Received
+        Request received
       </p>
       <h2 className="font-editorial text-4xl font-semibold text-white sm:text-5xl">
-        We&apos;ve got your request.
+        Thank you very much.
       </h2>
       <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-white/50">
-        We&apos;ll be in touch within 24 hours on weekdays at the contact info
-        you provided.
+        We received your request and will reply within 24 hours on weekdays to learn a little more about your
+        vehicle and coordinate a visit.
       </p>
 
       {/* Gold divider */}
@@ -75,10 +75,10 @@ export default function StepSuccess({ selectedServices }: Props) {
       {/* Actions */}
       <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a href="/" className="btn-gold">
-          Back to Home
+          Back to home
         </a>
         <a href="/portfolio" className="btn-ghost">
-          View Our Work
+          View our work
         </a>
       </div>
 

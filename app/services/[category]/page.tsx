@@ -103,8 +103,8 @@ export default function CategoryPage({
           <ScrollReveal delay={0.1}>
             <div className="mt-12 flex flex-col gap-4 border-t border-white/5 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-white/50">
-                Not sure which option fits?{" "}
-                <span className="text-white/70">We&apos;ll help you figure it out.</span>
+                Not sure which option is right for your vehicle?{" "}
+                <span className="text-white/70">We will gladly help you decide.</span>
               </p>
               <a href="/contact" className="btn-ghost inline-flex shrink-0 items-center gap-2">
                 Ask us

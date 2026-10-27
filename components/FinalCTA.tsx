@@ -24,12 +24,13 @@ export default function FinalCTA() {
 
       <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-6 md:py-36 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Ready when you are</p>
+          <p className="eyebrow">Get in touch</p>
           <h2 id="cta-heading" className="mt-6 font-editorial text-[clamp(3rem,6.4vw,5.5rem)] font-semibold leading-[0.98] text-white">
-            Let&apos;s make your car <span className="text-gold-gradient italic">look its best.</span>
+            We look forward to <span className="text-gold-gradient italic">hearing from you.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-            Tell us about your vehicle and we&apos;ll get back to you within 24 hours on weekdays.
+            Tell us a little about your vehicle and what you are looking for. We will reply within 24 hours on weekdays to
+            coordinate a visit and evaluate the best options for you.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/quote" className="btn-gold">

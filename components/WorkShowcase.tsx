@@ -20,7 +20,7 @@ export default function WorkShowcase() {
           <div>
             <p className="eyebrow">Our work</p>
             <h2 id="work-heading" className="mt-5 max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-              Real cars. Real jobs. <span className="text-gold-gradient italic">Right here in Raleigh.</span>
+              Some of the vehicles <span className="text-gold-gradient italic">we have worked on.</span>
             </h2>
           </div>
           <Link href="/portfolio" className="btn-ghost self-start md:self-auto">
