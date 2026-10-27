@@ -5,7 +5,7 @@ export default function RestorFXBand() {
   return (
     <section aria-labelledby="restorfx-heading" className="bg-surface-900 pb-24 md:pb-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="relative grid overflow-hidden rounded-[32px] border border-gold-500/25 bg-surface-800 lg:grid-cols-12">
+        <div className="relative grid overflow-hidden border border-gold-500/25 bg-surface-800 lg:grid-cols-12">
           <div
             className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full opacity-70"
             style={{ background: "radial-gradient(closest-side, rgba(212,175,55,0.18), transparent)" }}
@@ -15,15 +15,15 @@ export default function RestorFXBand() {
           <div className="relative p-8 sm:p-12 lg:col-span-7 lg:p-16">
             <div className="flex flex-wrap items-center gap-4">
               {/* RestorFX's own wordmark is black + yellow, so it sits on a white badge */}
-              <span className="inline-flex rounded-full bg-white px-5 py-3">
+              <span className="inline-flex bg-white px-5 py-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/branding/restorfx-logo.svg" alt="RestorFX" width={140} height={13} className="h-3.5 w-auto" />
               </span>
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-500">Trusted partner</span>
+              <span className="font-brand text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-500">Trusted partner</span>
             </div>
 
-            <h2 id="restorfx-heading" className="mt-8 font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance text-white md:text-5xl">
-              Faded or scratched paint? <span className="text-gold-500">We bring it back.</span>
+            <h2 id="restorfx-heading" className="mt-8 font-display text-4xl font-semibold leading-[1.08] text-balance text-white md:text-[3.4rem]">
+              Faded or scratched paint? <span className="text-gold-gradient italic">We bring it back.</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">
               For paint restoration we work alongside RestorFX, our partner for specialized clear-coat repair. Whether
@@ -56,7 +56,7 @@ export default function RestorFXBand() {
                   src="/images/services/partners/restorfx/tarifa-comercial.jpg"
                   alt="Best of Business 2025 — Auto Restoration Service, Raleigh NC"
                   fill
-                  className="rounded-2xl object-contain"
+                  className="object-contain"
                   sizes="288px"
                 />
               </div>

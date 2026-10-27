@@ -75,7 +75,7 @@ export default function CategoryPage({
               { label: cat.name },
             ]}
           />
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.03em] text-balance text-white sm:text-5xl md:text-7xl">
+          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.02] text-balance text-white sm:text-5xl md:text-7xl">
             {cat.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />

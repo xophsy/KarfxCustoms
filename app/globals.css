@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --font-display: var(--font-archivo);
+  --font-display: var(--font-bodoni);
   --font-body: var(--font-archivo);
+  --font-brand: var(--font-archivo);
 }
 
 @layer base {
-  /* Headings use Archivo's wide cut; fonts without a width axis (the admin's Bodoni) ignore it. */
-  .font-display {
-    font-variation-settings: "wdth" 115;
+  /* The KAR FX wordmark, labels and buttons use Archivo's wide cut; fonts without a width axis ignore it. */
+  .font-brand,
+  .btn-gold,
+  .btn-ghost,
+  .eyebrow {
+    font-variation-settings: "wdth" 125;
   }
 }
 
@@ -53,55 +57,52 @@ body {
   background: #D4AF37;
 }
 
-/* Accent text: solid brand gold (kept under its old name so every page picks it up) */
+/* Gold gradient text (pair with `italic` on Bodoni headlines) */
 .text-gold-gradient {
-  color: #D4AF37;
-  font-style: normal;
+  background: linear-gradient(135deg, #D4AF37 0%, #F3D77A 45%, #C9A84C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Buttons */
+/* Buttons: square, small wide caps */
 .btn-gold,
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
+  gap: 0.625rem;
+  font-family: var(--font-brand), system-ui, sans-serif;
   font-weight: 600;
-  font-size: 0.9375rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.01em;
-  padding: 0.875rem 1.625rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 1.75rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .btn-gold {
-  background: #D4AF37;
+  background: linear-gradient(135deg, #D4AF37 0%, #EBCB63 50%, #C9A84C 100%);
   color: #0a0a0a;
 }
 
 .btn-gold:hover {
-  background: #E5C352;
-  box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.6);
-  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 0 28px rgba(212, 175, 55, 0.35);
 }
 
 .btn-ghost {
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #D4AF37;
+  background: transparent;
 }
 
 .btn-ghost:hover {
   border-color: #D4AF37;
-  color: #D4AF37;
-}
-
-.btn-gold:active,
-.btn-ghost:active {
-  transform: translateY(0);
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .btn-gold:focus-visible,
@@ -110,36 +111,46 @@ body {
   outline-offset: 3px;
 }
 
-/* Section label: short gold rule + small caps text */
+/* Section label: short gold rule + small wide caps */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.75rem;
+  gap: 0.875rem;
+  font-family: var(--font-brand), system-ui, sans-serif;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #D4AF37;
 }
 
 .eyebrow::before {
   content: "";
-  width: 1.75rem;
+  width: 2rem;
   height: 1px;
   background: currentColor;
 }
 
-/* Card surface */
+/* Card surface: hairline border, sharp corners */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(212, 175, 55, 0.12);
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(212, 175, 55, 0.45);
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* Slow settle-in for the hero photo */
+@keyframes hero-zoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+
+.hero-zoom {
+  animation: hero-zoom 14s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Noise texture overlay */

@@ -4,7 +4,7 @@ import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import { BUSINESS_INFO } from "@/lib/business";
 
-// The public site: one variable family, widened for headings (see .font-display in globals.css).
+// Archivo: body text, plus its wide cut for the KAR FX wordmark, labels and buttons (.font-brand in globals.css).
 const archivo = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
@@ -12,16 +12,16 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// Bodoni and Jost are the admin's fonts (app/admin/layout.tsx), so public pages don't preload them.
+// Bodoni: headlines.
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-bodoni",
   display: "swap",
-  preload: false,
 });
 
+// Jost is only the admin's body font (app/admin/layout.tsx), so public pages don't preload it.
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],

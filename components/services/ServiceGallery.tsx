@@ -98,12 +98,12 @@ export default function ServiceGallery({ images, serviceName }: Props) {
               {/* Badges */}
               <div className="absolute left-3 top-3 z-10 flex gap-2">
                 {img.isBeforeAfter && (
-                  <span className="rounded-full border border-gold-500/40 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gold-500 backdrop-blur-sm">
+                  <span className="rounded-sm border border-gold-500/40 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gold-500 backdrop-blur-sm">
                     Before / After
                   </span>
                 )}
                 {img.isDetail && (
-                  <span className="rounded-full border border-white/20 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/60 backdrop-blur-sm">
+                  <span className="rounded-sm border border-white/20 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/60 backdrop-blur-sm">
                     Detail
                   </span>
                 )}

@@ -25,9 +25,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // Set per area in globals.css: Archivo on the public site, Bodoni + Jost in the admin.
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        // Set per area: globals.css for the public site, app/admin/layout.tsx for the admin.
+        display: ["var(--font-display)", "Georgia", "serif"],
         body: ["var(--font-body)", "system-ui", "sans-serif"],
+        brand: ["var(--font-brand)", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "gold-gradient":

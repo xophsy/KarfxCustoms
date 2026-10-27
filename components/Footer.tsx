@@ -17,7 +17,7 @@ const socials = [
   { label: "TikTok", href: BUSINESS_INFO.tiktokHref, Icon: TikTokIcon },
 ];
 
-const heading = "text-xs font-semibold uppercase tracking-[0.2em] text-white/40";
+const heading = "font-brand text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500";
 const link = "text-[15px] text-white/70 transition-colors hover:text-gold-500";
 
 export default function Footer() {
@@ -29,7 +29,7 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-3" aria-label="KAR FX Customs home">
               <Image src="/images/branding/Logo.png" alt="" width={112} height={112} className="h-14 w-14 object-contain" />
               <span className="leading-none">
-                <span className="block font-display text-xl font-extrabold tracking-tight text-white">KAR FX</span>
+                <span className="block font-brand text-xl font-extrabold tracking-tight text-white">KAR FX</span>
                 <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
               </span>
             </Link>

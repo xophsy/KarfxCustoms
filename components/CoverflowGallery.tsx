@@ -180,7 +180,7 @@ export default function CoverflowGallery({
                 onClick={() =>
                   isFront ? setLightboxIndex(index) : setActiveIndex(index)
                 }
-                className="group absolute left-1/2 top-1/2 overflow-hidden rounded-2xl bg-surface-800 shadow-2xl shadow-black/60 focus:outline-none focus:ring-2 focus:ring-gold-500"
+                className="group absolute left-1/2 top-1/2 overflow-hidden bg-surface-800 shadow-2xl shadow-black/60 focus:outline-none focus:ring-2 focus:ring-gold-500"
                 style={{
                   zIndex: 100 - ak,
                   width: cardW,
@@ -207,7 +207,7 @@ export default function CoverflowGallery({
                   draggable={false}
                 />
                 <div className="absolute inset-0 bg-gold-500/0 transition-colors duration-300 group-hover:bg-gold-500/10" />
-                <div className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent transition-colors duration-300 group-hover:border-gold-500/40" />
+                <div className="pointer-events-none absolute inset-0 border border-transparent transition-colors duration-300 group-hover:border-gold-500/40" />
                 {/* Darken the receding cards so the focused one stands out */}
                 <div
                   className="pointer-events-none absolute inset-0 bg-black transition-opacity duration-300"
