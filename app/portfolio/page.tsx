@@ -26,7 +26,7 @@ export default function PortfolioPage() {
 
   return (
     <section className="flex h-[calc(100dvh-10rem)] flex-col bg-surface-900 md:h-[calc(100dvh-5rem)]">
-      <div className="mx-auto w-full max-w-7xl shrink-0 px-5 pb-4 pt-8 sm:px-6 md:pt-12 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl shrink-0 px-5 pb-4 pt-16 sm:px-6 md:pt-20 lg:px-8">
         <p className="eyebrow">Our work</p>
         <h1 className="mt-4 font-editorial text-4xl font-semibold leading-[1.05] text-balance text-white md:text-6xl">
           Real jobs, real vehicles, and a wider look at the shop.

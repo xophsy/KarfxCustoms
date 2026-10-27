@@ -45,16 +45,17 @@ export default function Navbar() {
         )}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
-          <Link href="/" aria-label="KAR FX Customs home" className="group flex shrink-0 items-center gap-3">
+          {/* The badge hangs half below the 80px bar: its top margin is 80px minus half its height. */}
+          <Link href="/" aria-label="KAR FX Customs home" className="group flex shrink-0 items-start gap-3 self-start md:gap-4">
             <Image
               src="/images/branding/Logo.png"
               alt=""
-              width={144}
-              height={144}
+              width={256}
+              height={256}
               priority
-              className="h-14 w-14 object-contain transition-transform duration-300 group-hover:rotate-[-8deg] md:h-[4.5rem] md:w-[4.5rem]"
+              className="mt-9 h-[5.5rem] w-[5.5rem] object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:rotate-[-8deg] md:mt-4 md:h-32 md:w-32"
             />
-            <span className="leading-none">
+            <span className="mt-[22px] leading-none md:mt-5">
               <span className="block font-brand text-xl font-extrabold tracking-tight text-white md:text-2xl">KAR FX</span>
               <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
             </span>
@@ -102,7 +103,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         className={cn(
-          "fixed inset-0 z-40 flex flex-col bg-surface-900 px-5 pb-10 pt-28 transition-opacity duration-300 sm:px-6 lg:hidden",
+          "fixed inset-0 z-40 flex flex-col bg-surface-900 px-5 pb-10 pt-36 transition-opacity duration-300 sm:px-6 lg:hidden",
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden={!menuOpen}

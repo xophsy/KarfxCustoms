@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/10" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-black/10 to-black/60" aria-hidden="true" />
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-36 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-40 sm:px-6 md:pt-48 lg:px-8">
         <p className="eyebrow">
           {/* one span so the eyebrow's flex gap doesn't split the line */}
           <span>
