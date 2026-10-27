@@ -24,24 +24,27 @@ export default function Hero() {
         fill
         priority
         sizes="100vw"
-        className="hero-zoom object-cover object-[72%_center]"
+        className="hero-zoom object-cover object-[72%_center] brightness-110"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/10" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-black/10 to-black/60" aria-hidden="true" />
+      {/* Light shading only where the text sits (left), the navbar (top) and the stats (bottom) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-black/35" aria-hidden="true" />
+      {/* Phones stack the text over the car, so they get a touch more shade */}
+      <div className="absolute inset-0 bg-black/25 md:hidden" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-40 sm:px-6 md:pt-48 lg:px-8">
-        <p className="eyebrow">
+        <p className="eyebrow [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
           {/* one span so the eyebrow's flex gap doesn't split the line */}
           <span>
             <span className="hidden sm:inline">{BUSINESS_INFO.brandName} · </span>Raleigh, NC
           </span>
         </p>
-        <h1 className="mt-7 font-editorial text-[clamp(3.4rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.01em] text-white">
+        <h1 className="mt-7 font-editorial text-[clamp(3.4rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.01em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.5)]">
           The Detail Makes
           <br />
-          <span className="text-gold-gradient italic">the Difference.</span>
+          <span className="inline-block text-gold-gradient italic [text-shadow:none] drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)]">the Difference.</span>
         </h1>
-        <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
+        <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/90 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]">
           Paint protection film, wraps, tint, ceramic coating and detailing in Raleigh. Tell us about your vehicle, and we
           will help you find the best option for it.
         </p>
@@ -56,7 +59,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <dl className="mt-16 grid grid-cols-2 gap-y-6 border-t border-white/15 pt-7 md:grid-cols-4">
+        <dl className="mt-16 grid [text-shadow:0_1px_10px_rgba(0,0,0,0.6)] grid-cols-2 gap-y-6 border-t border-white/15 pt-7 md:grid-cols-4">
           {FACTS.map((fact) => (
             <div key={fact.value} className="pr-4 md:border-l md:border-white/10 md:pl-6 md:first:border-l-0 md:first:pl-0">
               <dt className="sr-only">{fact.label}</dt>
