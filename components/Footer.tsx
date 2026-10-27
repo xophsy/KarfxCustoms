@@ -129,12 +129,26 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {BUSINESS_INFO.brandName}. All
             rights reserved.
           </p>
-          <Link
-            href="/portfolio"
-            className="text-xs text-white/20 transition-colors duration-200 hover:text-gold-500/60"
-          >
-            View Portfolio
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/portfolio"
+              className="text-xs text-white/20 transition-colors duration-200 hover:text-gold-500/60"
+            >
+              View Portfolio
+            </Link>
+            {/* Quiet staff entrance to the shop admin */}
+            <Link
+              href="/admin"
+              aria-label="Staff login"
+              title="Staff login"
+              className="flex h-7 w-7 items-center justify-center rounded-full text-white/20 transition-colors duration-200 hover:text-gold-500 focus-visible:text-gold-500"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="10" width="14" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
