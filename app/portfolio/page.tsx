@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import CoverflowGallery from "@/components/CoverflowGallery";
+import PortfolioGrid from "@/components/PortfolioGrid";
 import {
   ALL_PORTFOLIO_IMAGES,
   PORTFOLIO_BY_CATEGORY,
@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const FILTERS: { id: PortfolioCategory | "all"; label: string; count: number }[] = [
-  { id: "all", label: "All Work", count: ALL_PORTFOLIO_IMAGES.length },
+  { id: "all", label: "All work", count: ALL_PORTFOLIO_IMAGES.length },
   ...PORTFOLIO_CATEGORIES.map(({ id, label }) => ({
     id,
     label,
@@ -21,19 +21,18 @@ const FILTERS: { id: PortfolioCategory | "all"; label: string; count: number }[]
 
 export default function PortfolioPage() {
   const [filter, setFilter] = useState<PortfolioCategory | "all">("all");
-  const images =
-    filter === "all" ? ALL_PORTFOLIO_IMAGES : PORTFOLIO_BY_CATEGORY[filter];
+  const images = filter === "all" ? ALL_PORTFOLIO_IMAGES : PORTFOLIO_BY_CATEGORY[filter];
 
   return (
-    <section className="flex h-[calc(100dvh-10rem)] flex-col bg-surface-900 md:h-[calc(100dvh-5rem)]">
-      <div className="mx-auto w-full max-w-7xl shrink-0 px-5 pb-4 pt-16 sm:px-6 md:pt-20 lg:px-8">
+    <section className="bg-surface-900 pb-24">
+      <div className="mx-auto w-full max-w-7xl px-5 pt-16 sm:px-6 md:pt-20 lg:px-8">
         <p className="eyebrow">Our work</p>
         <h1 className="mt-4 font-editorial text-4xl font-semibold leading-[1.05] text-balance text-white md:text-6xl">
           Real jobs, real vehicles, and a wider look at the shop.
         </h1>
 
         <div
-          className="-mx-5 mt-6 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden"
+          className="-mx-5 mb-8 mt-7 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:px-0 [&::-webkit-scrollbar]:hidden"
           role="group"
           aria-label="Filter by type of work"
         >
@@ -55,11 +54,9 @@ export default function PortfolioPage() {
             </button>
           ))}
         </div>
-      </div>
 
-      <div className="min-h-0 flex-1">
-        {/* key remounts the gallery so each filter starts from its first photos */}
-        <CoverflowGallery key={filter} images={images} />
+        {/* key resets the viewer when the filter changes */}
+        <PortfolioGrid key={filter} images={images} />
       </div>
     </section>
   );
