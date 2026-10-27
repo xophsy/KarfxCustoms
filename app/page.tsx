@@ -35,8 +35,8 @@ export default function Home() {
           <ScrollReveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="eyebrow">Services</p>
-              <h2 id="services-heading" className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-balance text-white md:text-[3.4rem]">
-                Everything your car needs, <span className="text-gold-gradient italic">under one roof.</span>
+              <h2 id="services-heading" className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
+                Everything your car needs, <span className="text-gold-gradient">under one roof.</span>
               </h2>
             </div>
             <div className="max-w-sm">

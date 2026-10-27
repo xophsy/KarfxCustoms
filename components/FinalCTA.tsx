@@ -25,8 +25,8 @@ export default function FinalCTA() {
       <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-6 md:py-36 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow">Ready when you are</p>
-          <h2 id="cta-heading" className="mt-6 font-display text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[1.04] text-white">
-            Let&apos;s make your car <span className="text-gold-gradient italic">look its best.</span>
+          <h2 id="cta-heading" className="mt-6 font-display text-[clamp(2.4rem,5vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white">
+            Let&apos;s make your car <span className="text-gold-gradient">look its best.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
             Tell us about your vehicle and we&apos;ll get back to you within 24 hours on weekdays.
@@ -51,11 +51,11 @@ export default function FinalCTA() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="glass-card flex h-full items-start gap-4 p-5 backdrop-blur-md"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-gold-500/30 text-gold-500">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-500">
                   <Icon size={18} aria-hidden="true" />
                 </span>
                 <span>
-                  <span className="block font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">{label}</span>
+                  <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-white/50">{label}</span>
                   <span className="mt-1 block text-[15px] font-medium text-white">{value}</span>
                 </span>
               </a>

@@ -17,7 +17,7 @@ const socials = [
   { label: "TikTok", href: BUSINESS_INFO.tiktokHref, Icon: TikTokIcon },
 ];
 
-const heading = "font-brand text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500";
+const heading = "text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500";
 const link = "text-[15px] text-white/70 transition-colors hover:text-gold-500";
 
 export default function Footer() {

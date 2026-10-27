@@ -22,8 +22,8 @@ export default function HowItWorks() {
       <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
           <p className="eyebrow">How it works</p>
-          <h2 id="process-heading" className="mt-5 font-display text-4xl font-semibold leading-[1.08] text-balance text-white md:text-[3.4rem]">
-            Three steps. <span className="whitespace-nowrap text-gold-gradient italic">No guesswork.</span>
+          <h2 id="process-heading" className="mt-5 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
+            Three steps. <span className="whitespace-nowrap text-gold-gradient">No guesswork.</span>
           </h2>
           <Link href="/quote" className="btn-gold mt-8">
             Start step one
@@ -34,7 +34,7 @@ export default function HowItWorks() {
         <ol className="grid gap-4 md:grid-cols-3 lg:col-span-8">
           {STEPS.map((step, i) => (
             <li key={step.title} className="glass-card flex flex-col p-7">
-              <span className="font-display text-6xl font-medium italic leading-none text-gold-gradient">0{i + 1}</span>
+              <span className="font-display text-5xl font-bold leading-none text-gold-gradient">0{i + 1}</span>
               <h3 className="mt-8 text-lg font-semibold text-white">{step.title}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-white/60">{step.body}</p>
             </li>

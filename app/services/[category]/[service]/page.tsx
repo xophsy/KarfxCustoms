@@ -88,7 +88,7 @@ export default function ServiceDetailPage({
             </span>
           )}
 
-          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.02] text-balance text-white sm:text-5xl md:text-7xl">
+          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-balance text-white sm:text-5xl md:text-6xl">
             {service.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />
@@ -152,7 +152,7 @@ export default function ServiceDetailPage({
           <>
             <section className="py-8 md:py-14">
               <ScrollReveal>
-                <h2 className="font-display text-3xl font-semibold text-white mb-8">
+                <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
                   Our work
                 </h2>
               </ScrollReveal>
@@ -165,10 +165,10 @@ export default function ServiceDetailPage({
         {/* ── Process ──────────────────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="py-12 md:py-16">
-            <h2 className="font-display text-3xl font-semibold text-white mb-8">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
               The process
             </h2>
-            <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 grid-cols-1 sm:grid-cols-3">
+            <div className="grid gap-px overflow-hidden rounded-2xl bg-white/10 grid-cols-1 sm:grid-cols-3">
               {service.steps.map((step, i) => (
                 <div key={i} className="relative bg-surface-900 p-5 md:p-8">
                   <span className="mb-3 block text-xs font-bold tracking-[0.3em] text-gold-500/50">
@@ -200,7 +200,7 @@ export default function ServiceDetailPage({
             <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             <ScrollReveal>
               <section className="py-8 md:py-14">
-                <h2 className="font-display text-3xl font-semibold text-white mb-8">
+                <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
                   FAQ
                 </h2>
                 <div className="border-t border-white/5">
@@ -223,8 +223,8 @@ export default function ServiceDetailPage({
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="py-12 md:py-16">
-            <div className="border border-gold-500/20 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
-              <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
+            <div className="rounded-3xl border border-white/5 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
+              <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white md:text-4xl">
                 Ready to get started?
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
@@ -247,7 +247,7 @@ export default function ServiceDetailPage({
         {relatedServices.length > 0 && (
           <ScrollReveal>
             <section className="pb-16 md:pb-20">
-              <h2 className="font-display text-2xl font-semibold text-white mb-6">
+              <h2 className="font-display text-2xl font-bold tracking-[-0.01em] text-white mb-6">
                 You might also like
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -94,7 +94,7 @@ export default function QuoteServiceCard({
             <button
               type="button"
               onClick={onRemove}
-              className="w-full border border-gold-500/30 bg-gold-500/10 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold-500 transition-all duration-200 hover:bg-surface-700"
+              className="w-full rounded-xl border border-gold-500/30 bg-gold-500/10 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold-500 transition-all duration-200 hover:bg-surface-700"
             >
               ✓ Added — Remove
             </button>

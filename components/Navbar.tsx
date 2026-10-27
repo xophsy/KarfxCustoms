@@ -65,7 +65,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 font-brand text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 transition-colors hover:text-gold-500"
+                className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 transition-colors hover:text-gold-500"
               >
                 {link.label}
               </Link>
@@ -117,8 +117,8 @@ export default function Navbar() {
               className="group flex items-center justify-between border-b border-white/10 py-5"
             >
               <span className="flex items-baseline gap-4">
-                <span className="font-brand text-xs font-semibold text-gold-500">0{i + 1}</span>
-                <span className="font-display text-4xl font-semibold text-white">{link.label}</span>
+                <span className="text-xs font-semibold text-gold-500">0{i + 1}</span>
+                <span className="font-display text-3xl font-bold tracking-[-0.01em] text-white">{link.label}</span>
               </span>
               <ArrowRight size={20} className="text-white/40 transition-colors group-hover:text-gold-500" />
             </Link>

@@ -3,17 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --font-display: var(--font-bodoni);
-  --font-body: var(--font-archivo);
+  --font-display: var(--font-montserrat);
+  --font-body: var(--font-montserrat);
   --font-brand: var(--font-archivo);
 }
 
 @layer base {
-  /* The KAR FX wordmark, labels and buttons use Archivo's wide cut; fonts without a width axis ignore it. */
-  .font-brand,
-  .btn-gold,
-  .btn-ghost,
-  .eyebrow {
+  /* The KAR FX wordmark uses Archivo's wide cut; fonts without a width axis ignore it. */
+  .font-brand {
     font-variation-settings: "wdth" 125;
   }
 }
@@ -57,7 +54,7 @@ body {
   background: #F8C800;
 }
 
-/* Gold gradient text (pair with `italic` on Bodoni headlines) */
+/* Gold gradient text */
 .text-gold-gradient {
   background: linear-gradient(135deg, #F8C800 0%, #FFE04D 45%, #E8B000 100%);
   -webkit-background-clip: text;
@@ -65,18 +62,19 @@ body {
   background-clip: text;
 }
 
-/* Buttons: square, small wide caps */
+/* Buttons: softly rounded, small caps */
 .btn-gold,
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  font-family: var(--font-brand), system-ui, sans-serif;
+  border-radius: 0.75rem;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 600;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   line-height: 1rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 1rem 1.75rem;
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
@@ -111,15 +109,14 @@ body {
   outline-offset: 3px;
 }
 
-/* Section label: short gold rule + small wide caps */
+/* Section label: short gold rule + small caps */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.875rem;
-  font-family: var(--font-brand), system-ui, sans-serif;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #F8C800;
 }
@@ -131,16 +128,17 @@ body {
   background: currentColor;
 }
 
-/* Card surface: hairline border, sharp corners */
+/* Card surface: soft fill, rounded, barely-there edge */
 .glass-card {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(248, 200, 0, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(248, 200, 0, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(248, 200, 0, 0.35);
 }
 
 /* Slow settle-in for the hero photo */

@@ -36,10 +36,10 @@ export default function Hero() {
             <span className="hidden sm:inline">{BUSINESS_INFO.brandName} · </span>Raleigh, NC
           </span>
         </p>
-        <h1 className="mt-7 font-display text-[clamp(3.1rem,8vw,7rem)] font-semibold leading-[0.98] tracking-[-0.01em] text-white">
+        <h1 className="mt-7 font-display text-[clamp(2.6rem,6.4vw,5.6rem)] font-bold leading-[1.02] tracking-[-0.025em] text-white">
           The Detail Makes
           <br />
-          <span className="text-gold-gradient italic">the Difference.</span>
+          <span className="text-gold-gradient">the Difference.</span>
         </h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
           Paint protection film, wraps, tint, ceramic coating and detailing for vehicles that deserve more than ordinary
@@ -60,8 +60,8 @@ export default function Hero() {
           {FACTS.map((fact) => (
             <div key={fact.value} className="pr-4 md:border-l md:border-white/10 md:pl-6 md:first:border-l-0 md:first:pl-0">
               <dt className="sr-only">{fact.label}</dt>
-              <dd className="font-display text-2xl font-semibold text-white md:text-[1.7rem]">{fact.value}</dd>
-              <dd className="mt-1 font-brand text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              <dd className="text-2xl font-bold text-white md:text-[1.6rem]">{fact.value}</dd>
+              <dd className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
                 {fact.label}
               </dd>
             </div>

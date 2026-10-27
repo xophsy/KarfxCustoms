@@ -12,7 +12,7 @@ export default function ServiceTicker() {
             {NAMES.map((name) => (
               <span
                 key={name}
-                className="flex items-center whitespace-nowrap font-brand text-xs font-bold uppercase tracking-[0.25em]"
+                className="flex items-center whitespace-nowrap text-xs font-bold uppercase tracking-[0.25em]"
               >
                 <span className="px-8">{name}</span>
                 <span className="text-[9px]">◆</span>

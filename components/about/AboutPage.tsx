@@ -88,7 +88,7 @@ export default function AboutPage() {
 
             {/* ── Right: photo ────────────────────────────────────────────── */}
             <ScrollReveal delay={0.15}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-surface-800">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/5 bg-surface-800">
                 <Image
                   src="/images/about/8a8aaa_6f012fad3b3f44b99697004c5779a706~mv2.avif"
                   alt="Custom red and black Toyota Supra inside the KAR FX Customs workshop"
@@ -112,7 +112,7 @@ export default function AboutPage() {
 
             {/* ── Left: photo ─────────────────────────────────────────────── */}
             <ScrollReveal delay={0.05}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-surface-800">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/5 bg-surface-800">
                 <Image
                   src="/images/gallery/all/IMG_9575.jpg"
                   alt="Black SUV inside the KAR FX Customs workshop"
@@ -208,7 +208,7 @@ export default function AboutPage() {
 
             {/* ── Right: photo ────────────────────────────────────────────── */}
             <ScrollReveal delay={0.05}>
-              <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 bg-surface-800">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/5 bg-surface-800">
                 <Image
                   src="/images/gallery/all/IMG_9397.jpg"
                   alt="Vehicles inside the KAR FX Customs workshop in Raleigh"
@@ -236,7 +236,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {VALUES.map((v, i) => (
               <ScrollReveal key={v.label} delay={i * 0.08}>
-                <div className="border border-white/10 bg-surface-800/50 p-6 transition-colors duration-300 hover:border-gold-500/20">
+                <div className="rounded-2xl border border-white/5 bg-surface-800/50 p-6 transition-colors duration-300 hover:border-gold-500/20">
                   {/* Gold accent tick */}
                   <div className="mb-4 flex items-center gap-2.5">
                     <span className="text-gold-500" aria-hidden="true">✓</span>

@@ -82,7 +82,7 @@ function ServicePanel({
 
           {/* Service name */}
           <motion.h3
-            className="font-display text-3xl font-semibold text-white mb-4 md:text-4xl"
+            className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-4 md:text-4xl"
             initial={{ x: -32, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.45, delay: 0.3 }}

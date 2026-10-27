@@ -81,11 +81,11 @@ export default function ReviewsSection() {
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
             <p className="eyebrow">Reviews</p>
-            <h2 id="reviews-heading" className="mt-5 font-display text-4xl font-semibold leading-[1.08] text-balance text-white md:text-[3.4rem]">
+            <h2 id="reviews-heading" className="mt-5 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
               Don&apos;t take our word for it.
             </h2>
             <div className="mt-10 flex items-end gap-4">
-              <span className="font-display text-8xl font-semibold leading-none text-white md:text-9xl">
+              <span className="font-display text-8xl font-bold leading-none tracking-[-0.03em] text-white">
                 {BUSINESS_INFO.reviewRating}
               </span>
               <div className="pb-2">
@@ -105,10 +105,10 @@ export default function ReviewsSection() {
             >
               <figure>
                 <Stars count={review.stars} />
-                <blockquote className="mt-5 font-display text-xl italic leading-relaxed text-white/85">&ldquo;{review.text}&rdquo;</blockquote>
+                <blockquote className="mt-5 text-[16px] leading-relaxed text-white/85">&ldquo;{review.text}&rdquo;</blockquote>
                 <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
                   <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center bg-gradient-to-br from-gold-500 to-gold-600 font-brand text-[10px] font-bold text-black"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-500 to-gold-600 text-[10px] font-bold text-black"
                     aria-hidden="true"
                   >
                     {review.initials}

@@ -23,7 +23,7 @@ export default function CategoryGrid() {
           <li key={cat.slug}>
             <Link
               href={`/services/${cat.slug}`}
-              className="group relative flex aspect-square flex-col justify-end overflow-hidden border border-white/10 bg-surface-800 p-6 transition-colors duration-300 hover:border-gold-500/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500 sm:aspect-[4/5] lg:aspect-[3/4.2]"
+              className="group relative flex aspect-square flex-col justify-end overflow-hidden rounded-3xl bg-surface-800 p-6 ring-1 ring-white/5 transition-shadow duration-300 hover:ring-gold-500/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500 sm:aspect-[4/5] lg:aspect-[3/4.2]"
             >
               {img && (
                 <Image
@@ -36,20 +36,20 @@ export default function CategoryGrid() {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/45" aria-hidden="true" />
 
-              <span className="absolute left-6 top-6 font-brand text-[11px] font-semibold tracking-[0.3em] text-gold-500">
+              <span className="absolute left-6 top-6 text-[11px] font-semibold tracking-[0.3em] text-gold-500">
                 0{i + 1}
               </span>
               <span
-                className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center border border-white/30 text-white transition-colors duration-300 group-hover:border-gold-500 group-hover:bg-gold-500 group-hover:text-black"
+                className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black"
                 aria-hidden="true"
               >
                 <ArrowUpRight size={18} />
               </span>
 
               <div className="relative">
-                <h3 className="font-display text-[1.75rem] font-semibold leading-tight text-white">{cat.name}</h3>
+                <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.01em] text-white">{cat.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/75">{cat.tagline}</p>
-                <p className="mt-4 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/60">
+                <p className="mt-3 text-xs leading-relaxed text-white/60">
                   {cat.services.map((s) => s.name).join(" · ")}
                 </p>
               </div>

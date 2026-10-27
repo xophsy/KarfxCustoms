@@ -19,8 +19,8 @@ export default function WorkShowcase() {
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow">Our work</p>
-            <h2 id="work-heading" className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-balance text-white md:text-[3.4rem]">
-              Real cars. Real jobs. <span className="text-gold-gradient italic">Right here in Raleigh.</span>
+            <h2 id="work-heading" className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
+              Real cars. Real jobs. <span className="text-gold-gradient">Right here in Raleigh.</span>
             </h2>
           </div>
           <Link href="/portfolio" className="btn-ghost self-start md:self-auto">
@@ -42,7 +42,7 @@ export default function WorkShowcase() {
             >
               <Link
                 href="/portfolio"
-                className="group relative block h-full overflow-hidden border border-white/10 bg-surface-800"
+                className="group relative block h-full overflow-hidden rounded-2xl bg-surface-800 md:rounded-3xl"
               >
                 <Image
                   src={`/images/gallery/all/${item.file}`}
@@ -53,7 +53,7 @@ export default function WorkShowcase() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" aria-hidden="true" />
                 <div className="absolute inset-x-3 bottom-3 md:inset-x-5 md:bottom-5">
-                  <span className="inline-block font-brand text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500">
+                  <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500">
                     {item.tag}
                   </span>
                   <p className="mt-2 hidden text-sm font-medium text-white sm:block">{item.alt}</p>

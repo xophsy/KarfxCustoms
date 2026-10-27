@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Archivo, Bodoni_Moda, Jost } from "next/font/google";
+import { Archivo, Bodoni_Moda, Jost, Montserrat } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import { BUSINESS_INFO } from "@/lib/business";
 
-// Archivo: body text, plus its wide cut for the KAR FX wordmark, labels and buttons (.font-brand in globals.css).
+// Montserrat: every headline and all text on the public site.
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+// Archivo's wide cut: only the KAR FX wordmark (.in globals.css).
 const archivo = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
@@ -12,16 +19,16 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// Bodoni: headlines.
+// Bodoni and Jost are the admin's fonts (app/admin/layout.tsx), so public pages don't preload them.
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-bodoni",
   display: "swap",
+  preload: false,
 });
 
-// Jost is only the admin's body font (app/admin/layout.tsx), so public pages don't preload it.
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -146,7 +153,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`scroll-smooth ${archivo.variable} ${bodoni.variable} ${jost.variable}`}>
+    <html lang="en" className={`scroll-smooth ${montserrat.variable} ${archivo.variable} ${bodoni.variable} ${jost.variable}`}>
       <body className="bg-surface-900 text-white font-body antialiased print:bg-white">
         <script
           type="application/ld+json"
