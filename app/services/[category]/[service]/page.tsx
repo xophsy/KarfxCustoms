@@ -88,7 +88,7 @@ export default function ServiceDetailPage({
             </span>
           )}
 
-          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-balance text-white sm:text-5xl md:text-6xl">
+          <h1 className="mt-5 font-editorial text-5xl font-semibold leading-[1] text-balance text-white sm:text-6xl md:text-7xl">
             {service.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />

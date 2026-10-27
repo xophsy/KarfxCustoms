@@ -19,8 +19,8 @@ export default function WorkShowcase() {
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow">Our work</p>
-            <h2 id="work-heading" className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
-              Real cars. Real jobs. <span className="text-gold-gradient">Right here in Raleigh.</span>
+            <h2 id="work-heading" className="mt-5 max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+              Real cars. Real jobs. <span className="text-gold-gradient italic">Right here in Raleigh.</span>
             </h2>
           </div>
           <Link href="/portfolio" className="btn-ghost self-start md:self-auto">

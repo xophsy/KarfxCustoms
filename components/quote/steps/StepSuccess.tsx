@@ -36,7 +36,7 @@ export default function StepSuccess({ selectedServices }: Props) {
       <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500/60">
         Request Received
       </p>
-      <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white sm:text-4xl">
+      <h2 className="font-editorial text-4xl font-semibold text-white sm:text-5xl">
         We&apos;ve got your request.
       </h2>
       <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-white/50">

@@ -7,7 +7,7 @@ export default function NotFound() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500/90">
           Page Not Found
         </p>
-        <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight md:text-5xl">
+        <h1 className="mt-4 font-editorial text-5xl font-semibold md:text-6xl">
           That page isn&apos;t in the shop.
         </h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/60 md:text-base">

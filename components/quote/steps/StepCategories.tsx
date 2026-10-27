@@ -24,7 +24,7 @@ export default function StepCategories({
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500/60">
           Step 1 of 2
         </p>
-        <h1 className="font-display text-3xl font-bold tracking-[-0.01em] text-white sm:text-4xl">
+        <h1 className="font-editorial text-4xl font-semibold text-white sm:text-5xl">
           What are you looking for?
         </h1>
         <p className="mt-3 text-sm text-white/45">

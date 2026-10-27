@@ -66,10 +66,10 @@ export default function AboutPage() {
                 </div>
 
                 {/* Headline */}
-                <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+                <h1 className="font-editorial text-5xl font-semibold leading-[1] text-white sm:text-6xl md:text-7xl">
                   Standards of Excellence,
                   <br />
-                  <span className="text-gold-gradient">Not a Slogan.</span>
+                  <span className="text-gold-gradient italic">Not a Slogan.</span>
                 </h1>
               </ScrollReveal>
 

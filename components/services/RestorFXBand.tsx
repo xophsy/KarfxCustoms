@@ -22,8 +22,8 @@ export default function RestorFXBand() {
               <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-500">Trusted partner</span>
             </div>
 
-            <h2 id="restorfx-heading" className="mt-8 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
-              Faded or scratched paint? <span className="text-gold-gradient">We bring it back.</span>
+            <h2 id="restorfx-heading" className="mt-8 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+              Faded or scratched paint? <span className="text-gold-gradient italic">We bring it back.</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">
               For paint restoration we work alongside RestorFX, our partner for specialized clear-coat repair. Whether

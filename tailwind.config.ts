@@ -29,6 +29,7 @@ const config: Config = {
         display: ["var(--font-display)", "Georgia", "serif"],
         body: ["var(--font-body)", "system-ui", "sans-serif"],
         brand: ["var(--font-brand)", "system-ui", "sans-serif"],
+        editorial: ["var(--font-cormorant)", "Georgia", "serif"],
       },
       backgroundImage: {
         "gold-gradient":

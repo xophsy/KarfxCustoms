@@ -1,17 +1,26 @@
 import type { Metadata } from "next";
-import { Archivo, Bodoni_Moda, Jost, Montserrat } from "next/font/google";
+import { Archivo, Bodoni_Moda, Cormorant_Garamond, Jost, Montserrat } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import { BUSINESS_INFO } from "@/lib/business";
 
-// Montserrat: every headline and all text on the public site.
+// Montserrat: all text and most headings on the public site.
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
 });
 
-// Archivo's wide cut: only the KAR FX wordmark (.in globals.css).
+// Cormorant Garamond: only the biggest headlines (font-editorial).
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+// Archivo's wide cut: only the KAR FX wordmark (.font-brand in globals.css).
 const archivo = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
@@ -153,7 +162,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`scroll-smooth ${montserrat.variable} ${archivo.variable} ${bodoni.variable} ${jost.variable}`}>
+    <html lang="en" className={`scroll-smooth ${montserrat.variable} ${cormorant.variable} ${archivo.variable} ${bodoni.variable} ${jost.variable}`}>
       <body className="bg-surface-900 text-white font-body antialiased print:bg-white">
         <script
           type="application/ld+json"

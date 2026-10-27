@@ -36,10 +36,10 @@ export default function Hero() {
             <span className="hidden sm:inline">{BUSINESS_INFO.brandName} · </span>Raleigh, NC
           </span>
         </p>
-        <h1 className="mt-7 font-display text-[clamp(2.6rem,6.4vw,5.6rem)] font-bold leading-[1.02] tracking-[-0.025em] text-white">
+        <h1 className="mt-7 font-editorial text-[clamp(3.4rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.01em] text-white">
           The Detail Makes
           <br />
-          <span className="text-gold-gradient">the Difference.</span>
+          <span className="text-gold-gradient italic">the Difference.</span>
         </h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
           Paint protection film, wraps, tint, ceramic coating and detailing for vehicles that deserve more than ordinary

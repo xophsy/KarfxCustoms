@@ -22,8 +22,8 @@ export default function HowItWorks() {
       <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
           <p className="eyebrow">How it works</p>
-          <h2 id="process-heading" className="mt-5 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-balance text-white md:text-5xl">
-            Three steps. <span className="whitespace-nowrap text-gold-gradient">No guesswork.</span>
+          <h2 id="process-heading" className="mt-5 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+            Three steps. <span className="whitespace-nowrap text-gold-gradient italic">No guesswork.</span>
           </h2>
           <Link href="/quote" className="btn-gold mt-8">
             Start step one
