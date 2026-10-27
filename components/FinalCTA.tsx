@@ -1,74 +1,67 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { BUSINESS_INFO } from "@/lib/business";
-import { useInViewOnce } from "@/lib/useInViewOnce";
+
+const CONTACTS = [
+  { Icon: MapPin, label: "Visit by appointment", value: BUSINESS_INFO.fullAddress, href: BUSINESS_INFO.mapHref, external: true },
+  { Icon: Phone, label: "Call or text", value: BUSINESS_INFO.phoneDisplay, href: BUSINESS_INFO.phoneHref },
+  { Icon: Mail, label: "Email", value: BUSINESS_INFO.email, href: BUSINESS_INFO.emailHref },
+];
 
 export default function FinalCTA() {
-  const { ref, inView } = useInViewOnce<HTMLElement>(0.2);
-
   return (
-    <section
-      id="cta"
-      ref={ref}
-      className="relative overflow-hidden bg-surface-900 section-padding"
-    >
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[220px] w-[520px] -translate-x-1/2 -translate-y-1/2"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(212,175,55,0.12) 0%, transparent 70%)",
-          filter: "blur(120px)",
-        }}
+    <section id="cta" aria-labelledby="cta-heading" className="relative overflow-hidden">
+      <Image
+        src="/images/gallery/all/IMG_9397.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
       />
+      <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-surface-900" aria-hidden="true" />
 
-      <div
-        className="relative mx-auto max-w-3xl text-center"
-        style={{
-          opacity: inView ? 1 : 0,
-          transform: inView ? "translateY(0)" : "translateY(24px)",
-          transition: "opacity 0.7s ease, transform 0.7s ease",
-        }}
-      >
-        <div className="mb-6 flex items-center justify-center gap-4">
-          <span className="block h-px w-8 bg-gold-500/40" />
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
-            Ready To Start
-          </span>
-          <span className="block h-px w-8 bg-gold-500/40" />
+      <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-6 md:py-36 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="eyebrow">Ready when you are</p>
+          <h2 id="cta-heading" className="mt-6 font-display text-[clamp(2.6rem,6vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-white">
+            Let&apos;s make your car <span className="text-gold-500">look its best.</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
+            Tell us about your vehicle and we&apos;ll get back to you within 24 hours on weekdays.
+          </p>
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="/quote" className="btn-gold">
+              Get a quote
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <a href={BUSINESS_INFO.phoneHref} className="btn-ghost">
+              <Phone size={15} aria-hidden="true" />
+              {BUSINESS_INFO.phoneDisplay}
+            </a>
+          </div>
         </div>
 
-        <h2 className="mb-5 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
-          Care
-          <br />
-          <span className="text-gold-gradient italic">starts here.</span>
-        </h2>
-
-        <p className="mb-10 text-base leading-relaxed text-white/60">
-          Tell us about your vehicle and we&apos;ll get back to you within 24 hours on weekdays.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/quote"
-            className="btn-gold"
-          >
-            Get a Quote
-          </Link>
-          <a
-            href={BUSINESS_INFO.phoneHref}
-            className="btn-ghost inline-flex items-center gap-2"
-          >
-            <Phone size={13} strokeWidth={2} />
-            {BUSINESS_INFO.phoneDisplay}
-          </a>
-        </div>
-
-        <p className="mt-6 text-xs text-white/40">
-          {BUSINESS_INFO.serviceAreaMessage} | {BUSINESS_INFO.phoneDisplay}
-        </p>
+        <ul className="mx-auto mt-16 grid max-w-5xl gap-3 md:grid-cols-3">
+          {CONTACTS.map(({ Icon, label, value, href, external }) => (
+            <li key={label}>
+              <a
+                href={href}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="glass-card flex h-full items-start gap-4 p-5 backdrop-blur-md"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-500">
+                  <Icon size={18} aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white/50">{label}</span>
+                  <span className="mt-1 block text-[15px] font-medium text-white">{value}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

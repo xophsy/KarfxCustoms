@@ -37,7 +37,7 @@ export default function QuoteCategoryCard({
         ease: [0.25, 0.1, 0.25, 1],
         delay: index * 0.07,
       }}
-      className="group relative flex min-h-[180px] w-full cursor-pointer flex-col overflow-hidden border border-white/5 text-left transition-colors duration-400 hover:border-gold-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 sm:min-h-[200px]"
+      className="group relative flex min-h-[180px] w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 text-left transition-colors duration-400 hover:border-gold-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 sm:min-h-[200px]"
       style={{ background: category.gradient }}
       aria-label={`Select ${category.name}`}
     >

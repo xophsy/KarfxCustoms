@@ -1,18 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  TikTokIcon,
-} from "@/components/icons/SocialIcons";
+import { FacebookIcon, InstagramIcon, TikTokIcon } from "@/components/icons/SocialIcons";
 import { BUSINESS_INFO } from "@/lib/business";
+import { SERVICE_CATEGORIES } from "@/lib/services-data";
 
-const footerLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/#services" },
-  { label: "Portfolio", href: "/portfolio" },
+const shopLinks = [
+  { label: "Our work", href: "/portfolio" },
+  { label: "Reviews", href: "/#reviews" },
   { label: "About", href: "/about" },
-  { label: "Get a Quote", href: "/quote" },
+  { label: "Get a quote", href: "/quote" },
 ];
 
 const socials = [
@@ -21,121 +17,98 @@ const socials = [
   { label: "TikTok", href: BUSINESS_INFO.tiktokHref, Icon: TikTokIcon },
 ];
 
+const heading = "text-xs font-semibold uppercase tracking-[0.2em] text-white/40";
+const link = "text-[15px] text-white/70 transition-colors hover:text-gold-500";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-surface-900">
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-3">
-          <div className="space-y-4">
-            <div>
-              <Image
-                src="/images/branding/Logo.png"
-                alt="KAR FX Customs"
-                width={320}
-                height={100}
-                className="h-28 w-auto object-contain"
-              />
-            </div>
-            <p className="max-w-xs text-sm leading-relaxed text-white/60">
-              {BUSINESS_INFO.summary}
-            </p>
-            <div className="h-px w-8 bg-gold-500/40" aria-hidden="true" />
-            <div className="mt-2 space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gold-500/60">★★★★★</span>
-                <span className="text-xs text-white/40">{BUSINESS_INFO.reviewSummary}</span>
-              </div>
-              <p className="text-xs text-white/35">
-                {BUSINESS_INFO.appointmentNote}. Reply within 24 hours on weekdays.
-              </p>
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="KAR FX Customs home">
+              <Image src="/images/branding/Logo.png" alt="" width={112} height={112} className="h-14 w-14 object-contain" />
+              <span className="leading-none">
+                <span className="block font-display text-xl font-extrabold tracking-tight text-white">KAR FX</span>
+                <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
+              </span>
+            </Link>
+            <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-white/55">{BUSINESS_INFO.summary}</p>
+            <div className="mt-6 flex items-center gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow us on ${label}`}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-gold-500 hover:text-gold-500"
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </a>
+              ))}
             </div>
           </div>
 
-          <div>
-            <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
-              Navigation
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center gap-2 text-sm text-white/60 transition-colors duration-200 hover:text-gold-500"
-                  >
-                    <span
-                      className="h-px w-0 shrink-0 bg-gold-500 transition-all duration-300 group-hover:w-4"
-                      aria-hidden="true"
-                    />
-                    {link.label}
+          <div className="md:col-span-3">
+            <h3 className={heading}>Services</h3>
+            <ul className="mt-5 space-y-3">
+              {SERVICE_CATEGORIES.map((cat) => (
+                <li key={cat.slug}>
+                  <Link href={`/services/${cat.slug}`} className={link}>
+                    {cat.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
-              Connect
-            </h3>
-            <address className="mb-8 space-y-2.5 not-italic">
-              <a
-                href={BUSINESS_INFO.emailHref}
-                className="block text-sm text-white/60 transition-colors duration-200 hover:text-white"
-              >
-                {BUSINESS_INFO.email}
-              </a>
-              <a
-                href={BUSINESS_INFO.phoneHref}
-                className="block text-sm text-white/60 transition-colors duration-200 hover:text-white"
-              >
-                {BUSINESS_INFO.phoneDisplay}
-              </a>
-              <a
-                href={BUSINESS_INFO.mapHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-sm text-white/60 transition-colors duration-200 hover:text-white"
-              >
-                {BUSINESS_INFO.locationName}
-              </a>
-              <p className="text-sm text-white/40">
-                {BUSINESS_INFO.fullAddress}
-              </p>
-              <p className="text-sm text-white/40">
-                {BUSINESS_INFO.serviceAreaMessage}
-              </p>
-            </address>
-
-            <div className="flex items-center gap-3">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Follow us on ${social.label}`}
-                  className="flex h-10 w-10 items-center justify-center border border-white/15 text-white/50 transition-all duration-200 hover:border-gold-500/50 hover:text-gold-500"
-                >
-                  <social.Icon className="h-5 w-5" />
-                </a>
+          <div className="md:col-span-2">
+            <h3 className={heading}>Shop</h3>
+            <ul className="mt-5 space-y-3">
+              {shopLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={link}>
+                    {item.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
+
+          <address className="not-italic md:col-span-3">
+            <h3 className={heading}>Contact</h3>
+            <ul className="mt-5 space-y-3">
+              <li>
+                <a href={BUSINESS_INFO.phoneHref} className={link}>
+                  {BUSINESS_INFO.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={BUSINESS_INFO.emailHref} className={link}>
+                  {BUSINESS_INFO.email}
+                </a>
+              </li>
+              <li>
+                <a href={BUSINESS_INFO.mapHref} target="_blank" rel="noopener noreferrer" className={link}>
+                  {BUSINESS_INFO.streetAddress}
+                  <br />
+                  {BUSINESS_INFO.cityStateZip}
+                </a>
+              </li>
+              <li className="text-sm text-white/45">{BUSINESS_INFO.appointmentNote}.</li>
+            </ul>
+          </address>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
-          <p className="text-xs text-white/20">
-            &copy; {new Date().getFullYear()} {BUSINESS_INFO.brandName}. All
-            rights reserved.
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/35 sm:flex-row">
+          <p>
+            &copy; {new Date().getFullYear()} {BUSINESS_INFO.brandName}. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/portfolio"
-              className="text-xs text-white/20 transition-colors duration-200 hover:text-gold-500/60"
-            >
-              View Portfolio
-            </Link>
+          <div className="flex items-center gap-4">
+            <span>
+              ★ {BUSINESS_INFO.reviewSummary}
+            </span>
             {/* Quiet staff entrance to the shop admin */}
             <Link
               href="/admin"

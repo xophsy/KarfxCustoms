@@ -1,146 +1,85 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { BUSINESS_INFO } from "@/lib/business";
-import HeroBackground from "@/components/HeroBackground";
 
-const PARTICLES = [
-  { top: 12, left: 8, delay: 0 },
-  { top: 23, left: 72, delay: 0.6 },
-  { top: 38, left: 31, delay: 1.1 },
-  { top: 55, left: 88, delay: 0.3 },
-  { top: 68, left: 15, delay: 1.8 },
-  { top: 77, left: 54, delay: 0.9 },
-  { top: 14, left: 47, delay: 2.1 },
-  { top: 44, left: 63, delay: 1.4 },
-  { top: 85, left: 79, delay: 0.5 },
-  { top: 91, left: 35, delay: 1.7 },
+const FACTS = [
+  { value: BUSINESS_INFO.reviewRating, label: `${BUSINESS_INFO.reviewCount} Google reviews`, star: true },
+  { value: "24h", label: "Quote replies on weekdays" },
+  { value: "Veteran", label: "Owned in Raleigh, NC" },
 ];
 
 export default function Hero() {
   return (
-    <>
-      <style>{`
-        @keyframes heroFloat {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(24px, -24px) scale(1.06); }
-          66% { transform: translate(-18px, 16px) scale(0.96); }
-        }
-        @keyframes heroPulse {
-          0%, 100% { opacity: 0.28; }
-          50% { opacity: 0.55; }
-        }
-        @keyframes heroParticle {
-          0%, 100% { opacity: 0; transform: scale(0.5); }
-          50% { opacity: 0.6; transform: scale(1); }
-        }
-        @keyframes heroSlideUp {
-          from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
-          to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-        .hero-orb {
-          position: absolute;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(212,175,55,0.42) 0%, rgba(212,175,55,0.12) 45%, transparent 70%);
-          filter: blur(72px);
-          animation: heroFloat 9s ease-in-out infinite, heroPulse 5s ease-in-out infinite;
-          pointer-events: none;
-        }
-        .hero-particle {
-          position: absolute;
-          width: 3px;
-          height: 3px;
-          background: #D4AF37;
-          border-radius: 50%;
-          animation: heroParticle 3s ease-in-out infinite;
-          pointer-events: none;
-        }
-        .hero-item {
-          animation: heroSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
-          opacity: 0;
-        }
-        .hero-item-1 { animation-delay: 0.12s; }
-        .hero-item-2 { animation-delay: 0.28s; }
-        .hero-item-3 { animation-delay: 0.42s; }
-        .hero-item-4 { animation-delay: 0.56s; }
-        .hero-item-5 { animation-delay: 0.7s; }
-      `}</style>
+    <section id="home" aria-label="Homepage hero" className="relative overflow-hidden">
+      {/* Soft gold light behind the headline */}
+      <div
+        className="pointer-events-none absolute -left-40 top-0 h-[520px] w-[720px] opacity-60"
+        style={{ background: "radial-gradient(closest-side, rgba(212,175,55,0.16), transparent)" }}
+        aria-hidden="true"
+      />
 
-      <section
-        id="home"
-        className="relative flex flex-col justify-start overflow-hidden bg-surface-900 md:min-h-dvh md:justify-center"
-        aria-label="Homepage hero"
-      >
-        <HeroBackground />
-
-        <div
-          className="hero-orb hidden md:block"
-          style={{ width: 420, height: 420, top: "8%", left: "12%" }}
-          aria-hidden="true"
-        />
-        <div
-          className="hero-orb hidden md:block"
-          style={{ width: 320, height: 320, top: "58%", right: "12%", animationDelay: "3s, 1.5s" }}
-          aria-hidden="true"
-        />
-
-        {PARTICLES.map((particle, index) => (
-          <div
-            key={index}
-            className="hero-particle"
-            style={{
-              top: `${particle.top}%`,
-              left: `${particle.left}%`,
-              animationDelay: `${particle.delay}s`,
-            }}
-            aria-hidden="true"
-          />
-        ))}
-
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-7 px-6 pb-14 pt-10 [text-shadow:0_2px_18px_rgba(0,0,0,0.3)] md:gap-8 md:pb-28 md:pt-24">
-          <div className="hero-item hero-item-1 flex items-center gap-3">
-            <div className="h-px w-8 bg-gold-500" aria-hidden="true" />
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-500">
-              {BUSINESS_INFO.brandName} | {BUSINESS_INFO.serviceAreaLabel}
-            </span>
-          </div>
-
-          <div className="hero-item hero-item-2 max-w-5xl">
-            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.4rem]">
-              The Detail Makes
-              <br />
-              <span className="text-gold-gradient italic">the Difference.</span>
-            </h1>
-          </div>
-
-          <p className="hero-item hero-item-3 max-w-2xl text-base leading-relaxed text-white/60 md:text-lg">
-            We protect and transform vehicles in Raleigh — and we take the work
-            seriously enough that the results speak for themselves.
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-14 pt-6 sm:px-6 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-8 lg:pb-10">
+        <div className="lg:col-span-6">
+          <p className="eyebrow">Raleigh, NC</p>
+          <h1 className="mt-6 font-display text-[clamp(2.9rem,7vw,5.6rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white">
+            The detail makes the <span className="text-gold-500">difference.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+            Paint protection film, wraps, tint, ceramic coating and detailing, done by a team that treats every car like
+            its own.
           </p>
 
-          <div className="hero-item hero-item-4 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-            <Link href="/quote" className="btn-gold inline-flex items-center gap-2">
-              Get a Quote
-              <ArrowRight size={13} />
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link href="/quote" className="btn-gold">
+              Get a quote
+              <ArrowRight size={16} aria-hidden="true" />
             </Link>
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-white/60 transition-colors duration-200 hover:text-white/90"
-            >
-              View Our Work
-              <ArrowRight size={13} />
+            <Link href="/portfolio" className="btn-ghost">
+              See our work
             </Link>
           </div>
 
-          <div className="hero-item hero-item-5 hidden max-w-3xl border-t border-white/5 pt-5 md:block">
-            <p className="text-sm leading-relaxed text-white/65">
-              Raleigh-based.&nbsp; Serious about the work.&nbsp; Quick to respond.
-            </p>
-          </div>
+          <dl className="mt-12 grid max-w-xl grid-cols-3 divide-x divide-white/10 border-t border-white/10 pt-6">
+            {FACTS.map((fact) => (
+              <div key={fact.label} className="px-4 first:pl-0">
+                <dt className="sr-only">{fact.label}</dt>
+                <dd className="flex items-center gap-1.5 font-display text-2xl font-bold text-white sm:text-3xl">
+                  {fact.value}
+                  {fact.star && <Star size={18} className="fill-gold-500 text-gold-500" aria-hidden="true" />}
+                </dd>
+                <dd className="mt-1 text-xs leading-snug text-white/55 sm:text-sm">{fact.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-      </section>
-    </>
+        <div className="relative lg:col-span-6">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-white/10 sm:aspect-[5/4] lg:aspect-auto lg:h-[min(78svh,760px)]">
+            <Image
+              src="/images/gallery/all/hero.jpg"
+              alt="Fade-wrapped Toyota Supra inside the KAR FX Customs shop"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-[50%_60%]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" aria-hidden="true" />
+            <Link
+              href="/portfolio"
+              className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl border border-white/15 bg-black/50 p-4 backdrop-blur-md transition-colors hover:border-gold-500/60 sm:inset-x-auto sm:left-5 sm:bottom-5 sm:min-w-[320px]"
+            >
+              <span>
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">Recent build</span>
+                <span className="mt-1 block text-sm font-medium text-white">Red-to-black fade wrap · Toyota Supra</span>
+              </span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-black transition-colors group-hover:bg-gold-500">
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

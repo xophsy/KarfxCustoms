@@ -1,287 +1,62 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, Shield, Layers, Gauge, Sparkles, type LucideIcon } from "lucide-react";
-
-const PANEL_ICONS: Record<string, LucideIcon> = {
-  "protection":             Shield,
-  "wraps-styling":          Layers,
-  "wheels-calipers-lighting": Gauge,
-  "detailing":              Sparkles,
-};
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
-import { CATEGORY_IMAGES } from "@/lib/services-images";
 
-const PANEL_NUMBERS = ["01", "02", "03", "04"];
-
-function ServicePanel({
-  index,
-  slug,
-  name,
-  tagline,
-  gradient,
-  services,
-  imgSrc,
-  imgAlt,
-  isExpanded,
-  onHover,
-}: {
-  index: number;
-  slug: string;
-  name: string;
-  tagline: string;
-  gradient: string;
-  services: { name: string }[];
-  imgSrc?: string;
-  imgAlt?: string;
-  isExpanded: boolean;
-  onHover: () => void;
-}) {
-  return (
-    <motion.a
-      href={`/services/${slug}`}
-      className="relative h-full overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
-      animate={{ flexGrow: isExpanded ? 3 : 1 }}
-      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-      onMouseEnter={onHover}
-      aria-label={`Explore ${name}`}
-    >
-      {/* ── Background ───────────────────────────────────────────────────── */}
-      <div className="absolute inset-0" style={{ background: gradient }}>
-        {imgSrc && (
-          <Image
-            src={imgSrc}
-            alt={imgAlt ?? name}
-            fill
-            className="object-cover transition-all duration-1000 ease-out scale-105"
-            sizes="60vw"
-          />
-        )}
-        <motion.div
-          className="absolute inset-0"
-          animate={{ backgroundColor: isExpanded ? "rgba(0,0,0,0.10)" : "rgba(0,0,0,0.65)" }}
-          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        />
-        {/* Bottom-up dark gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-      </div>
-
-      {/* ── Gold top-edge accent (expanded only) ─────────────────────────── */}
-      <motion.div
-        className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500 to-transparent"
-        animate={{ opacity: isExpanded ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-      />
-
-      {/* ── Panel number ─────────────────────────────────────────────────── */}
-      <span className="absolute top-5 left-5 font-display text-[11px] tracking-[0.4em] text-gold-500 select-none">
-        {PANEL_NUMBERS[index]}
-      </span>
-
-      {/* ── Collapsed ────────────────────────────────────────────────────── */}
-      {!isExpanded && (
-        <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-        >
-          {/* Icon badge */}
-          {(() => {
-            const Icon = PANEL_ICONS[slug];
-            return Icon ? (
-              <div
-                className="flex items-center justify-center w-16 h-16 rounded-full border border-gold-500/40 bg-gold-500/10"
-                style={{ boxShadow: "0 0 20px rgba(212,175,55,0.2)" }}
-              >
-                <Icon size={28} className="text-gold-500" strokeWidth={1.5} />
-              </div>
-            ) : null;
-          })()}
-          {/* Label */}
-          <h2 className="font-display text-[10px] font-bold tracking-[0.2em] uppercase text-white/90 select-none px-2 text-center leading-tight">
-            {name}
-          </h2>
-        </motion.div>
-      )}
-
-      {/* ── Expanded — full content ──────────────────────────────────────── */}
-      {isExpanded && (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent pointer-events-none" />
-          <motion.div
-            className="absolute inset-0 flex flex-col justify-center px-10 md:px-12 [filter:drop-shadow(0_1px_6px_rgba(0,0,0,0.9))]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.35, delay: 0.18 }}
-          >
-            {/* Tagline */}
-            <motion.p
-              className="mb-3 text-[11px] font-medium uppercase tracking-[0.4em] text-gold-500"
-              initial={{ x: -24, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-            >
-              {tagline}
-            </motion.p>
-
-            {/* Category name */}
-            <motion.h2
-              className="font-display text-4xl font-bold leading-[1.08] text-white mb-2 md:text-5xl"
-              style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
-              initial={{ x: -32, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.45, delay: 0.3 }}
-            >
-              {name}
-            </motion.h2>
-
-            {/* Sub-text (first service as short descriptor) */}
-            <motion.p
-              className="mb-5 text-sm font-light text-white/50"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-            >
-              {services[0]?.name && `Starting with ${services[0].name}`}
-            </motion.p>
-
-            {/* Service pill tags */}
-            <motion.div
-              className="mb-6 flex flex-wrap gap-2"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.08, delayChildren: 0.42 },
-                },
-              }}
-            >
-              {services.map((s) => (
-                <motion.span
-                  key={s.name}
-                  className="font-body text-[10px] font-bold tracking-wider uppercase text-gold-500 border border-gold-500 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full"
-                  variants={{
-                    hidden: { y: 10, opacity: 0 },
-                    visible: { y: 0, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } },
-                  }}
-                >
-                  {s.name}
-                </motion.span>
-              ))}
-            </motion.div>
-
-          </motion.div>
-
-          {/* CTA — pinned to bottom */}
-          <motion.div
-            className="absolute bottom-8 left-10 md:left-12 group flex items-center gap-2"
-            initial={{ y: 16, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.65 }}
-          >
-            <span className="text-xs font-semibold tracking-widest uppercase text-gold-500">
-              Explore
-            </span>
-            <ArrowRight
-              size={14}
-              className="text-gold-500 transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </motion.div>
-        </>
-      )}
-    </motion.a>
-  );
-}
+// Homepage card photos: one car per category, none repeating the hero.
+const CARD_IMAGES: Record<string, { src: string; alt: string }> = {
+  protection: { src: "/images/gallery/all/maserati-ppf.jpg", alt: "White Maserati MC20 with satin paint protection film" },
+  "wraps-styling": { src: "/images/gallery/all/IMG_5019.jpg", alt: "Purple color-change wrap on a Toyota Camry" },
+  "wheels-calipers-lighting": {
+    src: "/images/gallery/all/b3de50a9-2058-4e57-b44c-b38be9a220ff.jpg",
+    alt: "Forged drag wheel on the wrapped Toyota Supra",
+  },
+  detailing: { src: "/images/gallery/all/IMG_9881.jpg", alt: "Front of an orange Corvette C6" },
+};
 
 export default function CategoryGrid() {
-  const [expanded, setExpanded] = useState<string>("");
-
   return (
-    <>
-      {/* ── Desktop: horizontal accordion ──────────────────────────────── */}
-      <div
-        className="hidden md:flex mx-auto max-w-7xl overflow-hidden border border-white/5"
-        style={{ height: 560 }}
-        onMouseLeave={() => setExpanded("")}
-      >
-        {SERVICE_CATEGORIES.map((cat, i) => {
-          const img = CATEGORY_IMAGES[cat.slug];
-          return (
-            <ServicePanel
-              key={cat.slug}
-              index={i}
-              slug={cat.slug}
-              name={cat.name}
-              tagline={cat.tagline}
-              gradient={cat.gradient}
-              services={cat.services}
-              imgSrc={img?.src}
-              imgAlt={img?.alt}
-              isExpanded={expanded === cat.slug}
-              onHover={() => setExpanded(cat.slug)}
-            />
-          );
-        })}
-      </div>
-
-      {/* ── Mobile: 2×2 tap grid ────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 gap-px md:hidden border border-white/5">
-        {SERVICE_CATEGORIES.map((cat, i) => {
-          const img = CATEGORY_IMAGES[cat.slug];
-          const Icon = PANEL_ICONS[cat.slug];
-          return (
-            <a
-              key={cat.slug}
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {SERVICE_CATEGORIES.map((cat, i) => {
+        const img = CARD_IMAGES[cat.slug];
+        return (
+          <li key={cat.slug}>
+            <Link
               href={`/services/${cat.slug}`}
-              className="relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
-              style={{ height: 180, background: cat.gradient }}
-              aria-label={`Explore ${cat.name}`}
+              className="group relative flex aspect-square flex-col justify-end overflow-hidden rounded-3xl border border-white/10 bg-surface-800 p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500 sm:aspect-[4/5] lg:aspect-[3/4.2]"
             >
-              {/* Background image */}
               {img && (
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-cover opacity-50"
-                  sizes="50vw"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               )}
-              {/* Overlays */}
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              {/* Gold top edge */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
-              {/* Number */}
-              <span className="absolute top-3 left-3 font-display text-[10px] tracking-[0.3em] text-gold-500 select-none">
-                {PANEL_NUMBERS[i]}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/0" aria-hidden="true" />
+
+              <span className="absolute left-5 top-5 rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                0{i + 1}
               </span>
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                {Icon && (
-                  <div
-                    className="flex items-center justify-center w-10 h-10 rounded-full border border-gold-500/40 bg-gold-500/10"
-                    style={{ boxShadow: "0 0 14px rgba(212,175,55,0.15)" }}
-                  >
-                    <Icon size={18} className="text-gold-500" strokeWidth={1.5} />
-                  </div>
-                )}
-                <span className="font-display text-[11px] font-bold tracking-[0.15em] uppercase text-white text-center px-3 leading-tight">
-                  {cat.name}
-                </span>
-                <span className="flex items-center gap-1 text-[10px] font-semibold tracking-widest uppercase text-gold-500">
-                  Explore <ArrowRight size={10} />
-                </span>
+              <span
+                className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white text-black transition-colors duration-300 group-hover:bg-gold-500"
+                aria-hidden="true"
+              >
+                <ArrowUpRight size={18} />
+              </span>
+
+              <div className="relative">
+                <h3 className="font-display text-2xl font-bold leading-tight tracking-tight text-white">{cat.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/75">{cat.tagline}</p>
+                <p className="mt-4 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/60">
+                  {cat.services.map((s) => s.name).join(" · ")}
+                </p>
               </div>
-            </a>
-          );
-        })}
-      </div>
-    </>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

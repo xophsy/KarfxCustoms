@@ -62,7 +62,7 @@ export default function ServiceCard({ service, categorySlug, index = 0 }: Props)
 
         {/* B2B badge */}
         {service.isB2B && (
-          <span className="absolute right-3 top-3 z-10 rounded-sm border border-gold-500/30 bg-surface-900/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gold-500/80 backdrop-blur-sm">
+          <span className="absolute right-3 top-3 z-10 rounded-full border border-gold-500/30 bg-surface-900/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gold-500/80 backdrop-blur-sm">
             For Business
           </span>
         )}

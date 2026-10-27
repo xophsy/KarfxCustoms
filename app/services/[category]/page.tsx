@@ -59,27 +59,27 @@ export default function CategoryPage({
               src={catImg.src}
               alt={catImg.alt}
               fill
-              className="object-cover opacity-20"
+              className="object-cover opacity-50"
               sizes="100vw"
               priority
             />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/10" />
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-surface-900 to-transparent" />
 
-        <div className="relative mx-auto max-w-5xl px-5 py-9 md:px-8 md:py-20">
+        <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-28 lg:px-8">
           <ServiceBreadcrumb
             crumbs={[
               { label: "Services", href: "/services" },
               { label: cat.name },
             ]}
           />
-          <h1 className="mt-5 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
+          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.03em] text-balance text-white sm:text-5xl md:text-7xl">
             {cat.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />
-          <p className="max-w-lg text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
             {cat.description}
           </p>
         </div>
@@ -87,7 +87,7 @@ export default function CategoryPage({
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
       <section aria-label={`${cat.name} services`} className="px-5 py-12 md:px-8 md:py-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
 
           <div className={`grid gap-5 ${cardGridClass}`}>
             {cat.services.map((service, i) => (
@@ -107,7 +107,7 @@ export default function CategoryPage({
                 <span className="text-white/70">We&apos;ll help you figure it out.</span>
               </p>
               <a href="/contact" className="btn-ghost inline-flex shrink-0 items-center gap-2">
-                Ask Us
+                Ask us
                 <ArrowRight size={13} />
               </a>
             </div>
@@ -116,7 +116,7 @@ export default function CategoryPage({
       </section>
 
       <div className="px-5 pb-12 md:px-8">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           <a
             href="/services"
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-white/25 transition-colors duration-200 hover:text-gold-500"

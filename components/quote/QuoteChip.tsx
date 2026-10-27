@@ -17,7 +17,7 @@ export default function QuoteChip({ service, onRemove }: Props) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.88 }}
       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-      className="flex min-w-0 items-center gap-2 border border-gold-500/30 bg-surface-700/60 px-3 py-2 backdrop-blur-sm"
+      className="flex min-w-0 items-center gap-2 rounded-full border border-gold-500/30 bg-surface-700/60 px-3 py-2 backdrop-blur-sm"
     >
       {/* Service info */}
       <div className="min-w-0 flex-1">

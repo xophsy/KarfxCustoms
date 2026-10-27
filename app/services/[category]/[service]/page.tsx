@@ -64,16 +64,16 @@ export default function ServiceDetailPage({
               src={images.hero}
               alt={images.heroAlt}
               fill
-              className="object-cover opacity-25"
+              className="object-cover opacity-50"
               sizes="100vw"
               priority
             />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-transparent" />
 
-        <div className="relative mx-auto max-w-5xl px-5 py-16 md:px-8 md:py-24">
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-28 lg:px-8">
           <ServiceBreadcrumb
             crumbs={[
               { label: "Services", href: "/services" },
@@ -88,11 +88,11 @@ export default function ServiceDetailPage({
             </span>
           )}
 
-          <h1 className="mt-5 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.03em] text-balance text-white sm:text-5xl md:text-7xl">
             {service.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />
-          <p className="max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
+          <p className="max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
             {service.tagline}
           </p>
 
@@ -101,11 +101,11 @@ export default function ServiceDetailPage({
               href={`/quote?category=${params.category}&service=${params.service}`}
               className="btn-gold inline-flex items-center justify-center gap-2"
             >
-              Get a Quote
+              Get a quote
               <ArrowRight size={14} />
             </a>
             <a href="/contact" className="btn-ghost inline-flex justify-center">
-              Ask a Question
+              Ask a question
             </a>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function ServiceDetailPage({
               {/* Description */}
               <div className="space-y-4">
                 {service.description.map((p, i) => (
-                  <p key={i} className="text-sm leading-relaxed text-white/55 md:text-[15px]">
+                  <p key={i} className="text-[15px] leading-relaxed text-white/70 md:text-base">
                     {p}
                   </p>
                 ))}
@@ -135,7 +135,7 @@ export default function ServiceDetailPage({
                       className="mt-0.5 shrink-0 text-gold-500"
                       aria-hidden
                     />
-                    <span className="text-sm leading-relaxed text-white/60">
+                    <span className="text-[15px] leading-relaxed text-white/80">
                       {benefit}
                     </span>
                   </li>
@@ -152,8 +152,8 @@ export default function ServiceDetailPage({
           <>
             <section className="py-8 md:py-14">
               <ScrollReveal>
-                <h2 className="font-display text-2xl font-semibold text-white mb-8">
-                  Our Work
+                <h2 className="font-display text-3xl font-bold tracking-tight text-white mb-8">
+                  Our work
                 </h2>
               </ScrollReveal>
               <ServiceGallery images={images.gallery} serviceName={service.name} />
@@ -165,10 +165,10 @@ export default function ServiceDetailPage({
         {/* ── Process ──────────────────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="py-12 md:py-16">
-            <h2 className="font-display text-2xl font-semibold text-white mb-8">
-              The Process
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white mb-8">
+              The process
             </h2>
-            <div className="grid gap-px bg-white/5 grid-cols-1 sm:grid-cols-3">
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 grid-cols-1 sm:grid-cols-3">
               {service.steps.map((step, i) => (
                 <div key={i} className="relative bg-surface-900 p-5 md:p-8">
                   <span className="mb-3 block text-xs font-bold tracking-[0.3em] text-gold-500/50">
@@ -200,7 +200,7 @@ export default function ServiceDetailPage({
             <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
             <ScrollReveal>
               <section className="py-8 md:py-14">
-                <h2 className="font-display text-2xl font-semibold text-white mb-8">
+                <h2 className="font-display text-3xl font-bold tracking-tight text-white mb-8">
                   FAQ
                 </h2>
                 <div className="border-t border-white/5">
@@ -223,9 +223,9 @@ export default function ServiceDetailPage({
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="py-12 md:py-16">
-            <div className="border border-gold-500/10 bg-surface-800/30 px-6 py-10 text-center sm:px-10 md:py-14">
-              <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
-                Ready to Get Started?
+            <div className="rounded-3xl border border-gold-500/25 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
+              <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Ready to get started?
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
                 Tell us about your vehicle and we&apos;ll get back to you within 24 hours.
@@ -235,7 +235,7 @@ export default function ServiceDetailPage({
                   href={`/quote?service=${service.slug}`}
                   className="btn-gold inline-flex w-full items-center justify-center gap-2 sm:w-auto"
                 >
-                  Request a Quote
+                  Get a quote
                   <ArrowRight size={14} />
                 </a>
               </div>
@@ -247,8 +247,8 @@ export default function ServiceDetailPage({
         {relatedServices.length > 0 && (
           <ScrollReveal>
             <section className="pb-16 md:pb-20">
-              <h2 className="font-display text-xl font-semibold text-white mb-6">
-                You Might Also Like
+              <h2 className="font-display text-2xl font-bold tracking-tight text-white mb-6">
+                You might also like
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedServices.slice(0, 3).map((related, i) => (

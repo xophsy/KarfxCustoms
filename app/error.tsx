@@ -39,7 +39,7 @@ export default function Error({ error, reset }: ErrorProps) {
             href="/"
             className="btn-ghost"
           >
-            Back Home
+            Back home
           </Link>
         </div>
       </div>

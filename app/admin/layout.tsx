@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// The admin keeps its own type (printed sheets are sized around it); font-body re-applies the swapped variable.
+const adminFonts = { "--font-display": "var(--font-bodoni)", "--font-body": "var(--font-jost)" } as React.CSSProperties;
+
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <div className="font-body" style={adminFonts}>
+      {children}
+    </div>
+  );
 }

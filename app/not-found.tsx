@@ -20,13 +20,13 @@ export default function NotFound() {
             href="/"
             className="btn-gold"
           >
-            Back Home
+            Back home
           </Link>
           <Link
             href="/portfolio"
             className="btn-ghost"
           >
-            View Portfolio
+            View portfolio
           </Link>
         </div>
       </div>

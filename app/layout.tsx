@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Jost } from "next/font/google";
+import { Archivo, Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
 import { BUSINESS_INFO } from "@/lib/business";
 
+// The public site: one variable family, widened for headings (see .font-display in globals.css).
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+// Bodoni and Jost are the admin's fonts (app/admin/layout.tsx), so public pages don't preload them.
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-bodoni",
   display: "swap",
+  preload: false,
 });
 
 const jost = Jost({
@@ -17,6 +27,7 @@ const jost = Jost({
   weight: ["400", "500", "600", "700"],
   variable: "--font-jost",
   display: "swap",
+  preload: false,
 });
 
 const SITE_URL = "https://karfxcustoms.com";
@@ -135,7 +146,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`scroll-smooth ${bodoni.variable} ${jost.variable}`}>
+    <html lang="en" className={`scroll-smooth ${archivo.variable} ${bodoni.variable} ${jost.variable}`}>
       <body className="bg-surface-900 text-white font-body antialiased print:bg-white">
         <script
           type="application/ld+json"
