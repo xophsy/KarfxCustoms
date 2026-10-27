@@ -71,7 +71,7 @@ export default function QuoteCategoryCard({
       {/* Inner glow */}
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-100"
-        style={{ boxShadow: "inset 0 0 60px rgba(212,175,55,0.07)" }}
+        style={{ boxShadow: "inset 0 0 60px rgba(248,200,0,0.07)" }}
       />
 
       {/* Icon badge */}
@@ -81,7 +81,7 @@ export default function QuoteCategoryCard({
           <div className="relative z-10 p-5 pb-0">
             <div
               className="flex w-10 h-10 items-center justify-center rounded-full border border-gold-500/40 bg-gold-500/10"
-              style={{ boxShadow: "0 0 14px rgba(212,175,55,0.15)" }}
+              style={{ boxShadow: "0 0 14px rgba(248,200,0,0.15)" }}
             >
               <Icon size={18} className="text-gold-500" strokeWidth={1.5} />
             </div>

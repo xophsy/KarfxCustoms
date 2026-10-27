@@ -125,7 +125,7 @@ export default function CategoryCard({ category, index = 0 }: Props) {
         transition={{ duration: 0.3 }}
         style={{
           background: hovered
-            ? `radial-gradient(circle 320px at ${mouse.x}px ${mouse.y}px, rgba(212,175,55,0.13), transparent 70%)`
+            ? `radial-gradient(circle 320px at ${mouse.x}px ${mouse.y}px, rgba(248,200,0,0.13), transparent 70%)`
             : "transparent",
         }}
       />

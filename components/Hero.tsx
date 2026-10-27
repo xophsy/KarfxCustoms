@@ -31,7 +31,10 @@ export default function Hero() {
 
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-36 sm:px-6 lg:px-8">
         <p className="eyebrow">
-          <span className="hidden sm:inline">{BUSINESS_INFO.brandName} ·&nbsp;</span>Raleigh, NC
+          {/* one span so the eyebrow's flex gap doesn't split the line */}
+          <span>
+            <span className="hidden sm:inline">{BUSINESS_INFO.brandName} · </span>Raleigh, NC
+          </span>
         </p>
         <h1 className="mt-7 font-display text-[clamp(3.1rem,8vw,7rem)] font-semibold leading-[0.98] tracking-[-0.01em] text-white">
           The Detail Makes

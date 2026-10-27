@@ -26,7 +26,7 @@ export default function StepSuccess({ selectedServices }: Props) {
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgba(212,175,55,0.15) 0%, transparent 70%)",
+                "radial-gradient(ellipse at center, rgba(248,200,0,0.15) 0%, transparent 70%)",
             }}
           />
         </div>

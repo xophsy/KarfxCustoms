@@ -8,7 +8,7 @@ export default function RestorFXBand() {
         <div className="relative grid overflow-hidden border border-gold-500/25 bg-surface-800 lg:grid-cols-12">
           <div
             className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full opacity-70"
-            style={{ background: "radial-gradient(closest-side, rgba(212,175,55,0.18), transparent)" }}
+            style={{ background: "radial-gradient(closest-side, rgba(248,200,0,0.18), transparent)" }}
             aria-hidden="true"
           />
 

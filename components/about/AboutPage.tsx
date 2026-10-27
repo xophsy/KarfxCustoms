@@ -46,7 +46,7 @@ export default function AboutPage() {
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(212,175,55,0.14) 0%, transparent 68%)",
+              "radial-gradient(ellipse at center, rgba(248,200,0,0.14) 0%, transparent 68%)",
             filter: "blur(80px)",
           }}
         />

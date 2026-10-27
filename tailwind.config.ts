@@ -10,11 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          300: "#FFE082",
-          400: "#FFD54F",
-          500: "#D4AF37",
-          600: "#C9A84C",
-          700: "#A07D20",
+          300: "#FFE680",
+          400: "#FFD633",
+          500: "#F8C800",
+          600: "#E0B400",
+          700: "#B38F00",
         },
         surface: {
           900: "#0a0a0a",
@@ -32,9 +32,9 @@ const config: Config = {
       },
       backgroundImage: {
         "gold-gradient":
-          "linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #C9A84C 100%)",
+          "linear-gradient(135deg, #F8C800 0%, #FFE04D 50%, #E8B000 100%)",
         "gold-radial":
-          "radial-gradient(ellipse at center, #D4AF37 0%, #C9A84C 100%)",
+          "radial-gradient(ellipse at center, #F8C800 0%, #E0B400 100%)",
         "dark-gradient":
           "linear-gradient(180deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)",
       },

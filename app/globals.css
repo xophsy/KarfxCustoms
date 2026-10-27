@@ -38,7 +38,7 @@ body {
 }
 
 ::selection {
-  background: #D4AF37;
+  background: #F8C800;
   color: #0a0a0a;
 }
 
@@ -54,12 +54,12 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #F8C800;
 }
 
 /* Gold gradient text (pair with `italic` on Bodoni headlines) */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #D4AF37 0%, #F3D77A 45%, #C9A84C 100%);
+  background: linear-gradient(135deg, #F8C800 0%, #FFE04D 45%, #E8B000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -85,29 +85,29 @@ body {
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, #D4AF37 0%, #EBCB63 50%, #C9A84C 100%);
+  background: linear-gradient(135deg, #F8C800 0%, #FFD83A 50%, #EDB800 100%);
   color: #0a0a0a;
 }
 
 .btn-gold:hover {
   filter: brightness(1.08);
-  box-shadow: 0 0 28px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 28px rgba(248, 200, 0, 0.35);
 }
 
 .btn-ghost {
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #D4AF37;
+  border: 1px solid rgba(248, 200, 0, 0.4);
+  color: #F8C800;
   background: transparent;
 }
 
 .btn-ghost:hover {
-  border-color: #D4AF37;
-  background: rgba(212, 175, 55, 0.08);
+  border-color: #F8C800;
+  background: rgba(248, 200, 0, 0.08);
 }
 
 .btn-gold:focus-visible,
 .btn-ghost:focus-visible {
-  outline: 2px solid #D4AF37;
+  outline: 2px solid #F8C800;
   outline-offset: 3px;
 }
 
@@ -121,7 +121,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #D4AF37;
+  color: #F8C800;
 }
 
 .eyebrow::before {
@@ -134,13 +134,13 @@ body {
 /* Card surface: hairline border, sharp corners */
 .glass-card {
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(248, 200, 0, 0.12);
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .glass-card:hover {
   background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(212, 175, 55, 0.4);
+  border-color: rgba(248, 200, 0, 0.4);
 }
 
 /* Slow settle-in for the hero photo */
@@ -184,14 +184,14 @@ body {
 .gold-divider {
   width: 48px;
   height: 2px;
-  background: #D4AF37;
+  background: #F8C800;
 }
 
 /* Input focus gold */
 .input-gold:focus {
   outline: none;
-  border-color: #D4AF37;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  border-color: #F8C800;
+  box-shadow: 0 0 0 2px rgba(248, 200, 0, 0.2);
 }
 
 /* Reduced motion */
