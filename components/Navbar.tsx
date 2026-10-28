@@ -19,6 +19,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  // On a service page, Get a quote opens the form with that service already picked.
+  const service = pathname.match(/^\/services\/([^/]+)\/([^/]+)$/);
+  const quoteHref = service ? `/quote?category=${service[1]}&service=${service[2]}` : "/quote";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -81,9 +84,11 @@ export default function Navbar() {
               <Phone size={15} strokeWidth={2} aria-hidden="true" />
               {BUSINESS_INFO.phoneDisplay}
             </a>
-            <Link href="/quote" className="btn-gold !py-3">
-              Get a quote
-            </Link>
+            {pathname !== "/quote" && (
+              <Link href={quoteHref} className="btn-gold !py-3">
+                Get a quote
+              </Link>
+            )}
           </div>
 
           <button
@@ -126,7 +131,7 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="mt-auto flex flex-col gap-3">
-          <Link href="/quote" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)} className="btn-gold">
+          <Link href={quoteHref} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)} className="btn-gold">
             Get a quote
           </Link>
           <a href={BUSINESS_INFO.phoneHref} tabIndex={menuOpen ? 0 : -1} className="btn-ghost">
@@ -144,7 +149,7 @@ export default function Navbar() {
             <Phone size={15} strokeWidth={2} aria-hidden="true" />
             Call us
           </a>
-          <Link href="/quote" className="btn-gold !px-4">
+          <Link href={quoteHref} className="btn-gold !px-4">
             Get a quote
           </Link>
         </div>

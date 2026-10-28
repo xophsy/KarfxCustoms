@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle2, Phone } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import {
   SERVICE_CATEGORIES,
   getCategoryBySlug,
   getServiceBySlug,
 } from "@/lib/services-data";
-import { BUSINESS_INFO } from "@/lib/business";
 import { getServiceImages } from "@/lib/services-images";
-import ServiceBreadcrumb from "@/components/services/ServiceBreadcrumb";
 import ServiceGallery from "@/components/services/ServiceGallery";
 
 export function generateStaticParams() {
@@ -70,14 +68,6 @@ export default function ServiceDetailPage({
         <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-transparent" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-28 lg:px-8">
-          <ServiceBreadcrumb
-            crumbs={[
-              { label: "Services", href: "/#services" },
-              { label: cat.name, href: `/services/${cat.slug}` },
-              { label: service.name },
-            ]}
-          />
-
           {service.isB2B && (
             <span className="mt-5 inline-block border border-gold-500/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-gold-500/70">
               For Business
@@ -91,20 +81,6 @@ export default function ServiceDetailPage({
           <p className="max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
             {service.tagline}
           </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={`/quote?category=${params.category}&service=${params.service}`}
-              className="btn-gold inline-flex items-center justify-center gap-2"
-            >
-              Get a quote
-              <ArrowRight size={14} />
-            </a>
-            <a href={BUSINESS_INFO.phoneHref} className="btn-ghost inline-flex justify-center">
-              <Phone size={14} aria-hidden="true" />
-              Call {BUSINESS_INFO.phoneDisplay}
-            </a>
-          </div>
         </div>
       </section>
 

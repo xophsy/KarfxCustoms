@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
 const STEPS = [
   {
     title: "Tell us what you need",
@@ -24,10 +21,6 @@ export default function HowItWorks() {
           <h2 id="process-heading" className="font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
             How we <span className="whitespace-nowrap text-gold-gradient italic">work with you.</span>
           </h2>
-          <Link href="/quote" className="btn-gold mt-8">
-            Tell us about your vehicle
-            <ArrowRight size={16} aria-hidden="true" />
-          </Link>
         </div>
 
         <ol className="grid gap-4 md:grid-cols-3 lg:col-span-8">

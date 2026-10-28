@@ -1,15 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "@/components/icons/SocialIcons";
 import { BUSINESS_INFO } from "@/lib/business";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
-
-const shopLinks = [
-  { label: "Our work", href: "/portfolio" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "About", href: "/about" },
-  { label: "Get a quote", href: "/quote" },
-];
 
 const socials = [
   { label: "Instagram", href: BUSINESS_INFO.instagramHref, Icon: InstagramIcon },
@@ -25,15 +17,9 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-black">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <Link href="/" className="inline-flex items-center gap-3" aria-label="KAR FX Customs home">
-              <Image src="/images/branding/Logo.png" alt="" width={160} height={160} className="h-20 w-20 object-contain" />
-              <span className="leading-none">
-                <span className="block font-brand text-2xl font-extrabold tracking-tight text-white">KAR FX</span>
-                <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-500">Customs · Raleigh</span>
-              </span>
-            </Link>
-            <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-white/55">{BUSINESS_INFO.summary}</p>
+          <div className="md:col-span-5">
+            {/* No second logo here: the header's logo is always on screen */}
+            <p className="max-w-xs text-[15px] leading-relaxed text-white/55">{BUSINESS_INFO.summary}</p>
             <div className="mt-6 flex items-center gap-2">
               {socials.map(({ label, href, Icon }) => (
                 <a
@@ -50,7 +36,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-4">
             <h3 className={heading}>Services</h3>
             <ul className="mt-5 space-y-3">
               {SERVICE_CATEGORIES.map((cat) => (
@@ -63,27 +49,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
-            <h3 className={heading}>Shop</h3>
-            <ul className="mt-5 space-y-3">
-              {shopLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className={link}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           <address className="not-italic md:col-span-3">
             <h3 className={heading}>Contact</h3>
             <ul className="mt-5 space-y-3">
-              <li>
-                <a href={BUSINESS_INFO.phoneHref} className={link}>
-                  {BUSINESS_INFO.phoneDisplay}
-                </a>
-              </li>
               <li>
                 <a href={BUSINESS_INFO.emailHref} className={link}>
                   {BUSINESS_INFO.email}

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { BUSINESS_INFO } from "@/lib/business";
 
 const FACTS = [
@@ -60,11 +59,8 @@ export default function Hero() {
           will help you find the best option for it.
         </p>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <Link href="/quote" className="btn-gold">
-            Get a quote
-            <ArrowRight size={14} aria-hidden="true" />
-          </Link>
+        {/* Get a quote lives in the header and the phone bar; "Our work" is in the header from lg up */}
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 lg:hidden">
           <Link href="/portfolio" className="btn-ghost">
             View our work
           </Link>

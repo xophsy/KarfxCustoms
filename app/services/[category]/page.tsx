@@ -7,7 +7,6 @@ import {
 } from "@/lib/services-data";
 import { CATEGORY_IMAGES } from "@/lib/services-images";
 import ServiceCard from "@/components/services/ServiceCard";
-import ServiceBreadcrumb from "@/components/services/ServiceBreadcrumb";
 
 export function generateStaticParams() {
   return SERVICE_CATEGORIES.map((cat) => ({ category: cat.slug }));
@@ -67,13 +66,7 @@ export default function CategoryPage({
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-surface-900 to-transparent" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-28 lg:px-8">
-          <ServiceBreadcrumb
-            crumbs={[
-              { label: "Services", href: "/#services" },
-              { label: cat.name },
-            ]}
-          />
-          <h1 className="mt-5 font-editorial text-5xl font-semibold leading-[1] text-balance text-white sm:text-6xl md:text-7xl">
+          <h1 className="font-editorial text-5xl font-semibold leading-[1] text-balance text-white sm:text-6xl md:text-7xl">
             {cat.name}
           </h1>
           <div className="gold-divider mt-4 mb-5" />
