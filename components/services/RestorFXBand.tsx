@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 // KAR FX Customs and RestorFX Raleigh are one shop: same team, same address, same phone.
 export default function RestorFXBand() {
   return (
-    <section aria-labelledby="restorfx-heading" className="bg-surface-900 pt-20 md:pt-28">
+    <section id="restorfx" aria-labelledby="restorfx-heading" className="scroll-mt-20 bg-surface-900 pt-20 md:pt-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="relative grid overflow-hidden rounded-[32px] bg-surface-800 ring-1 ring-white/5 lg:grid-cols-12">
           <div

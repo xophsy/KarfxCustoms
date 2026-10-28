@@ -5,7 +5,7 @@ import { BUSINESS_INFO } from "@/lib/business";
 
 const FACTS = [
   { value: `${BUSINESS_INFO.reviewRating} ★`, label: `Google rating · ${BUSINESS_INFO.reviewCount} reviews` },
-  { value: "Best of 2025", label: "Auto restoration · Raleigh" },
+  { value: "24 hours", label: "Quote replies on weekdays" },
   { value: "Veteran", label: "Owned & operated" },
 ];
 
@@ -32,6 +32,24 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/25 md:hidden" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-40 sm:px-6 md:pt-48 lg:px-8">
+        {/* The award, first thing on the page; taps through to the RestorFX section that explains it */}
+        <a
+          href="#restorfx"
+          className="mb-8 inline-flex items-center gap-4 rounded-2xl bg-black/50 p-2 pr-5 ring-1 ring-white/15 backdrop-blur-md transition-colors hover:ring-gold-500/60"
+        >
+          <Image
+            src="/images/services/partners/restorfx/tarifa-comercial.jpg"
+            alt=""
+            width={1131}
+            height={1067}
+            priority
+            className="h-16 w-auto rounded-xl md:h-20"
+          />
+          <span className="leading-tight">
+            <span className="block text-base font-semibold text-white md:text-lg">Best of Business 2025</span>
+            <span className="mt-1 block text-sm text-white/75">Auto restoration in Raleigh · RestorFX Raleigh</span>
+          </span>
+        </a>
         <h1 className="font-editorial text-[clamp(3.4rem,8.4vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.01em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.5)]">
           The Detail Makes
           <br />
