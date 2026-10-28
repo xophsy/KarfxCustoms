@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Phone } from "lucide-react";
 import {
   SERVICE_CATEGORIES,
   getCategoryBySlug,
   getServiceBySlug,
-  getRelatedServices,
 } from "@/lib/services-data";
+import { BUSINESS_INFO } from "@/lib/business";
 import { getServiceImages } from "@/lib/services-images";
-import ServiceCard from "@/components/services/ServiceCard";
 import ServiceBreadcrumb from "@/components/services/ServiceBreadcrumb";
-import FAQAccordion from "@/components/services/FAQAccordion";
 import ServiceGallery from "@/components/services/ServiceGallery";
-import ScrollReveal from "@/components/services/ScrollReveal";
 
 export function generateStaticParams() {
   return SERVICE_CATEGORIES.flatMap((cat) =>
@@ -48,7 +45,6 @@ export default function ServiceDetailPage({
   if (!cat || !service) notFound();
 
   const images = getServiceImages(params.category, params.service);
-  const relatedServices = getRelatedServices(service.relatedSlugs);
 
   return (
     <>
@@ -104,174 +100,75 @@ export default function ServiceDetailPage({
               Get a quote
               <ArrowRight size={14} />
             </a>
-            <a href="/contact" className="btn-ghost inline-flex justify-center">
-              Ask a question
+            <a href={BUSINESS_INFO.phoneHref} className="btn-ghost inline-flex justify-center">
+              <Phone size={14} aria-hidden="true" />
+              Call {BUSINESS_INFO.phoneDisplay}
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── BODY ─────────────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-5xl px-5 md:px-8 lg:px-10">
+      {/* ── BODY: four plain sections, nothing to open or click through ─────── */}
+      <div className="mx-auto max-w-3xl space-y-16 px-5 py-14 md:px-8 md:py-20">
+        <section aria-labelledby="what-heading">
+          <h2 id="what-heading" className="font-display text-3xl font-bold tracking-[-0.01em] text-white">
+            What you get
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-white/80">{service.description[0]}</p>
+          <ul className="mt-6 space-y-3">
+            {service.benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-3 text-lg leading-relaxed text-white/90">
+                <CheckCircle2 size={22} className="mt-1 shrink-0 text-gold-500" aria-hidden="true" />
+                {benefit}
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        {/* ── Description + Benefits ─────────────────────────────────────── */}
-        <ScrollReveal>
-          <section className="py-8 md:py-14">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
-              {/* Description */}
-              <div className="space-y-4">
-                {service.description.map((p, i) => (
-                  <p key={i} className="text-[15px] leading-relaxed text-white/70 md:text-base">
-                    {p}
-                  </p>
-                ))}
-              </div>
-              {/* Benefits */}
-              <ul className="space-y-3" role="list">
-                {service.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2
-                      size={16}
-                      className="mt-0.5 shrink-0 text-gold-500"
-                      aria-hidden
-                    />
-                    <span className="text-[15px] leading-relaxed text-white/80">
-                      {benefit}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        </ScrollReveal>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-
-        {/* ── Gallery ──────────────────────────────────────────────────────── */}
         {images && images.gallery.length > 0 && (
-          <>
-            <section className="py-8 md:py-14">
-              <ScrollReveal>
-                <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
-                  Our work
-                </h2>
-              </ScrollReveal>
-              <ServiceGallery images={images.gallery} serviceName={service.name} />
-            </section>
-            <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-          </>
+          <section aria-labelledby="work-heading">
+            <h2 id="work-heading" className="mb-6 font-display text-3xl font-bold tracking-[-0.01em] text-white">
+              Our work
+            </h2>
+            <ServiceGallery images={images.gallery} serviceName={service.name} />
+          </section>
         )}
 
-        {/* ── Process ──────────────────────────────────────────────────────── */}
-        <ScrollReveal>
-          <section className="py-12 md:py-16">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
-              The process
+        {service.faq.length > 0 && (
+          <section aria-labelledby="faq-heading">
+            <h2 id="faq-heading" className="font-display text-3xl font-bold tracking-[-0.01em] text-white">
+              Common questions
             </h2>
-            <div className="grid gap-px overflow-hidden rounded-2xl bg-white/10 grid-cols-1 sm:grid-cols-3">
-              {service.steps.map((step, i) => (
-                <div key={i} className="relative bg-surface-900 p-5 md:p-8">
-                  <span className="mb-3 block text-xs font-bold tracking-[0.3em] text-gold-500/50">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mb-2 font-display text-base font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-white/45">
-                    {step.desc}
-                  </p>
-                  {i < service.steps.length - 1 && (
-                    <div
-                      className="absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-1/2 text-gold-500/20 sm:block"
-                      aria-hidden
-                    >
-                      <ArrowRight size={18} />
-                    </div>
-                  )}
+            {/* Answers are shown, not folded away, so there is nothing to open */}
+            <dl className="mt-6 space-y-7">
+              {service.faq.map(({ q, a }) => (
+                <div key={q}>
+                  <dt className="text-lg font-semibold text-white">{q}</dt>
+                  <dd className="mt-1.5 text-lg leading-relaxed text-white/75">{a}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </section>
-        </ScrollReveal>
-
-        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-        {service.faq.length > 0 && (
-          <>
-            <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-            <ScrollReveal>
-              <section className="py-8 md:py-14">
-                <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white mb-8">
-                  FAQ
-                </h2>
-                <div className="border-t border-white/5">
-                  <FAQAccordion items={service.faq} />
-                </div>
-                <p className="mt-6 text-sm text-white/35">
-                  More questions?{" "}
-                  <a href="/contact" className="text-gold-500 hover:underline underline-offset-2">
-                    Get in touch
-                  </a>
-                  .
-                </p>
-              </section>
-            </ScrollReveal>
-          </>
         )}
 
-        <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-
-        {/* ── CTA ──────────────────────────────────────────────────────────── */}
-        <ScrollReveal>
-          <section className="py-12 md:py-16">
-            <div className="rounded-3xl border border-white/5 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
-              <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white md:text-4xl">
-                We would love to help with your vehicle
-              </h2>
-              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
-                Tell us a little about what you are looking for. We will reply within 24 hours on weekdays.
-              </p>
-              <div className="mt-7 flex justify-center">
-                <a
-                  href={`/quote?service=${service.slug}`}
-                  className="btn-gold inline-flex w-full items-center justify-center gap-2 sm:w-auto"
-                >
-                  Get a quote
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
-
-        {/* ── Related Services ─────────────────────────────────────────────── */}
-        {relatedServices.length > 0 && (
-          <ScrollReveal>
-            <section className="pb-16 md:pb-20">
-              <h2 className="font-display text-2xl font-bold tracking-[-0.01em] text-white mb-6">
-                You might also like
-              </h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {relatedServices.slice(0, 3).map((related, i) => (
-                  <ServiceCard
-                    key={related.slug}
-                    service={related}
-                    categorySlug={related.categorySlug}
-                    index={i}
-                  />
-                ))}
-              </div>
-              <div className="mt-8">
-                <a
-                  href="/#services"
-                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-white/25 transition-colors duration-200 hover:text-gold-500"
-                >
-                  <span className="rotate-180 inline-block">→</span>
-                  All services
-                </a>
-              </div>
-            </section>
-          </ScrollReveal>
-        )}
+        <section className="rounded-3xl border border-white/5 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
+          <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white md:text-4xl">
+            We would love to help with your vehicle
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed text-white/70">
+            Tell us a little about what you are looking for. We will reply within 24 hours on weekdays.
+          </p>
+          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href={`/quote?category=${params.category}&service=${params.service}`} className="btn-gold">
+              Get a quote
+              <ArrowRight size={14} aria-hidden="true" />
+            </a>
+            <a href={BUSINESS_INFO.phoneHref} className="btn-ghost">
+              <Phone size={14} aria-hidden="true" />
+              Call {BUSINESS_INFO.phoneDisplay}
+            </a>
+          </div>
+        </section>
       </div>
     </>
   );

@@ -23,8 +23,6 @@
 export type GalleryImage = {
   src: string;
   alt: string;
-  isBeforeAfter?: boolean;
-  isDetail?: boolean;
 };
 
 export type ServiceImageSet = {
@@ -90,11 +88,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
         src: GALLERY("tint.jpg"),
         alt: "Tinted taillights on dark vehicle — rear 3/4 view",
       },
-      {
-        src: GALLERY("tint.jpg"),
-        alt: "Before and after: stock vs smoked headlight comparison",
-        isBeforeAfter: true,
-      },
     ],
   },
 
@@ -109,7 +102,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
       {
         src: GALLERY("detail-shot-1.jpg"),
         alt: "Ceramic coated paint surface — water beading close-up",
-        isDetail: true,
       },
     ],
   },
@@ -194,7 +186,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
       {
         src: GALLERY("IMG_7772.jpg"),
         alt: "Reflective caliper detail — full wheel view showing finish effect",
-        isDetail: true,
       },
       {
         src: GALLERY("IMG_7774.jpg"),
@@ -236,14 +227,8 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
     heroAlt: "Engine bay detail — clean engine compartment after professional service",
     gallery: [
       {
-        src: GALLERY("detail-shot-2.jpg"),
-        alt: "Engine bay before and after — contamination and grime removed",
-        isBeforeAfter: true,
-      },
-      {
         src: GALLERY("detail-shot-1.jpg"),
         alt: "Clean engine bay close-up — degreased and dressed surfaces",
-        isDetail: true,
       },
     ],
   },
@@ -255,7 +240,6 @@ export const SERVICE_IMAGES: Record<string, ServiceImageSet> = {
       {
         src: GALLERY("detail-shot-2.jpg"),
         alt: "Detailing — paint surface close-up showing restored gloss",
-        isDetail: true,
       },
       {
         src: GALLERY("bmw-ceramic.jpg"),

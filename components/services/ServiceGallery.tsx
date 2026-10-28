@@ -95,20 +95,6 @@ export default function ServiceGallery({ images, serviceName }: Props) {
                 count <= 2 ? "aspect-[4/3]" : "aspect-[4/3]"
               )}
             >
-              {/* Badges */}
-              <div className="absolute left-3 top-3 z-10 flex gap-2">
-                {img.isBeforeAfter && (
-                  <span className="rounded-full border border-gold-500/40 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gold-500 backdrop-blur-sm">
-                    Before / After
-                  </span>
-                )}
-                {img.isDetail && (
-                  <span className="rounded-full border border-white/20 bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white/60 backdrop-blur-sm">
-                    Detail
-                  </span>
-                )}
-              </div>
-
               {/* Zoom icon overlay */}
               <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-gold-500 backdrop-blur-sm">
