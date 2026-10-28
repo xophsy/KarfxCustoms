@@ -80,8 +80,7 @@ export default function ReviewsSection() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <p className="eyebrow">Reviews</p>
-            <h2 id="reviews-heading" className="mt-5 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+            <h2 id="reviews-heading" className="font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
               What our clients <span className="text-gold-gradient italic">say about us.</span>
             </h2>
             <div className="mt-10 flex items-end gap-4">

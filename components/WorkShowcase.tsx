@@ -4,12 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { ALL_PORTFOLIO_IMAGES } from "@/lib/gallery";
 
 const FEATURED = [
-  { file: "0898a7e4-0d03-4d39-a746-8d58b7f6fa84.jpg", alt: "McLaren Senna outside KAR FX Customs", tag: "Protection" },
-  { file: "IMG_6719.jpg", alt: "Glossy blue BMW XM front three-quarter", tag: "Protection" },
-  { file: "IMG_2806.jpg", alt: "Orange Ford Mustang with black rear stripes and louvers", tag: "Wraps" },
-  { file: "IMG_6065.jpg", alt: "Yamaha 212X boat with green and white graphics", tag: "Boats" },
-  { file: "IMG_1531.jpg", alt: "Black Chevrolet Chevelle SS front view", tag: "Detailing" },
-  { file: "IMG_5960.jpg", alt: "White Rolls-Royce Ghost with custom wheels", tag: "Wheels" },
+  { file: "0898a7e4-0d03-4d39-a746-8d58b7f6fa84.jpg", alt: "McLaren Senna outside KAR FX Customs" },
+  { file: "IMG_6719.jpg", alt: "Glossy blue BMW XM front three-quarter" },
+  { file: "IMG_2806.jpg", alt: "Orange Ford Mustang with black rear stripes and louvers" },
+  { file: "IMG_6065.jpg", alt: "Yamaha 212X boat with green and white graphics" },
+  { file: "IMG_1531.jpg", alt: "Black Chevrolet Chevelle SS front view" },
+  { file: "IMG_5960.jpg", alt: "White Rolls-Royce Ghost with custom wheels" },
 ];
 
 export default function WorkShowcase() {
@@ -18,8 +18,7 @@ export default function WorkShowcase() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="eyebrow">Our work</p>
-            <h2 id="work-heading" className="mt-5 max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+            <h2 id="work-heading" className="max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
               Some of the vehicles <span className="text-gold-gradient italic">we have worked on.</span>
             </h2>
           </div>
@@ -53,10 +52,7 @@ export default function WorkShowcase() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" aria-hidden="true" />
                 <div className="absolute inset-x-3 bottom-3 md:inset-x-5 md:bottom-5">
-                  <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500">
-                    {item.tag}
-                  </span>
-                  <p className="mt-2 hidden text-sm font-medium text-white sm:block">{item.alt}</p>
+                  <p className="hidden text-sm font-medium text-white sm:block">{item.alt}</p>
                 </div>
               </Link>
             </li>

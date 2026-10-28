@@ -109,25 +109,6 @@ body {
   outline-offset: 3px;
 }
 
-/* Section label: short gold rule + small caps */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.875rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #F8C800;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: currentColor;
-}
-
 /* Card surface: soft fill, rounded, barely-there edge */
 .glass-card {
   background: rgba(255, 255, 255, 0.04);

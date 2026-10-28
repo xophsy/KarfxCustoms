@@ -32,8 +32,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <ScrollReveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="eyebrow">Services</p>
-              <h2 id="services-heading" className="mt-5 max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+              <h2 id="services-heading" className="max-w-2xl font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
                 Everything your vehicle needs, <span className="text-gold-gradient italic">under one roof.</span>
               </h2>
             </div>

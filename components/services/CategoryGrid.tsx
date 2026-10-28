@@ -17,7 +17,7 @@ const CARD_IMAGES: Record<string, { src: string; alt: string }> = {
 export default function CategoryGrid() {
   return (
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {SERVICE_CATEGORIES.map((cat, i) => {
+      {SERVICE_CATEGORIES.map((cat) => {
         const img = CARD_IMAGES[cat.slug];
         return (
           <li key={cat.slug}>
@@ -36,9 +36,6 @@ export default function CategoryGrid() {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/45" aria-hidden="true" />
 
-              <span className="absolute left-6 top-6 text-[11px] font-semibold tracking-[0.3em] text-gold-500">
-                0{i + 1}
-              </span>
               <span
                 className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-gold-500 group-hover:text-black"
                 aria-hidden="true"

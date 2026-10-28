@@ -18,8 +18,7 @@ export default function FinalCTA() {
 
       <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-6 md:py-36 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Get in touch</p>
-          <h2 id="cta-heading" className="mt-6 font-editorial text-[clamp(3rem,6.4vw,5.5rem)] font-semibold leading-[0.98] text-white">
+          <h2 id="cta-heading" className="font-editorial text-[clamp(3rem,6.4vw,5.5rem)] font-semibold leading-[0.98] text-white">
             We look forward to <span className="text-gold-gradient italic">hearing from you.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">

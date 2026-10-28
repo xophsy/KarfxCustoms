@@ -26,8 +26,7 @@ export default function PortfolioPage() {
   return (
     <section className="bg-surface-900 pb-24">
       <div className="mx-auto w-full max-w-7xl px-5 pt-16 sm:px-6 md:pt-20 lg:px-8">
-        <p className="eyebrow">Our work</p>
-        <h1 className="mt-4 font-editorial text-4xl font-semibold leading-[1.05] text-balance text-white md:text-6xl">
+        <h1 className="font-editorial text-4xl font-semibold leading-[1.05] text-balance text-white md:text-6xl">
           Real jobs, real vehicles, and a wider look at the shop.
         </h1>
 

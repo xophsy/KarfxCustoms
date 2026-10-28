@@ -21,8 +21,7 @@ export default function HowItWorks() {
     <section aria-labelledby="process-heading" className="border-y border-white/10 bg-surface-800 py-24 md:py-28">
       <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
-          <p className="eyebrow">How it works</p>
-          <h2 id="process-heading" className="mt-5 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
+          <h2 id="process-heading" className="font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
             How we <span className="whitespace-nowrap text-gold-gradient italic">work with you.</span>
           </h2>
           <Link href="/quote" className="btn-gold mt-8">
