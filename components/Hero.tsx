@@ -37,12 +37,12 @@ export default function Hero() {
           className="mb-8 inline-flex items-center gap-4 rounded-2xl bg-black/50 p-2 pr-5 ring-1 ring-white/15 backdrop-blur-md transition-colors hover:ring-gold-500/60"
         >
           <Image
-            src="/images/services/partners/restorfx/best-of-business-2025.jpg"
+            src="/images/services/partners/restorfx/best-of-business-2025.png"
             alt=""
-            width={1131}
-            height={1067}
+            width={1033}
+            height={969}
             priority
-            className="h-16 w-auto rounded-xl md:h-20"
+            className="h-16 w-auto md:h-20"
           />
           <span className="leading-tight">
             <span className="block text-base font-semibold text-white md:text-lg">Best of Business 2025</span>

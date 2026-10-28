@@ -42,13 +42,13 @@ export default function RestorFXBand() {
 
           <div className="relative flex items-center justify-center bg-black/30 p-10 lg:col-span-5">
             <figure className="text-center">
-              {/* Box matches the photo's shape, so the rounded corners land on the photo itself */}
-              <div className="relative mx-auto aspect-[1131/1067] w-64 sm:w-80 lg:w-96">
+              {/* The awards are cut out of their white backdrop, so they sit straight on the dark panel */}
+              <div className="relative mx-auto aspect-[1033/969] w-64 sm:w-80 lg:w-96">
                 <Image
-                  src="/images/services/partners/restorfx/best-of-business-2025.jpg"
+                  src="/images/services/partners/restorfx/best-of-business-2025.png"
                   alt="Best of Business 2025 awards for RestorFX Raleigh, Auto Restoration Service"
                   fill
-                  className="rounded-2xl object-contain"
+                  className="object-contain"
                   sizes="(min-width: 1024px) 384px, (min-width: 640px) 320px, 256px"
                 />
               </div>
