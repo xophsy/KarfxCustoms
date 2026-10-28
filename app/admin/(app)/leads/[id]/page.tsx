@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CopyButton from "@/components/admin/CopyButton";
+import SubmitButton from "@/components/admin/SubmitButton";
 import { formatAge } from "@/lib/admin/format";
 import { LEAD_SOURCES, LEAD_STAGES, NEXT_STAGES, getLead, serviceName } from "@/lib/admin/leads";
 import { requireUser } from "@/lib/admin/session";
@@ -80,9 +81,9 @@ export default async function LeadPage({ params }: { params: { id: string } }) {
               <form key={stage} action={moveLead}>
                 <input type="hidden" name="id" value={lead.id} />
                 <input type="hidden" name="stage" value={stage} />
-                <button type="submit" className={stage === "lost" ? "btn-ghost text-red-300" : "btn-gold"}>
+                <SubmitButton pendingLabel="Moving…" className={stage === "lost" ? "btn-ghost text-red-300" : "btn-gold"}>
                   {stageLabel(stage)}
-                </button>
+                </SubmitButton>
               </form>
             ))}
           </div>
@@ -101,7 +102,7 @@ export default async function LeadPage({ params }: { params: { id: string } }) {
           placeholder="Only the shop sees these."
           className="input-gold w-full resize-y border border-white/10 bg-surface-800 px-4 py-3 text-base text-white placeholder-white/25 focus:border-gold-500 focus:outline-none focus:ring-0"
         />
-        <button type="submit" className="btn-ghost">Save notes</button>
+        <SubmitButton pendingLabel="Saving…" className="btn-ghost">Save notes</SubmitButton>
       </form>
     </div>
   );

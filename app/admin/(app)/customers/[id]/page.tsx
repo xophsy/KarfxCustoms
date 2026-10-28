@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import SubmitButton from "@/components/admin/SubmitButton";
 import { getCustomer } from "@/lib/admin/customers";
 import { formatAge } from "@/lib/admin/format";
 import { LEAD_STAGES, serviceName } from "@/lib/admin/leads";
@@ -38,9 +39,9 @@ export default async function CustomerPage({ params }: { params: { id: string } 
                 <form action={archiveVehicleAction}>
                   <input type="hidden" name="vehicleId" value={v.id} />
                   <input type="hidden" name="customerId" value={customer.id} />
-                  <button type="submit" className="text-xs font-semibold uppercase tracking-[0.12em] text-white/40 hover:text-red-300">
+                  <SubmitButton pendingLabel="Archiving…" className="text-xs font-semibold uppercase tracking-[0.12em] text-white/40 hover:text-red-300">
                     Archive
-                  </button>
+                  </SubmitButton>
                 </form>
               </li>
             ))}
@@ -57,7 +58,7 @@ export default async function CustomerPage({ params }: { params: { id: string } 
             placeholder="2024 BMW X5 · black"
             className="input-gold min-w-0 flex-1 border border-white/10 bg-surface-800 px-4 py-3 text-base text-white placeholder-white/25 focus:border-gold-500 focus:outline-none focus:ring-0"
           />
-          <button type="submit" className="btn-ghost">Add</button>
+          <SubmitButton pendingLabel="Adding…" className="btn-ghost">Add</SubmitButton>
         </form>
       </section>
 

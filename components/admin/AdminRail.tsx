@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logOut } from "@/app/admin/login/actions";
+import SubmitButton from "@/components/admin/SubmitButton";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -15,9 +16,9 @@ function LogOutButton({ name }: { name: string }) {
   return (
     <form action={logOut} className="text-right md:text-left">
       <p className="hidden text-sm text-white/75 md:block">{name}</p>
-      <button type="submit" className="text-xs font-semibold uppercase tracking-[0.15em] text-white/45 transition-colors hover:text-gold-500 md:mt-1">
+      <SubmitButton pendingLabel="Logging out…" className="text-xs font-semibold uppercase tracking-[0.15em] text-white/45 transition-colors hover:text-gold-500 md:mt-1">
         Log out
-      </button>
+      </SubmitButton>
     </form>
   );
 }
