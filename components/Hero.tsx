@@ -37,7 +37,7 @@ export default function Hero() {
           className="mb-8 inline-flex items-center gap-4 rounded-2xl bg-black/50 p-2 pr-5 ring-1 ring-white/15 backdrop-blur-md transition-colors hover:ring-gold-500/60"
         >
           <Image
-            src="/images/services/partners/restorfx/tarifa-comercial.jpg"
+            src="/images/services/partners/restorfx/best-of-business-2025.jpg"
             alt=""
             width={1131}
             height={1067}

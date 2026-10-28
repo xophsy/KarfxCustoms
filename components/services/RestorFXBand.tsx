@@ -45,7 +45,7 @@ export default function RestorFXBand() {
               {/* Box matches the photo's shape, so the rounded corners land on the photo itself */}
               <div className="relative mx-auto aspect-[1131/1067] w-64 sm:w-80 lg:w-96">
                 <Image
-                  src="/images/services/partners/restorfx/tarifa-comercial.jpg"
+                  src="/images/services/partners/restorfx/best-of-business-2025.jpg"
                   alt="Best of Business 2025 awards for RestorFX Raleigh, Auto Restoration Service"
                   fill
                   className="rounded-2xl object-contain"
