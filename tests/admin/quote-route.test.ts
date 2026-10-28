@@ -7,7 +7,7 @@ const { saveWebsiteLead, send } = vi.hoisted(() => ({ saveWebsiteLead: vi.fn(), 
 vi.mock("@/lib/admin/leads", () => ({ saveWebsiteLead }));
 vi.mock("resend", () => ({ Resend: vi.fn(() => ({ emails: { send } })) }));
 
-function quoteRequest() {
+function quoteRequest(overrides: Record<string, unknown> = {}) {
   return new NextRequest("http://localhost:3000/api/quote", {
     method: "POST",
     headers: { origin: "http://localhost:3000", host: "localhost:3000", "content-type": "application/json" },
@@ -17,6 +17,7 @@ function quoteRequest() {
       source: "",
       website: "",
       submissionId: "0f8fad5b-d9cb-469f-a165-70867728950e",
+      ...overrides,
     }),
   });
 }
@@ -41,6 +42,22 @@ describe("POST /api/quote", () => {
     process.env.RESEND_API_KEY = "re_test";
     send.mockResolvedValue({ error: null });
     expect((await POST(quoteRequest())).status).toBe(200);
+  });
+
+  it("accepts a request with no service picked, for customers who are not sure yet", async () => {
+    saveWebsiteLead.mockResolvedValue({ leadId: "x", number: 202, created: true });
+    process.env.RESEND_API_KEY = "re_test";
+    send.mockResolvedValue({ error: null });
+    const res = await POST(quoteRequest({ services: [] }));
+    expect(res.status).toBe(200);
+    expect(saveWebsiteLead).toHaveBeenCalledWith(expect.objectContaining({ services: [] }));
+    expect(send).toHaveBeenCalledWith(expect.objectContaining({ subject: expect.stringContaining("Not sure yet") }), expect.anything());
+  });
+
+  it("still rejects a request without a usable phone number", async () => {
+    const res = await POST(quoteRequest({ contact: { name: "Jordan Pierce", phone: "12", email: "" } }));
+    expect(res.status).toBe(400);
+    expect(saveWebsiteLead).not.toHaveBeenCalled();
   });
 
   it("returns 503 when both fail", async () => {

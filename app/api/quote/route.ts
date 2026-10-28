@@ -77,12 +77,15 @@ function parseLead(body: Record<string, unknown>): Lead | null {
   const phoneIsValid = normalizePhone(lead.phone) !== null;
   const idIsValid = /^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(lead.submissionId);
 
-  if (lead.name.length < 2 || !phoneIsValid || !emailIsValid || !idIsValid || services.length === 0) {
+  // No service picked is fine: "not sure yet" customers get a call to help them choose.
+  if (lead.name.length < 2 || !phoneIsValid || !emailIsValid || !idIsValid) {
     return null;
   }
 
   return lead;
 }
+
+const NOT_SURE = "Not sure yet, wants help choosing";
 
 function emailFrame(content: string) {
   return `<!doctype html>
@@ -101,7 +104,7 @@ function leadRows(lead: Lead): [string, string][] {
     ["Name", lead.name],
     ["Phone", lead.phone],
     ["Email", lead.email || "Not provided"],
-    ["Services", lead.services.join("\n")],
+    ["Services", lead.services.join("\n") || NOT_SURE],
     ["Car & notes", lead.message || "None"],
     ["Came from", lead.source || "Website"],
   ];
@@ -123,7 +126,7 @@ function notificationHtml(lead: Lead) {
 function confirmationHtml(lead: Lead) {
   return emailFrame(`
     <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2">Thank you very much, ${escapeHtml(lead.name)}.</h1>
-    <p style="margin:0 0 18px;color:#c8c8c8;font-size:16px;line-height:1.6">We received your request about ${escapeHtml(lead.services.join(", "))}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.</p>
+    <p style="margin:0 0 18px;color:#c8c8c8;font-size:16px;line-height:1.6">We received your request${lead.services.length ? ` about ${escapeHtml(lead.services.join(", "))}` : ""}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.</p>
     <p style="margin:0;color:#999;font-size:14px;line-height:1.6">If you need us sooner, please call or text <a href="${BUSINESS_INFO.phoneHref}" style="color:#D4AF37">${BUSINESS_INFO.phoneDisplay}</a>. We look forward to speaking with you.</p>`);
 }
 
@@ -153,7 +156,7 @@ export async function POST(request: NextRequest) {
   const lead = parseLead(body);
   if (!lead) {
     return NextResponse.json(
-      { success: false, error: "Please check your name, phone, and selected services." },
+      { success: false, error: "Please check your name and phone number." },
       { status: 400 }
     );
   }
@@ -179,7 +182,7 @@ export async function POST(request: NextRequest) {
   const notificationEmail = process.env.LEAD_NOTIFICATION_EMAIL ?? BUSINESS_INFO.email;
   const fromEmail = process.env.LEAD_FROM_EMAIL ?? "KAR FX Customs Website <quotes@karfxcustoms.com>";
   const safeName = lead.name.replace(/[\r\n]+/g, " ");
-  const firstService = lead.services[0].replace(/ \(.*\)$/, "");
+  const firstService = lead.services[0]?.replace(/ \(.*\)$/, "") ?? "Not sure yet";
 
   const { error: notificationError } = await resend.emails.send(
     {
@@ -211,7 +214,7 @@ export async function POST(request: NextRequest) {
         replyTo: notificationEmail,
         subject: "We received your KAR FX Customs request",
         html: confirmationHtml(lead),
-        text: `Thank you very much, ${lead.name}.\n\nWe received your request about ${lead.services.join(", ")}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.\n\nIf you need us sooner, please call or text ${BUSINESS_INFO.phoneDisplay}. We look forward to speaking with you.`,
+        text: `Thank you very much, ${lead.name}.\n\nWe received your request${lead.services.length ? ` about ${lead.services.join(", ")}` : ""}. We would like to learn a little more about your vehicle and what you are looking for, so we can coordinate a visit and evaluate the best options for you. We will reply within 24 hours on weekdays.\n\nIf you need us sooner, please call or text ${BUSINESS_INFO.phoneDisplay}. We look forward to speaking with you.`,
       },
       { idempotencyKey: `quote-confirmation-${lead.submissionId}` }
     );
