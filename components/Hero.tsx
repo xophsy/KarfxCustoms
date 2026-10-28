@@ -5,7 +5,7 @@ import { BUSINESS_INFO } from "@/lib/business";
 
 const FACTS = [
   { value: `${BUSINESS_INFO.reviewRating} ★`, label: `Google rating · ${BUSINESS_INFO.reviewCount} reviews` },
-  { value: "24 hours", label: "Quote replies on weekdays" },
+  { value: "Best of 2025", label: "Auto restoration · Raleigh" },
   { value: "Veteran", label: "Owned & operated" },
 ];
 

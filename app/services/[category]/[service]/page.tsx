@@ -151,24 +151,6 @@ export default function ServiceDetailPage({
           </section>
         )}
 
-        <section className="rounded-3xl border border-white/5 bg-surface-800 px-6 py-10 text-center sm:px-10 md:py-14">
-          <h2 className="font-display text-3xl font-bold tracking-[-0.01em] text-white md:text-4xl">
-            We would love to help with your vehicle
-          </h2>
-          <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed text-white/70">
-            Tell us a little about what you are looking for. We will reply within 24 hours on weekdays.
-          </p>
-          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href={`/quote?category=${params.category}&service=${params.service}`} className="btn-gold">
-              Get a quote
-              <ArrowRight size={14} aria-hidden="true" />
-            </a>
-            <a href={BUSINESS_INFO.phoneHref} className="btn-ghost">
-              <Phone size={14} aria-hidden="true" />
-              Call {BUSINESS_INFO.phoneDisplay}
-            </a>
-          </div>
-        </section>
       </div>
     </>
   );

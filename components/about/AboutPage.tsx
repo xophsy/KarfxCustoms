@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/services/ScrollReveal";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -250,45 +248,6 @@ export default function AboutPage() {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── CLOSING CTA ────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/5 bg-surface-800/30 px-6 py-16 md:px-12 md:py-20">
-        <div className="mx-auto max-w-4xl">
-          <ScrollReveal>
-            <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-
-              {/* Left: copy */}
-              <div>
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-500/60">
-                  See for Yourself
-                </p>
-                <h2 className="font-display text-2xl font-semibold leading-snug text-white sm:text-3xl">
-                  The work is the reputation.
-                </h2>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/45">
-                  Browse our gallery of jobs or get in touch {"\u2014"} whichever path makes
-                  you more confident. We are here to serve you.
-                </p>
-              </div>
-
-              {/* Right: CTAs */}
-              <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  href="/portfolio"
-                  className="btn-gold inline-flex items-center gap-2"
-                >
-                  View portfolio
-                  <ArrowRight size={13} />
-                </Link>
-                <Link href="/quote" className="btn-ghost">
-                  Get a quote
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-
         </div>
       </section>
 

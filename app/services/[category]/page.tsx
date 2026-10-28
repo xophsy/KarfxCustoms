@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import {
   SERVICE_CATEGORIES,
   getCategoryBySlug,
@@ -9,7 +8,6 @@ import {
 import { CATEGORY_IMAGES } from "@/lib/services-images";
 import ServiceCard from "@/components/services/ServiceCard";
 import ServiceBreadcrumb from "@/components/services/ServiceBreadcrumb";
-import ScrollReveal from "@/components/services/ScrollReveal";
 
 export function generateStaticParams() {
   return SERVICE_CATEGORIES.map((cat) => ({ category: cat.slug }));
@@ -100,18 +98,6 @@ export default function CategoryPage({
             ))}
           </div>
 
-          <ScrollReveal delay={0.1}>
-            <div className="mt-12 flex flex-col gap-4 border-t border-white/5 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-white/50">
-                Not sure which option is right for your vehicle?{" "}
-                <span className="text-white/70">We will gladly help you decide.</span>
-              </p>
-              <a href="/contact" className="btn-ghost inline-flex shrink-0 items-center gap-2">
-                Ask us
-                <ArrowRight size={13} />
-              </a>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
+// KAR FX Customs and RestorFX Raleigh are one shop: same team, same address, same phone.
 export default function RestorFXBand() {
   return (
-    <section aria-labelledby="restorfx-heading" className="bg-surface-900 pb-24 md:pb-32">
+    <section aria-labelledby="restorfx-heading" className="bg-surface-900 pt-20 md:pt-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="relative grid overflow-hidden rounded-[32px] bg-surface-800 ring-1 ring-white/5 lg:grid-cols-12">
           <div
@@ -19,50 +20,41 @@ export default function RestorFXBand() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/branding/restorfx-logo.svg" alt="RestorFX" width={140} height={13} className="h-3.5 w-auto" />
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-500">Trusted partner</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-500">Raleigh · Same shop, same team</span>
             </div>
 
             <h2 id="restorfx-heading" className="mt-8 font-editorial text-[2.75rem] font-semibold leading-[1.02] text-balance text-white md:text-[3.75rem]">
-              Faded or scratched paint? <span className="text-gold-gradient italic">We can help.</span>
+              We are also <span className="text-gold-gradient italic">RestorFX Raleigh.</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">
-              For paint restoration, we work together with RestorFX, our partner for specialized clear-coat repair. Whether
-              your paint is faded and oxidized or needs correction before a wrap or PPF, we can restore it to a like-new
-              finish without repainting.
+              KAR FX Customs and RestorFX Raleigh are the same shop, under one roof. If your paint is faded, oxidized or
+              scratched, we restore the clear coat to a like-new finish without repainting. In 2025 our shop was named
+              Best of Business for auto restoration in Raleigh, based on our Google reviews.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a href="/quote?ref=restorfx" className="btn-gold" aria-label="Book a RestorFX consultation through KAR FX">
-                Book through KAR FX
+            <div className="mt-9">
+              <a href="/quote?ref=restorfx" className="btn-gold">
+                Ask about RestorFX
                 <ArrowRight size={16} aria-hidden="true" />
-              </a>
-              <a
-                href="https://restorfx.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-ghost"
-                aria-label="Visit the RestorFX website (opens in new tab)"
-              >
-                Visit RestorFX
-                <ExternalLink size={15} aria-hidden="true" />
               </a>
             </div>
           </div>
 
           <div className="relative flex items-center justify-center bg-black/30 p-10 lg:col-span-5">
             <figure className="text-center">
-              <div className="relative mx-auto h-56 w-60 md:h-64 md:w-72">
+              {/* Box matches the photo's shape, so the rounded corners land on the photo itself */}
+              <div className="relative mx-auto aspect-[1131/1067] w-64 sm:w-80 lg:w-96">
                 <Image
                   src="/images/services/partners/restorfx/tarifa-comercial.jpg"
-                  alt="Best of Business 2025 — Auto Restoration Service, Raleigh NC"
+                  alt="Best of Business 2025 awards for RestorFX Raleigh, Auto Restoration Service"
                   fill
                   className="rounded-2xl object-contain"
-                  sizes="288px"
+                  sizes="(min-width: 1024px) 384px, (min-width: 640px) 320px, 256px"
                 />
               </div>
-              <figcaption className="mt-5 text-sm font-semibold text-white">
+              <figcaption className="mt-5 text-base font-semibold text-white">
                 Best of Business 2025
-                <span className="mt-1 block text-xs font-normal text-white/50">Auto restoration · BusinessRate · Raleigh, NC</span>
+                <span className="mt-1 block text-sm font-normal text-white/55">Auto restoration in Raleigh · BusinessRate</span>
               </figcaption>
             </figure>
           </div>

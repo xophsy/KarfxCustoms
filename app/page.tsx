@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import FinalCTA from "@/components/FinalCTA";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -49,11 +48,10 @@ export default function Home() {
         </div>
       </section>
 
+      <RestorFXBand />
       <WorkShowcase />
       <HowItWorks />
       <ReviewsSection />
-      <RestorFXBand />
-      <FinalCTA />
     </>
   );
 }
