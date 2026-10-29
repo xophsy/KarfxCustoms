@@ -2,7 +2,7 @@ import { sql } from "@/lib/admin/db";
 import { hashPassword } from "@/lib/admin/password";
 
 export async function resetDb() {
-  await sql`truncate users, sessions, login_failures, customers, vehicles, leads, activity restart identity cascade`;
+  await sql`truncate users, sessions, login_failures, customers, vehicles, leads, activity, calls restart identity cascade`;
 }
 
 export async function createTestUser(email: string, password: string, role: "owner" | "tech"): Promise<string> {

@@ -61,6 +61,9 @@ export async function logActivity(entity: string, entityId: string, action: stri
   await sql`insert into activity (entity, entity_id, action, user_id) values (${entity}, ${entityId}, ${action}, ${userId})`;
 }
 
+// The name a phone customer gets until a later call or form tells us who they are.
+export const UNKNOWN_CALLER = "Unknown caller";
+
 // One customer per phone number: a returning customer reuses their record.
 export async function upsertCustomer(input: { name: string; phone: string; email?: string }): Promise<string> {
   const digits = normalizePhone(input.phone);
@@ -68,7 +71,8 @@ export async function upsertCustomer(input: { name: string; phone: string; email
   const [row] = await sql`insert into customers (name, phone, phone_digits, email)
     values (${input.name.trim()}, ${input.phone.trim()}, ${digits}, ${input.email?.trim() || null})
     on conflict (phone_digits) where archived_at is null
-    do update set email = coalesce(customers.email, excluded.email)
+    do update set email = coalesce(customers.email, excluded.email),
+      name = case when customers.name = ${UNKNOWN_CALLER} then excluded.name else customers.name end
     returning id`;
   return row.id;
 }
