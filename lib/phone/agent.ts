@@ -5,7 +5,10 @@ import { SERVICE_CATEGORIES } from "@/lib/services-data";
 // What the Retell agent is told and asked, built from the website's own data so the two never drift.
 // The owner copies both into Retell from /admin/calls/setup.
 
-export type AnalysisField = { name: string; type: "string" | "enum" | "boolean"; description: string; choices?: readonly string[] };
+// The www host: the bare domain redirects there, and Retell doesn't follow redirects on a POST.
+export const WEBHOOK_URL = "https://www.karfxcustoms.com/api/phone/retell";
+
+export type AnalysisField ={ name: string; type: "string" | "enum" | "boolean"; description: string; choices?: readonly string[] };
 
 const serviceKeyList = SERVICE_CATEGORIES.flatMap((c) => c.services.map((s) => `${c.slug}/${s.slug} — ${s.name}`)).join("; ");
 
@@ -66,7 +69,7 @@ Work these into the conversation naturally, never like a form:
 2. Their vehicle: year, make, model and color.
 3. What they want done.
 4. How soon they want it.
-5. The best number to call them back. Read back the number they are calling from and ask if that is the best one.
+5. The best number to call them back. They are calling from {{user_number}}: read that number back and ask if it is the best one. If it is empty, hidden or ${BUSINESS_INFO.phoneDisplay}, ask for their number instead. Never guess a number.
 6. Anything else Carlos should know.
 If they are calling about a job the shop already has (status, pickup or a problem), get their name, number and what it is about.
 If they are selling something, get their name, company and number, and say you will pass it on.

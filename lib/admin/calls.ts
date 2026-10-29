@@ -29,6 +29,7 @@ export type CallRow = {
   id: string;
   at: Date;
   callerName: string | null;
+  fromNumber: string | null; // caller ID, shown when it differs from the number they gave
   callbackPhone: string | null;
   callType: CallType;
   urgent: boolean;
@@ -49,17 +50,25 @@ async function openLeadId(customerId: string): Promise<string | null> {
   return row?.id ?? null;
 }
 
-async function createPhoneLead(customerId: string, input: CallInput): Promise<string> {
-  let vehicleId: string | null = null;
+// A call's lead carries a submission_id derived from the Retell call id, so two deliveries of the
+// same call arriving at once still make a single lead (the unique index refuses the second).
+const leadKey = (retellCallId: string) => `retell:${retellCallId}`;
+
+async function createPhoneLead(customerId: string, input: CallInput): Promise<{ id: string; created: boolean }> {
+  const message = input.timeframe ? `${input.summary}\nWhen: ${input.timeframe}` : input.summary;
+  const [lead] = await sql`insert into leads (customer_id, services, message, source, submission_id)
+    values (${customerId}, ${input.serviceKeys}, ${message}, 'phone', md5(${leadKey(input.retellCallId)})::uuid)
+    on conflict (submission_id) do nothing
+    returning id`;
+  if (!lead) {
+    const [existing] = await sql`select id from leads where submission_id = md5(${leadKey(input.retellCallId)})::uuid`;
+    return { id: existing.id, created: false };
+  }
   if (input.vehicle) {
     const [vehicle] = await sql`insert into vehicles (customer_id, label) values (${customerId}, ${input.vehicle}) returning id`;
-    vehicleId = vehicle.id;
+    await sql`update leads set vehicle_id = ${vehicle.id} where id = ${lead.id}`;
   }
-  const message = input.timeframe ? `${input.summary}\nWhen: ${input.timeframe}` : input.summary;
-  const [lead] = await sql`insert into leads (customer_id, vehicle_id, services, message, source)
-    values (${customerId}, ${vehicleId}, ${input.serviceKeys}, ${message}, 'phone')
-    returning id`;
-  return lead.id;
+  return { id: lead.id, created: true };
 }
 
 export async function saveCall(input: CallInput): Promise<SavedCall> {
@@ -67,11 +76,11 @@ export async function saveCall(input: CallInput): Promise<SavedCall> {
   if (DEMO) throw new Error("Demo mode: no database connected, call not stored");
 
   // Retell can deliver the same call more than once: answer with what the first delivery did.
-  const [existing] = await sql`select c.id, c.lead_id,
-      (select f.id from calls f where f.lead_id = c.lead_id order by f.created_at, f.id limit 1) as first_call_id
-    from calls c where c.retell_call_id = ${input.retellCallId}`;
+  const [existing] = await sql`select c.id, c.lead_id, l.submission_id = md5(${leadKey(input.retellCallId)})::uuid as made_lead
+    from calls c left join leads l on l.id = c.lead_id
+    where c.retell_call_id = ${input.retellCallId}`;
   if (existing) {
-    const outcome = !existing.lead_id ? "no-lead" : existing.first_call_id === existing.id ? "new-lead" : "added-to-lead";
+    const outcome = !existing.lead_id ? "no-lead" : existing.made_lead ? "new-lead" : "added-to-lead";
     return { callId: existing.id, leadId: existing.lead_id, outcome, duplicate: true };
   }
 
@@ -82,15 +91,20 @@ export async function saveCall(input: CallInput): Promise<SavedCall> {
   const isCustomer = input.callType === "inquiry" || input.callType === "existing_customer";
   if (isCustomer && input.callerSpoke && input.callbackPhone) {
     customerId = await upsertCustomer({ name: input.callerName ?? UNKNOWN_CALLER, phone: input.callbackPhone });
-    leadId = await openLeadId(customerId);
-    if (leadId) {
+    // This call's own lead, if a parallel delivery of it already made one.
+    const [own] = await sql`select id from leads where submission_id = md5(${leadKey(input.retellCallId)})::uuid`;
+    leadId = own?.id ?? (await openLeadId(customerId));
+    if (own) {
+      outcome = "new-lead";
+    } else if (leadId) {
       outcome = "added-to-lead";
       await sql`update leads set updated_at = now() where id = ${leadId}`;
       await logActivity("lead", leadId, "call", null);
     } else if (input.callType === "inquiry") {
       outcome = "new-lead";
-      leadId = await createPhoneLead(customerId, input);
-      await logActivity("lead", leadId, "created", null);
+      const lead = await createPhoneLead(customerId, input);
+      leadId = lead.id;
+      if (lead.created) await logActivity("lead", leadId, "created", null);
     }
   }
 
@@ -109,6 +123,7 @@ const toCallRow = (r: Row): CallRow => ({
   id: r.id,
   at: new Date(r.at),
   callerName: r.caller_name,
+  fromNumber: r.from_number,
   callbackPhone: r.callback_phone,
   callType: r.call_type,
   urgent: r.urgent,
@@ -123,7 +138,7 @@ const toCallRow = (r: Row): CallRow => ({
 // Newest 200 calls, or every call on one lead.
 async function queryCalls(leadId: string | null): Promise<CallRow[]> {
   const rows = await sql`select c.id, coalesce(c.started_at, c.created_at) as at, coalesce(cu.name, c.caller_name) as caller_name,
-      c.callback_phone, c.call_type, c.urgent, c.summary, c.transcript, c.recording_url, c.lead_id, l.number::int as lead_number, c.customer_id
+      c.from_number, c.callback_phone, c.call_type, c.urgent, c.summary, c.transcript, c.recording_url, c.lead_id, l.number::int as lead_number, c.customer_id
     from calls c left join customers cu on cu.id = c.customer_id left join leads l on l.id = c.lead_id
     where ${leadId}::uuid is null or c.lead_id = ${leadId}::uuid
     order by at desc limit 200`;

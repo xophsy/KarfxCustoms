@@ -20,11 +20,13 @@ export function verifyRetellSignature(rawBody: string, apiKey: string, header: s
 
 const text = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
 
-// The analysis model writes words like "unknown" or "N/A" into fields the caller never filled.
-const PLACEHOLDER = /^(unknown|n\/?a|none|not provided|not given|null)?$/i;
+// The analysis model writes words like "unknown", "N/A" or "Not mentioned" into fields the caller
+// never filled. ("Na" alone stays: it can be a real name.)
+const PLACEHOLDER =
+  /^(|-+|null|unspecified|n[/.]a|unknown( caller| name)?|none( provided| given)?|no name( given| provided)?|not (mentioned|specified|stated|available|provided|given))$/i;
 function optional(value: unknown, max: number): string | null {
   const v = text(value, max);
-  return PLACEHOLDER.test(v.replace(/[.!?]+$/, "")) ? null : v;
+  return PLACEHOLDER.test(v.replace(/^[([]+|[)\].!?]+$/g, "").trim()) ? null : v;
 }
 
 // Forwarding can show the shop's own number as the caller ID: that is no caller ID at all.

@@ -31,6 +31,8 @@ describe("POST /api/phone/retell", () => {
   it("refuses an unsigned or badly signed request", async () => {
     expect((await POST(retellRequest(analyzed(), { signature: "v=1,d=00" }))).status).toBe(401);
     expect(saveCall).not.toHaveBeenCalled();
+    // A wrong key in Vercel loses every call, so it must show up in the logs.
+    expect(console.error).toHaveBeenCalledWith(expect.stringContaining("signature"));
   });
 
   it("ignores events other than call_analyzed", async () => {

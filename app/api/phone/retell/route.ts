@@ -31,6 +31,8 @@ export async function POST(request: NextRequest) {
 
   const rawBody = await request.text();
   if (!verifyRetellSignature(rawBody, apiKey, request.headers.get("x-retell-signature"))) {
+    // Every real call fails this way if RETELL_API_KEY isn't the Retell key with the webhook badge.
+    console.error("[KAR FX Phone] webhook signature rejected: check RETELL_API_KEY is Retell's webhook key");
     return NextResponse.json({ error: "Bad signature." }, { status: 401 });
   }
 

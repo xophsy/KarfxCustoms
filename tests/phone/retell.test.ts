@@ -53,7 +53,8 @@ describe("reading a Retell call", () => {
   });
 
   it("turns placeholder words into missing values", () => {
-    for (const word of ["unknown", "N/A", "Not provided.", "none", "  "]) {
+    const words = ["unknown", "N/A", "Not provided.", "none", "  ", "Not mentioned", "Not specified", "not stated", "unspecified", "n.a.", "-", "(unknown)", "None provided", "Not available", "No name given", "Unknown Caller"];
+    for (const word of words) {
       expect(parseRetellCall(retellCall({ custom: { caller_name: word } }))!.callerName).toBeNull();
     }
   });

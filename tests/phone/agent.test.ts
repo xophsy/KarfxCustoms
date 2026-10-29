@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { BUSINESS_INFO } from "@/lib/business";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
-import { ANALYSIS_FIELDS, buildAgentPrompt } from "@/lib/phone/agent";
+import { ANALYSIS_FIELDS, WEBHOOK_URL, buildAgentPrompt } from "@/lib/phone/agent";
 import { parseRetellCall } from "@/lib/phone/retell";
 
 describe("the AI's instructions", () => {
@@ -21,6 +21,15 @@ describe("the AI's instructions", () => {
   it("carries the never-quote-a-price rule and no prices", () => {
     expect(buildAgentPrompt()).toMatch(/never (give|quote) a price/i);
     expect(buildAgentPrompt()).not.toMatch(/\$\d/);
+  });
+
+  it("reads back the caller's real number, never a made-up one", () => {
+    expect(buildAgentPrompt()).toContain("{{user_number}}");
+  });
+
+  it("points Retell at the www address, which doesn't redirect", () => {
+    expect(new URL(WEBHOOK_URL).host).toBe("www.karfxcustoms.com");
+    expect(new URL(WEBHOOK_URL).pathname).toBe("/api/phone/retell");
   });
 
   it("gives no phone number but the shop's", () => {

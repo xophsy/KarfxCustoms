@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { sql } from "@/lib/admin/db";
 import { listCalls, saveCall, type CallInput } from "@/lib/admin/calls";
-import { getLead, setLeadStage } from "@/lib/admin/leads";
+import { getLead, saveWebsiteLead, setLeadStage } from "@/lib/admin/leads";
 import { createTestUser, resetDb } from "./helpers";
 
 function call(overrides: Partial<CallInput> = {}): CallInput {
@@ -25,7 +25,7 @@ function call(overrides: Partial<CallInput> = {}): CallInput {
   };
 }
 
-const count = async (table: "calls" | "customers" | "leads") =>
+const count = async (table: "calls" | "customers" | "leads" | "vehicles") =>
   (await sql([`select count(*)::int as n from ${table}`] as unknown as TemplateStringsArray))[0].n;
 
 describe("AI-answered calls", () => {
@@ -87,6 +87,34 @@ describe("AI-answered calls", () => {
     expect(b).toEqual({ ...a, duplicate: true });
     expect(await count("calls")).toBe(1);
     expect(await count("leads")).toBe(1);
+  });
+
+  it("makes one lead when Retell delivers the same call twice at once", async () => {
+    const [a, b] = await Promise.all([saveCall(call()), saveCall(call())]);
+    expect(await count("leads")).toBe(1);
+    expect(await count("vehicles")).toBe(1);
+    expect(await count("calls")).toBe(1);
+    expect(a.leadId).toBe(b.leadId);
+  });
+
+  it("calls a website lead's first phone call a repeat contact on retry", async () => {
+    const { leadId } = await saveWebsiteLead({
+      name: "Jordan Pierce",
+      phone: "(919) 555-0142",
+      email: "",
+      message: "",
+      services: [],
+      source: "",
+      submissionId: "0f8fad5b-d9cb-469f-a165-70867728950e",
+    });
+    const first = await saveCall(call());
+    expect(first).toMatchObject({ outcome: "added-to-lead", leadId });
+    expect(await saveCall(call())).toEqual({ ...first, duplicate: true });
+  });
+
+  it("keeps the caller ID next to the number they gave", async () => {
+    await saveCall(call({ fromNumber: "+19845550119" }));
+    expect((await listCalls())[0]).toMatchObject({ fromNumber: "+19845550119", callbackPhone: "(919) 555-0142" });
   });
 
   it("fills in an unknown caller's name on a later call", async () => {

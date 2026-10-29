@@ -1,9 +1,8 @@
 import Link from "next/link";
 import CopyButton from "@/components/admin/CopyButton";
 import { requireUser } from "@/lib/admin/session";
-import { ANALYSIS_FIELDS, buildAgentPrompt } from "@/lib/phone/agent";
+import { ANALYSIS_FIELDS, WEBHOOK_URL, buildAgentPrompt } from "@/lib/phone/agent";
 
-const WEBHOOK_URL = "https://karfxcustoms.com/api/phone/retell";
 const term = "text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45";
 
 // Everything to paste into Retell, generated from the website's data so it is always current.
@@ -28,6 +27,10 @@ export default async function PhoneSetupPage() {
         <p className="flex flex-wrap items-center gap-2 text-sm">
           <code className="break-all text-white">{WEBHOOK_URL}</code>
           <CopyButton text={WEBHOOK_URL} />
+        </p>
+        <p className="text-sm text-white/80">
+          In Vercel, set <code className="text-white">RETELL_API_KEY</code> to the Retell API key with the webhook badge next to it. Any other key
+          rejects every call.
         </p>
       </section>
 

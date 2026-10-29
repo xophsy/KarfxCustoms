@@ -1,6 +1,17 @@
 import Link from "next/link";
 import type { CallRow, CallType } from "@/lib/admin/calls";
 import { formatAge } from "@/lib/admin/format";
+import { formatPhone, normalizePhone } from "@/lib/admin/phone";
+import { BUSINESS_INFO } from "@/lib/business";
+
+const SHOP_DIGITS = normalizePhone(BUSINESS_INFO.phoneHref);
+
+// The real caller ID, only when it adds something: not the number they gave, not the shop's own.
+function otherCallerId(call: CallRow): string | null {
+  const digits = call.fromNumber ? normalizePhone(call.fromNumber) : null;
+  if (!digits || digits === SHOP_DIGITS) return null;
+  return call.callbackPhone && normalizePhone(call.callbackPhone) === digits ? null : formatPhone(digits);
+}
 
 const TYPE_LABELS: Record<CallType, string> = {
   inquiry: "Inquiry",
@@ -14,6 +25,7 @@ const TYPE_LABELS: Record<CallType, string> = {
 // on a lead's own page (showLead off) the page header already shows who it is.
 export default function CallCard({ call, showLead = false }: { call: CallRow; showLead?: boolean }) {
   const when = call.at.toLocaleString("en-US", { timeZone: "America/New_York", dateStyle: "medium", timeStyle: "short" });
+  const callerId = otherCallerId(call);
 
   return (
     <article className="space-y-3 border border-white/10 bg-surface-800 p-4">
@@ -49,6 +61,8 @@ export default function CallCard({ call, showLead = false }: { call: CallRow; sh
           </Link>
         )}
       </p>
+
+      {callerId && <p className="text-xs text-white/45">Called from {callerId}</p>}
 
       <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">{call.summary || "No summary."}</p>
 
