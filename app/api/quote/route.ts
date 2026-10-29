@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { BUSINESS_INFO } from "@/lib/business";
+import { emailFrame, emailTable, escapeHtml, leadEmailAddresses } from "@/lib/email";
 import { SERVICE_CATEGORIES } from "@/lib/services-data";
 import { saveWebsiteLead } from "@/lib/admin/leads";
 import { normalizePhone } from "@/lib/admin/phone";
@@ -35,16 +36,6 @@ type Lead = {
 
 function stringField(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/[&<>'"]/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    '"': "&quot;",
-  })[character] ?? character);
 }
 
 // Service names come from our own data, never from the request body.
@@ -87,18 +78,6 @@ function parseLead(body: Record<string, unknown>): Lead | null {
 
 const NOT_SURE = "Not sure yet, wants help choosing";
 
-function emailFrame(content: string) {
-  return `<!doctype html>
-  <html><body style="margin:0;background:#0a0a0a;font-family:Arial,sans-serif;color:#f5f5f5">
-    <div style="max-width:640px;margin:0 auto;padding:32px 20px">
-      <div style="border:1px solid #3d3520;background:#111111;padding:32px">
-        <p style="margin:0 0 20px;color:#D4AF37;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase">KAR FX Customs</p>
-        ${content}
-      </div>
-    </div>
-  </body></html>`;
-}
-
 function leadRows(lead: Lead): [string, string][] {
   return [
     ["Name", lead.name],
@@ -115,12 +94,7 @@ function notificationHtml(lead: Lead) {
   return emailFrame(`
     <h1 style="margin:0 0 8px;font-size:28px;line-height:1.2">New quote request</h1>
     <p style="margin:0 0 28px;color:#aaa">Call <a href="${escapeHtml(phoneHref)}" style="color:#D4AF37">${escapeHtml(lead.phone)}</a>${lead.email ? " or reply to this email" : ""} to reach ${escapeHtml(lead.name)}.</p>
-    <table role="presentation" style="width:100%;border-collapse:collapse">
-      ${leadRows(lead).map(([label, value]) => `<tr>
-        <td style="width:120px;padding:12px 12px 12px 0;border-top:1px solid #2b2b2b;color:#999;font-size:13px;vertical-align:top">${escapeHtml(label)}</td>
-        <td style="padding:12px 0;border-top:1px solid #2b2b2b;color:#fff;font-size:15px;white-space:pre-wrap">${escapeHtml(value)}</td>
-      </tr>`).join("")}
-    </table>`);
+    ${emailTable(leadRows(lead))}`);
 }
 
 function confirmationHtml(lead: Lead) {
@@ -179,8 +153,7 @@ export async function POST(request: NextRequest) {
   }
 
   const resend = new Resend(apiKey);
-  const notificationEmail = process.env.LEAD_NOTIFICATION_EMAIL ?? BUSINESS_INFO.email;
-  const fromEmail = process.env.LEAD_FROM_EMAIL ?? "KAR FX Customs Website <quotes@karfxcustoms.com>";
+  const { from: fromEmail, to: notificationEmail } = leadEmailAddresses();
   const safeName = lead.name.replace(/[\r\n]+/g, " ");
   const firstService = lead.services[0]?.replace(/ \(.*\)$/, "") ?? "Not sure yet";
 
