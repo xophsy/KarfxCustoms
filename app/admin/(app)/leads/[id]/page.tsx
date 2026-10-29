@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CallCard from "@/components/admin/CallCard";
 import CopyButton from "@/components/admin/CopyButton";
 import SubmitButton from "@/components/admin/SubmitButton";
+import { listLeadCalls } from "@/lib/admin/calls";
 import { formatAge } from "@/lib/admin/format";
 import { LEAD_SOURCES, LEAD_STAGES, NEXT_STAGES, getLead, serviceName } from "@/lib/admin/leads";
 import { requireUser } from "@/lib/admin/session";
@@ -12,7 +14,7 @@ const stageLabel = (id: string) => LEAD_STAGES.find((s) => s.id === id)?.label ?
 
 export default async function LeadPage({ params }: { params: { id: string } }) {
   await requireUser();
-  const lead = await getLead(params.id);
+  const [lead, calls] = await Promise.all([getLead(params.id), listLeadCalls(params.id)]);
   if (!lead) notFound();
 
   const services = lead.services.map((key) => serviceName(key) ?? key);
@@ -70,6 +72,15 @@ export default async function LeadPage({ params }: { params: { id: string } }) {
         <section className="space-y-1 border border-white/10 bg-surface-800 p-4">
           <h2 className={term}>What they wrote</h2>
           <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">{lead.message}</p>
+        </section>
+      )}
+
+      {calls.length > 0 && (
+        <section className="space-y-3">
+          <h2 className={term}>Calls</h2>
+          {calls.map((call) => (
+            <CallCard key={call.id} call={call} />
+          ))}
         </section>
       )}
 
