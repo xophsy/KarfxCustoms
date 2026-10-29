@@ -3,8 +3,14 @@
   "configurations": [
     {
       "name": "karfx-dev",
-      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
-      "runtimeArgs": ["C:\\Users\\softsea\\Desktop\\Projects\\SandBox\\Websites\\KarFXcustoms\\node_modules\\next\\dist\\bin\\next", "dev"],
+      "runtimeExecutable": "C:\\Windows\\System32\\cmd.exe",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\xophs\\Desktop\\Ai\\Websites\\karfxcustom && npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "karfx-prod",
+      "runtimeExecutable": "C:\\Windows\\System32\\cmd.exe",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\xophs\\Desktop\\Ai\\Websites\\karfxcustom && npm start"],
       "port": 3000
     }
   ]

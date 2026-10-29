@@ -31,3 +31,6 @@ yarn-error.log*
 
 # local dev database (PGlite)
 /.pglite
+
+# Local-only KAR FX files (inspection sheet PDFs, previews, scratch tools). Never pushed: the repo is public.
+/local/

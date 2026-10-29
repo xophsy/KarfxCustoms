@@ -1,5 +1,18 @@
 # Claude Code Configuration - RuFlo V3
 
+## KAR FX Customs: owner's rules
+
+The owner rejected each of these when it appeared on karfxcustoms.com:
+
+- Never show the customer two of the same thing at once: no button, link, label or logo repeated on one screen. The header (desktop) and the bottom Call / Get a quote bar (phones) are always visible, so in-page Get a quote / Call buttons, footer copies of header links, breadcrumbs that repeat the nav or title, and eyebrow labels that repeat a heading all count as repeats.
+- No redundancy: no repeated "get in touch" boxes, no labels that restate the heading next to them.
+- Fewest taps; picture an older visitor. Services open in one tap from the home page, no in-between menu pages, FAQ answers shown rather than folded away.
+- KAR FX Customs and RestorFX Raleigh are the same shop (same team, address, phone). Never call RestorFX a "partner". The Best of Business 2025 award (RestorFX Raleigh, auto restoration) is shown at the top of the home page.
+- Copy is in Carlos's warm, needs-first texting style.
+- Before shipping a public-site change, check every screen at desktop and phone width for anything shown twice, and prefer removing over adding.
+- Everything under `/images/` is cached for a year (`immutable`, set in next.config): a changed image needs a new filename and updated references, then a check of the live file.
+- `local/` holds KAR FX files that stay on this computer (inspection sheet PDFs, design previews, scratch tools). It is git-ignored because the repo is public: never commit from it.
+
 ## Behavioral Rules (Always Enforced)
 
 - Do what has been asked; nothing more, nothing less
